@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与海德格尔对话 - 存在澄明之境</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #2F4F4F 0%, #405060 30%, #506070 70%, #607080 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(96, 112, 128, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(96, 112, 128, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 黑森林小屋场景 */
+        .forest-hut {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(ellipse at 30% 70%, rgba(34, 139, 34, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(139, 69, 19, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #2F4F4F 0%, #405060 30%, #506070 70%, #607080 100%);
+            overflow: hidden;
+        }
+        
+        /* 森林背景 */
+        .forest-background {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 30px,
+                    rgba(34, 139, 34, 0.3) 30px,
+                    rgba(34, 139, 34, 0.3) 35px,
+                    transparent 35px,
+                    transparent 70px
+                );
+        }
+        
+        /* 存在之光 */
+        .being-light {
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: lightPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes lightPulse {
+            0%, 100% { 
+                opacity: 0.3; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.2);
+            }
+        }
+        
+        /* 此在符号 */
+        .dasein-symbol {
+            position: absolute;
+            top: 30%;
+            right: 20%;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.6);
+            animation: daseinFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes daseinFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateY(-15px) rotate(5deg);
+                opacity: 1;
+            }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 6s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(-2deg);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: translateY(-10px) rotate(2deg);
+                filter: brightness(1.1);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 75%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #2F4F4F;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #607080;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #607080;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #708090;
+            background: rgba(112, 128, 144, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(176, 196, 222, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(176, 196, 222, 0.5);
+        }
+        
+        /* 存在结构展示 */
+        .being-structure {
+            background: rgba(47, 79, 79, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(47, 79, 79, 0.3);
+        }
+        
+        .structure-item {
+            margin: 8px 0;
+            padding: 5px 10px;
+            background: rgba(96, 112, 128, 0.2);
+            border-radius: 5px;
+            border-left: 3px solid #708090;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #607080, #708090);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(96, 112, 128, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(96, 112, 128, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #B0C4DE;
+        }
+        
+        /* 时间性螺旋 */
+        .temporality-spiral {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            border: 2px dashed rgba(176, 196, 222, 0.6);
+            border-radius: 50%;
+            animation: timeRotate 10s linear infinite;
+        }
+        
+        @keyframes timeRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="forest-hut">
+        <div class="forest-background"></div>
+        <div class="being-light"></div>
+        <div class="dasein-symbol">∃</div>
+        <div class="temporality-spiral"></div>
+        
+        <div class="decoration">🌲 存在澄明之境 🌲</div>
+        
+        <div class="sage-portrait">
+            🤔
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">海德格尔的存在思考</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到这片澄明之境，年轻的问道者。我是马丁·海德格尔，一个在黑森林小屋中思考存在问题的德国哲学家。</p>
+                
+                <div class="quote">
+                    "存在者存在，但存在本身不存在。"——我们需要重新思考存在的意义。
+                </div>
+                
+                <p>在这个被技术统治的时代，人们忘记了最根本的问题：存在到底意味着什么？我们被日常事务所淹没，失去了对存在本真性的体验。</p>
+                
+                <div class="being-structure">
+                    <strong>🎯 此在(Dasein)的存在结构：</strong>
+                    <div class="structure-item"><strong>被抛性</strong> - 我们被抛入这个世界，没有选择</div>
+                    <div class="structure-item"><strong>筹划性</strong> - 我们总是向前筹划，朝向可能性</div>
+                    <div class="structure-item"><strong>沉沦性</strong> - 我们容易迷失在日常的"闲谈"中</div>
+                </div>
+                
+                <div class="quote">
+                    "人是存在的牧者。"——我们的使命是守护存在的真理，让存在自行澄明。
+                </div>
+                
+                <p>真正的思考不是计算和推理，而是让存在自己显现出来。在我的黑森林小屋里，远离城市的喧嚣，我体验到了存在的宁静和深邃。</p>
+                
+                <div class="wisdom-point">
+                    <strong>⏰ 时间性与存在：</strong><br>
+                    • <strong>过去</strong>：我们的被抛性和传统<br>
+                    • <strong>现在</strong>：当下的决断和选择<br>
+                    • <strong>未来</strong>：向死存在的有限性觉醒<br>
+                    时间不是容器，而是存在的视域
+                </div>
+                
+                <div class="quote">
+                    "向死存在"——只有面对死亡的有限性，我们才能领悟存在的本真意义。
+                </div>
+                
+                <p>现代技术虽然带来了便利，但也遮蔽了存在。我们需要重新学会"思"，学会"诗意地栖居"。真正的智慧不在于占有知识，而在于让存在之真理自行敞开。</p>
+                
+                <p>在这个"无家可归"的时代，我们需要找到精神的家园。这个家园不在别处，就在我们对存在的本真领悟中。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🏠 海德格尔的生存智慧：</strong><br>
+                    摆脱日常的沉沦状态，在焦虑中体验虚无，在向死存在中领悟本真，在思考中让存在澄明。真正的自由是对存在真理的敞开。
+                </div>
+                
+                <p>记住，语言是存在的家。我们要学会倾听存在在语言中的言说，而不是用语言去征服存在。让我们一起守护这份珍贵的存在之光。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'world-heidegger';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与海德格尔的对话，获得了存在哲学的深邃智慧！');
+            
+            // 返回世界之山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

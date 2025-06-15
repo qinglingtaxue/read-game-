@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与维特根斯坦对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            min-height: 100vh;
+            position: relative;
+            color: white;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(65, 105, 225, 1);
+            transform: translateY(-2px);
+        }
+        
+        .sage-scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 70% 40%, rgba(50, 205, 50, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #2F4F4F 0%, #000428 50%, #004e92 100%);
+            overflow: hidden;
+        }
+        
+        /* 语言气泡装饰 */
+        .language-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+        }
+        
+        .bubble {
+            position: absolute;
+            border: 2px solid rgba(50, 205, 50, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .bubble1 {
+            width: 60px;
+            height: 60px;
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        
+        .bubble2 {
+            width: 40px;
+            height: 40px;
+            top: 25%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+        
+        .bubble3 {
+            width: 80px;
+            height: 80px;
+            top: 45%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .moon {
+            position: absolute;
+            top: 5%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #e6e6e6 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.8); }
+        }
+        
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(50, 205, 50, 0.3) 0%, rgba(65, 105, 225, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(50, 205, 50, 0.3);
+            border: 2px solid rgba(50, 205, 50, 0.5);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            color: #333;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #32CD32;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #32CD32;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #32CD32;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #32CD32;
+            background: rgba(50, 205, 50, 0.1);
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .wisdom-point {
+            background: rgba(50, 205, 50, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(50, 205, 50, 0.5);
+        }
+        
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #32CD32, #228B22);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(50, 205, 50, 0.4);
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #32CD32;
+            text-align: center;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回月亮山</button>
+    
+    <div class="sage-scene">
+        <div class="language-bubbles">
+            <div class="bubble bubble1"></div>
+            <div class="bubble bubble2"></div>
+            <div class="bubble bubble3"></div>
+        </div>
+        
+        <div class="moon"></div>
+        
+        <div class="decoration">🗣️ 语言游戏广场 💬</div>
+        
+        <div class="sage-portrait">
+            🗣️
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">维特根斯坦的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到语言游戏的广场，语言的探索者。我是路德维希·维特根斯坦，语言哲学的革新者。</p>
+                
+                <div class="quote">
+                    "我的语言的界限就是我的世界的界限。"
+                </div>
+                
+                <p>我一生经历了两次哲学转向。早期我认为语言的作用是描绘世界，后期我发现语言更像是一种生活形式。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💡 维特根斯坦的语言哲学：</strong><br>
+                    • <strong>语言游戏</strong>：语言在具体的生活情境中才有意义<br>
+                    • <strong>家族相似性</strong>：概念之间的关系如家族成员般相似<br>
+                    • <strong>私人语言批判</strong>：不存在纯粹私人的语言<br>
+                    • <strong>生活形式</strong>：语言与特定的生活方式相联系
+                </div>
+                
+                <p>哲学问题往往是语言的迷惑造成的。我们需要检查语言在日常生活中的实际用法，而不是抽象地思考词语的意义。</p>
+                
+                <div class="quote">
+                    "哲学是一场反对语言迷惑我们理智的斗争。"
+                </div>
+                
+                <p>想象一下，语言就像工具箱里的工具。锤子、螺丝刀、尺子——每个工具都有其特定的用途。词语也是如此，它们在不同的"语言游戏"中发挥不同的作用。</p>
+                
+                <p>记住，语言不仅是交流的工具，更是构成我们思维和世界观的基础。理解语言，就是理解人类活动的本质。</p>
+                
+                <p>愿你在维特根斯坦的智慧指引下，学会在语言的迷宫中找到通往真理的道路！</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../moon-mountain.html';
+        }
+        
+        function completeDialogue() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'moon-wittgenstein';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            alert('🎉 恭喜！您已经完成了与维特根斯坦的对话，获得了语言哲学家的智慧！');
+            goBack();
+        }
+        
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+</body>
+</html>

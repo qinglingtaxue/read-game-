@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月亮山探索之旅</title>
+    <link rel="stylesheet" href="css/moon-mountain.css">
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回选择</button>
+
+    <!-- 进度显示 -->
+    <div class="progress-display">
+        <span class="mountain-progress">月亮山进度：<span id="mountain-progress">0/7</span></span>
+        <span class="total-progress">总进度：<span id="total-progress">0/420</span></span>
+    </div>
+    
+    <div class="mountain-scene">
+        <!-- 云朵 -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        
+        <!-- 山脉层次 -->
+        <div class="distant-mountains"></div>
+        <div class="middle-mountains"></div>
+        <div class="front-mountains"></div>
+
+        <!-- 月亮 -->
+        <div class="moon">
+            <div class="moon-crater crater1"></div>
+            <div class="moon-crater crater2"></div>
+            <div class="moon-crater crater3"></div>
+        </div>
+        
+        <!-- 星空背景 -->
+        <div class="stars">
+            <div class="star star1"></div>
+            <div class="star star2"></div>
+            <div class="star star3"></div>
+            <div class="star star4"></div>
+            <div class="star star5"></div>
+            <div class="star star6"></div>
+            <div class="star star7"></div>
+        </div>
+
+        <!-- 山顶的创新者学派 -->
+        <div class="innovation-peak">
+            <div class="peak-glow"></div>
+            <div class="peak-name">创新者学派</div>
+        </div>
+
+        <!-- 月亮山的智者们 -->
+        <div class="sages-on-moon">
+            <div class="sage-figure sage-bacon" data-sage="bacon" onclick="exploreSage('bacon')">
+                <div class="sage-avatar">📚</div>
+                <div class="sage-name">培根</div>
+                <div class="sage-specialty">经验主义</div>
+            </div>
+            
+            <div class="sage-figure sage-descartes" data-sage="descartes" onclick="exploreSage('descartes')">
+                <div class="sage-avatar">🤔</div>
+                <div class="sage-name">笛卡尔</div>
+                <div class="sage-specialty">理性主义</div>
+            </div>
+            
+            <div class="sage-figure sage-hume" data-sage="hume" onclick="exploreSage('hume')">
+                <div class="sage-avatar">🎭</div>
+                <div class="sage-name">休谟</div>
+                <div class="sage-specialty">怀疑主义</div>
+            </div>
+            
+            <div class="sage-figure sage-kant" data-sage="kant" onclick="exploreSage('kant')">
+                <div class="sage-avatar">⚖️</div>
+                <div class="sage-name">康德</div>
+                <div class="sage-specialty">批判哲学</div>
+            </div>
+            
+            <div class="sage-figure sage-husserl" data-sage="husserl" onclick="exploreSage('husserl')">
+                <div class="sage-avatar">👁️</div>
+                <div class="sage-name">胡塞尔</div>
+                <div class="sage-specialty">现象学</div>
+            </div>
+            
+            <div class="sage-figure sage-wittgenstein" data-sage="wittgenstein" onclick="exploreSage('wittgenstein')">
+                <div class="sage-avatar">🗣️</div>
+                <div class="sage-name">维特根斯坦</div>
+                <div class="sage-specialty">语言哲学</div>
+            </div>
+            
+            <div class="sage-figure sage-polanyi" data-sage="polanyi" onclick="exploreSage('polanyi')">
+                <div class="sage-avatar">🔬</div>
+                <div class="sage-name">波兰尼</div>
+                <div class="sage-specialty">隐性知识</div>
+            </div>
+        </div>
+        
+        <!-- 探索提示 -->
+        <div class="exploration-hint">
+            🌟 点击月光下的智者开始对话
+        </div>
+        
+        <!-- 导游人物和对话气泡 - 移到左侧 -->
+        <div class="guide-section">
+            <div class="guide-character">
+                <div class="guide-avatar">🌙</div>
+                <div class="guide-name">月亮守护者</div>
+            </div>
+            <div class="speech-bubble">
+                <div class="bubble-content">
+                    <h3>🌙 月亮之山，我在仰望</h3>
+                    <p>月亮之上，有多少知识，在自由的漫步。通往山之巅的路径有三条：笛卡尔信徒山脉、讲故事的人山脉、达尔文信徒山脉。</p>
+                    <p>在汲取了天地间的精华之后，有一个老人来到山之巅，开创了创新者学派。</p>
+                </div>
+                <div class="bubble-tail"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音乐控制按钮 -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleBgMusic()">🎵</button>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="music/sun-mountain-bg.MP3" type="audio/mpeg">
+        <source src="music/sun-mountain-bg.MP3" type="audio/ogg">
+    </audio>
+
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // 拜访智者
+        function exploreSage(sageId) {
+            window.location.href = `sages/moon/${sageId}.html`;
+        }
+
+        // 检查山峰完成状态
+        function checkMountainComplete() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const moonSages = ['bacon', 'descartes', 'hume', 'kant', 'husserl', 'wittgenstein', 'polanyi'];
+            const completedCount = moonSages.filter(sage => visitedSages.includes(`moon-${sage}`)).length;
+            
+            document.getElementById('mountain-progress').textContent = `${completedCount}/7`;
+            document.getElementById('total-progress').textContent = `${visitedSages.length}/420`;
+            
+            // 更新智者状态显示
+            moonSages.forEach(sage => {
+                const sageElement = document.querySelector(`[data-sage="${sage}"]`);
+                if (visitedSages.includes(`moon-${sage}`)) {
+                    sageElement.classList.add('visited');
+                }
+            });
+            
+            // 如果完成了月亮山，显示前往下一座山的提示
+          if (completedCount === 7 && !localStorage.getItem('moonMountainCompleted')) {
+    localStorage.setItem('moonMountainCompleted', 'true');
+    showNextMountainOption();
+}
+        }
+
+        // 显示前往下一座山的选项
+        function showNextMountainOption() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 2000;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; position: relative;">
+                    <span onclick="this.parentElement.parentElement.remove()" 
+                          style="position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 28px; color: #999; font-weight: bold; user-select: none;">&times;</span>
+                    
+                    <h3 style="color: #4169E1; margin-bottom: 25px; font-size: 24px;">🎉 恭喜完成月亮山探索！</h3>
+                    <p style="margin-bottom: 30px; font-size: 16px; line-height: 1.6; color: #333;">你已拜访了月亮山的所有7位智者，获得了方法论的智慧。现在可以前往更高层次的智慧山峰。</p>
+                    
+                    <div style="display: flex; gap: 20px; justify-content: center;">
+                        <button onclick="goToNextMountain()" style="background: linear-gradient(45deg, #4169E1, #1E90FF); color: white; border: none; padding: 15px 30px; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: bold;">探索天之山</button>
+                        <button onclick="goBack()" style="background: #666; color: white; border: none; padding: 15px 30px; border-radius: 25px; cursor: pointer; font-size: 16px;">返回全景</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // 前往下一座山
+        function goToNextMountain() {
+            window.location.href = 'index.html#heaven-mountains';
+        }
+
+        // 背景音乐控制
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        if (bgMusic) {
+            bgMusic.volume = 0.3;
+        }
+
+        function toggleBgMusic() {
+            if (!bgMusic) return;
+            
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(error => {
+                    console.log('播放失败，请检查音频文件');
+                });
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            }
+        }
+
+        // 用户首次交互时尝试播放
+        let hasInteracted = false;
+        document.addEventListener('click', function() {
+            if (!hasInteracted && bgMusic) {
+                hasInteracted = true;
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(() => {
+                    // 静默处理
+                });
+            }
+        });
+
+        // 页面加载时检查状态
+        window.addEventListener('load', checkMountainComplete);
+    </script>
+</body>
+</html>

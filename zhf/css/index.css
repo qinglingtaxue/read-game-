@@ -1,0 +1,642 @@
+/* ==================== 基础重置 ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'KaiTi', 'SimSun', '楷体', serif;
+    background: linear-gradient(to bottom, 
+        #7f8c8d 0%, 
+        #95a5a6 20%, 
+        #bdc3c7 40%, 
+        #d5dbdb 60%, 
+        #ecf0f1 80%, 
+        #f8f9fa 100%);
+    position: relative;
+    user-select: none;
+    perspective: 1200px;
+    perspective-origin: 50% 30%;
+}
+
+/* ==================== 主容器 ==================== */
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+/* ==================== 标题区域 ==================== */
+.header {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 100;
+}
+
+.title {
+    font-size: 48px;
+    color: #ffffff;
+    font-weight: 900;
+    font-family: 'STCaiyun', 'STXingkai', 'LiSu', 'YouYuan', '华文彩云', '华文行楷', '草书', '行楷', serif;
+    text-shadow: 
+        3px 3px 0px rgba(0,0,0,0.3),
+        4px 4px 8px rgba(0,0,0,0.4),
+        2px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+    letter-spacing: 10px;
+    transform: rotate(-2deg) scale(1.05);
+    filter: contrast(1.3) brightness(1.1);
+    font-style: italic;
+}
+
+.subtitle {
+    font-size: 22px;
+    color: #f8f9fa;
+    font-style: italic;
+    font-family: 'STCaiyun', 'STXingkai', 'LiSu', 'YouYuan', '华文彩云', '华文行楷', '草书', '行楷', serif;
+    text-shadow: 
+        2px 2px 0px rgba(0,0,0,0.3),  
+        3px 3px 6px rgba(0,0,0,0.4),
+        1px 1px 3px rgba(0,0,0,0.5);
+    opacity: 0.95;
+    letter-spacing: 8px;
+    transform: rotate(1deg) scale(1.02);
+}
+
+/* ==================== 山水系统 ==================== */
+.mountain-system {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotateX(25deg) rotateY(0deg);
+    transform-style: preserve-3d;
+    animation: gentle-drift 120s ease-in-out infinite;
+}
+
+@keyframes gentle-drift {
+    0%, 100% { transform: rotateX(25deg) rotateY(0deg); }
+    25% { transform: rotateX(28deg) rotateY(2deg); }
+    50% { transform: rotateX(22deg) rotateY(0deg); }
+    75% { transform: rotateX(25deg) rotateY(-2deg); }
+}
+
+/* ==================== 烟雾效果 ==================== */
+.mist-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    transform: translateZ(50px);
+}
+
+.mist {
+    position: absolute;
+    animation: mist-drift 20s ease-in-out infinite;
+    filter: blur(4px);
+    opacity: 0.6;
+    transform-style: preserve-3d;
+}
+
+.mist svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes mist-drift {
+    0%, 100% { 
+        transform: translateX(0) translateY(0) translateZ(0) scale(1); 
+        opacity: 0.6; 
+    }
+    25% { 
+        transform: translateX(30px) translateY(-15px) translateZ(20px) scale(1.1); 
+        opacity: 0.8; 
+    }
+    50% { 
+        transform: translateX(-15px) translateY(-30px) translateZ(40px) scale(1.2); 
+        opacity: 0.5; 
+    }
+    75% { 
+        transform: translateX(-30px) translateY(-10px) translateZ(10px) scale(1.05); 
+        opacity: 0.7; 
+    }
+}
+
+.mist-1 {
+    width: 400px;
+    height: 200px;
+    left: 25%;
+    top: 50%;
+    animation-delay: 0s;
+    animation-duration: 25s;
+}
+
+.mist-3 {
+    width: 380px;
+    height: 190px;
+    left: 60%;
+    top: 55%;
+    animation-delay: -10s;
+    animation-duration: 22s;
+}
+
+.mist-4 {
+    width: 420px;
+    height: 210px;
+    left: 15%;
+    top: 65%;
+    animation-delay: -15s;
+    animation-duration: 28s;
+}
+
+.mist-5 {
+    width: 320px;
+    height: 160px;
+    left: 50%;
+    top: 40%;
+    animation-delay: -20s;
+    animation-duration: 16s;
+}
+
+.mist-6 {
+    width: 300px;
+    height: 150px;
+    left: 75%;
+    top: 35%;
+    animation-delay: -8s;
+    animation-duration: 20s;
+}
+
+.mist-7 {
+    width: 360px;
+    height: 180px;
+    left: 45%;
+    top: 30%;
+    animation-delay: -25s;
+    animation-duration: 30s;
+}
+
+/* 指定区域的新雾气 */
+.mist-13 {
+    width: 800px;
+    height: 100px;
+    left: 10%;
+    top: 42%;
+    animation-delay: -55s;
+    animation-duration: 35s;
+}
+
+.mist-14 {
+    width: 900px;
+    height: 120px;
+    left: 5%;
+    top: 58%;
+    animation-delay: -60s;
+    animation-duration: 40s;
+}
+
+.mist-15 {
+    width: 850px;
+    height: 110px;
+    left: 8%;
+    top: 72%;
+    animation-delay: -65s;
+    animation-duration: 38s;
+}
+
+.mist-16 {
+    width: 300px;
+    height: 200px;
+    left: 75%;
+    top: 75%;
+    animation-delay: -70s;
+    animation-duration: 30s;
+}
+
+/* 下方雾气 */
+.mist-9 {
+    width: 450px;
+    height: 220px;
+    left: 5%;
+    top: 75%;
+    animation-delay: -35s;
+    animation-duration: 32s;
+}
+
+.mist-10 {
+    width: 400px;
+    height: 200px;
+    left: 30%;
+    top: 80%;
+    animation-delay: -40s;
+    animation-duration: 26s;
+}
+
+.mist-11 {
+    width: 320px;
+    height: 160px;
+    left: 60%;
+    top: 78%;
+    animation-delay: -45s;
+    animation-duration: 28s;
+}
+
+.mist-12 {
+    width: 380px;
+    height: 190px;
+    left: 15%;
+    top: 85%;
+    animation-delay: -50s;
+    animation-duration: 34s;
+}
+
+/* ==================== 山峰基础样式 ==================== */
+.mountain {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform-origin: center bottom;
+    transform-style: preserve-3d;
+}
+
+.mountain:hover {
+    transform: scale(1.1) translateZ(30px);
+    z-index: 60;
+}
+
+.mountain-shape {
+    position: relative;
+    transition: all 0.6s ease;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+    transform-style: preserve-3d;
+}
+
+.mountain:hover .mountain-shape {
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+.mountain-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.mountain:hover .mountain-glow {
+    opacity: 1;
+}
+
+.mountain-name {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: #2c3e50;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+.mountain-desc {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #5d6d7e;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 10;
+}
+
+.mountain:hover .mountain-desc {
+    opacity: 1;
+}
+
+/* ==================== 最远层山脉（人之山）==================== */
+.nature-mountain, .body-mountain, .faith-mountain {
+    z-index: 1;
+    transform: translateZ(-200px);
+}
+
+.nature-mountain {
+    left: 5%;
+    top: 70%;
+    width: 280px;
+    height: 140px;
+}
+
+.body-mountain {
+    left: 30%;
+    top: 75%;
+    width: 260px;
+    height: 120px;
+}
+
+.faith-mountain {
+    left: 60%;
+    top: 72%;
+    width: 300px;
+    height: 150px;
+}
+
+.nature-mountain .mountain-shape,
+.body-mountain .mountain-shape,
+.faith-mountain .mountain-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #8e44ad 0%, #7d3c98 30%, #6c3483 60%, #5b2c6f 100%);
+    clip-path: polygon(0% 100%, 8% 85%, 15% 70%, 25% 60%, 35% 45%, 50% 30%, 65% 40%, 75% 55%, 85% 65%, 95% 80%, 100% 100%);
+    opacity: 0.3;
+}
+
+/* ==================== 中间层山脉（地之山）==================== */
+.society-mountain, .organization-mountain, .family-mountain {
+    z-index: 5;
+    transform: translateZ(-100px);
+}
+
+.society-mountain {
+    left: 8%;
+    top: 55%;
+    width: 320px;
+    height: 180px;
+}
+
+.organization-mountain {
+    left: 35%;
+    top: 60%;
+    width: 340px;
+    height: 200px;
+}
+
+.family-mountain {
+    left: 65%;
+    top: 58%;
+    width: 300px;
+    height: 160px;
+}
+
+.society-mountain .mountain-shape,
+.organization-mountain .mountain-shape,
+.family-mountain .mountain-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #27ae60 0%, #229954 30%, #1e8449 60%, #196f3d 100%);
+    clip-path: polygon(0% 100%, 5% 90%, 12% 75%, 20% 60%, 30% 45%, 45% 25%, 60% 35%, 70% 50%, 80% 40%, 90% 60%, 97% 85%, 100% 100%);
+    opacity: 0.6;
+}
+
+/* ==================== 前景层山脉（天之山）==================== */
+.world-mountain, .history-mountain, .era-mountain {
+    z-index: 10;
+    transform: translateZ(0px);
+}
+
+.world-mountain {
+    left: 12%;
+    top: 40%;
+    width: 380px;
+    height: 240px;
+}
+
+.history-mountain {
+    left: 40%;
+    top: 45%;
+    width: 400px;
+    height: 260px;
+}
+
+.era-mountain {
+    left: 70%;
+    top: 42%;
+    width: 360px;
+    height: 220px;
+}
+
+.world-mountain .mountain-shape,
+.history-mountain .mountain-shape,
+.era-mountain .mountain-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #3498db 0%, #2980b9 30%, #1f618d 60%, #154360 100%);
+    clip-path: polygon(0% 100%, 3% 95%, 8% 80%, 15% 65%, 25% 45%, 40% 20%, 55% 30%, 65% 45%, 75% 25%, 85% 40%, 92% 65%, 98% 85%, 100% 100%);
+    opacity: 0.8;
+}
+
+/* ==================== 太阳之山（最高峰）==================== */
+.sun-mountain {
+    left: 50%;
+    top: 25%;
+    width: 200px;
+    height: 300px;
+    transform: translateX(-50%) translateZ(100px);
+    z-index: 20;
+}
+
+.sun-mountain .mountain-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #f39c12 0%, #e67e22 30%, #d35400 60%, #ba4a00 100%);
+    clip-path: polygon(35% 100%, 30% 90%, 25% 75%, 20% 60%, 18% 45%, 25% 30%, 40% 15%, 50% 0%, 60% 15%, 75% 30%, 82% 45%, 80% 60%, 75% 75%, 70% 90%, 65% 100%);
+    opacity: 0.95;
+    animation: sun-glow 8s ease-in-out infinite;
+}
+
+@keyframes sun-glow {
+    0%, 100% { 
+        box-shadow: 0 0 40px rgba(243, 156, 18, 0.5);
+        filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+    }
+    50% { 
+        box-shadow: 0 0 60px rgba(243, 156, 18, 0.7);
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+    }
+}
+
+/* ==================== 月亮之山（环绕）==================== */
+.moon-mountain {
+    left: 50%;
+    top: 40%;    /* ← 改为40%，在太阳山中上部 */
+    width: 80px;
+    height: 120px;  /* ← 恢复原来的高度120px */
+    transform-origin: 50% 50%;
+    animation: moon-orbit-realistic 45s ease-in-out infinite;
+    z-index: 15;
+}
+
+.moon-mountain .mountain-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #bdc3c7 0%, #95a5a6 30%, #7f8c8d 60%, #566573 100%);
+    clip-path: polygon(30% 100%, 25% 90%, 20% 75%, 15% 60%, 20% 45%, 35% 30%, 50% 15%, 65% 30%, 80% 45%, 75% 60%, 70% 75%, 65% 90%, 70% 100%);
+    opacity: 0.85;
+}
+
+@keyframes moon-orbit-realistic {
+    0% { 
+        transform: translateX(-50%) translateX(200px) translateY(0px) translateZ(50px);
+        z-index: 25;
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+    25% { 
+        transform: translateX(-50%) translateX(0px) translateY(-28px) translateZ(120px);
+        z-index: 25;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    50% { 
+        transform: translateX(-50%) translateX(-200px) translateY(0px) translateZ(20px);
+        z-index: 15;
+        opacity: 0.3;
+        filter: brightness(0.6);
+    }
+    75% { 
+        transform: translateX(-50%) translateX(0px) translateY(28px) translateZ(60px);
+        z-index: 18;
+        opacity: 0.8;
+        filter: brightness(0.9);
+    }
+    100% { 
+        transform: translateX(-50%) translateX(200px) translateY(0px) translateZ(50px);
+        z-index: 25;
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+}
+/* ==================== 诗句区域 ==================== */
+.poem-section {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 100;
+}
+
+.poem p {
+    font-size: 18px;
+    color: #2c3e50;
+    font-style: italic;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+}
+
+.poem-sub {
+    font-size: 14px !important;
+    opacity: 0.8 !important;
+    color: #34495e !important;
+}
+
+/* ==================== 提示框 ==================== */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 8px;
+    padding: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 300px;
+    backdrop-filter: blur(10px);
+}
+
+.tooltip-content {
+    padding: 16px;
+}
+
+.tooltip-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #f39c12;
+}
+
+.tooltip-desc {
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: #ecf0f1;
+}
+
+.tooltip-sages {
+    font-size: 12px;
+    color: #bdc3c7;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.tooltip-hint {
+    font-size: 12px;
+    color: #3498db;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+    .mountain-system {
+        transform: rotateX(20deg) scale(0.8);
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+    }
+    
+    .tooltip {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mountain-system {
+        transform: rotateX(15deg) scale(0.6);
+    }
+    
+    .header {
+        top: 15px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .subtitle {
+        font-size: 12px;
+    }
+    
+    .poem p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时代之山探索之旅</title>
+    <!-- 时代之山的CSS -->
+    <link rel="stylesheet" href="css/times-mountain.css">
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回全景图</button>
+
+    <!-- 进度显示 -->
+    <div class="progress-display">
+        <span class="mountain-progress">时代山进度：<span id="mountain-progress">0/0</span></span>
+        <span class="total-progress">总进度：<span id="total-progress">待更新</span></span>
+    </div>
+    
+    <div class="mountain-scene">
+        <!-- 星座 - 保持不变 -->
+        <div class="star-cluster star-cluster1">
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+        </div>
+        <div class="star-cluster star-cluster2">
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+            <div class="star-in-cluster"></div>
+        </div>
+        
+        <!-- 山脉层次 - 保持不变，样式将在times-mountain.css中调整 -->
+        <div class="distant-mountains"></div>
+        <div class="middle-mountains"></div>
+        <div class="front-mountains"></div>
+
+        <!-- 时代之河 - 替换科学之河 -->
+        <div class="times-rivers">
+            <div class="times-river river-direct-violence"></div>
+            <div class="times-river river-indirect-violence"></div>
+            <div class="times-river river-interconnected-era"></div>
+            <div class="times-river river-anti-alienation"></div>
+        </div>
+        
+        <!-- 河边的时代人物 - 移除 -->
+        
+        <!-- 导游人物和对话气泡 - 内容和图标调整 -->
+        <div class="guide-section">
+            <div class="guide-character">
+                <div class="guide-avatar">📜</div>
+                <div class="guide-name">历史向导</div>
+            </div>
+            <div class="speech-bubble">
+                <div class="bubble-content">
+                    <h3>⏳ 欢迎来到时代之山</h3>
+                    <p>在这里，时间的河流静静流淌。古代理性之河承载智慧萌芽，中世纪信仰之河孕育精神，文艺复兴人文之河点亮创造，现代科学之河推动进步。众多时代巨匠在此等候。</p>
+                </div>
+                <div class="bubble-tail"></div>
+            </div>
+        </div>
+
+        <!-- 右侧的总论和智者 - 智者列表调整 -->
+        <div class="right-side-sages">
+            <!-- 总论智者 -->
+            <div class="sage-figure sage-overview" data-sage="times-overview" onclick="exploreOverview('times')">
+                <div class="sage-avatar">📖</div>
+                <div class="sage-name">时代总论</div>
+            </div>
+            
+            <!-- 时代核心智者 -->
+            <div class="sage-figure sage-hegel" data-sage="hegel" onclick="exploreSage('hegel')">
+                <div class="sage-avatar">🧠</div>
+                <div class="sage-name">黑格尔</div>
+            </div>
+            
+            <div class="sage-figure sage-honnet" data-sage="honnet" onclick="exploreSage('honnet')">
+                <div class="sage-avatar">🤝</div>
+                <div class="sage-name">霍奈特</div>
+            </div>
+            
+            <div class="sage-figure sage-huntington" data-sage="huntington" onclick="exploreSage('huntington')">
+                <div class="sage-avatar">🌍</div>
+                <div class="sage-name">亨廷顿</div>
+            </div>
+            
+            <div class="sage-figure sage-aron" data-sage="aron" onclick="exploreSage('aron')">
+                <div class="sage-avatar">⚖️</div>
+                <div class="sage-name">阿隆</div>
+            </div>
+            
+            <div class="sage-figure sage-porter" data-sage="porter" onclick="exploreSage('porter')">
+                <div class="sage-avatar">📈</div>
+                <div class="sage-name">波特</div>
+            </div>
+            
+            <div class="sage-figure sage-nash" data-sage="nash" onclick="exploreSage('nash')">
+                <div class="sage-avatar">🎲</div>
+                <div class="sage-name">纳什</div>
+            </div>
+            
+            <div class="sage-figure sage-von-neumann" data-sage="von-neumann" onclick="exploreSage('von-neumann')">
+                <div class="sage-avatar">💻</div>
+                <div class="sage-name">冯·诺依曼</div>
+            </div>
+        </div>
+
+        <!-- 探索提示 - 内容调整 -->
+        <div class="exploration-hint">
+            📜 点击时代图标探索历史 | 🧐 点击右侧智者深入思辨
+        </div>
+    </div>
+
+    <!-- 背景音乐 - 路径调整 -->
+    <audio id="bgMusic" loop>
+        <source src="music/sun-mountain-bg.MP3" type="audio/mpeg">
+        <source src="music/sun-mountain-bg.MP3" type="audio/ogg">
+    </audio>
+
+    <!-- 音乐控制按钮 - 保持不变 -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleBgMusic()">🎵</button>
+
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = 'index.html'; // 假设 index.html 是主概览页面
+        }
+
+        // 探索时代河流
+        function exploreEra(eraId) {
+            window.location.href = `../ranges/times/${eraId}-era.html`; // 时代范围的新路径
+        }
+
+        // 探索总论 (适配时代之山)
+        function exploreOverview(type) {
+            window.location.href = `../sages/${type}/overview.html`;
+        }
+
+        // 探索时代智者
+        function exploreSage(sageId) {
+            window.location.href = `sages/times/${sageId}.html`; // 时代智者的新路径
+        }
+
+        // 内存存储替代localStorage (适配时代之山)
+        let visitedSages = [];
+        let timesMountainCompleted = false; // 时代之山完成状态
+
+        // 安全的存储访问函数
+        function getVisitedSages() {
+            try {
+                return JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            } catch (error) {
+                console.log('使用内存存储模式');
+                return visitedSages;
+            }
+        }
+
+        function setVisitedSages(sages) {
+            try {
+                localStorage.setItem('visitedSages', JSON.stringify(sages));
+            } catch (error) {
+                visitedSages = sages;
+            }
+        }
+
+        function getTimesMountainCompleted() {
+            try {
+                return localStorage.getItem('timesMountainCompleted') === 'true';
+            } catch (error) {
+                return timesMountainCompleted;
+            }
+        }
+
+        function setTimesMountainCompleted(completed) {
+            try {
+                localStorage.setItem('timesMountainCompleted', completed);
+            } catch (error) {
+                timesMountainCompleted = completed;
+            }
+        }
+
+        // 检查山峰完成状态
+        function checkMountainComplete() {
+            const visitedSagesList = getVisitedSages();
+            const timesEras = []; // 时代河流暂时不计入时代山进度，只计入总进度
+            const allTimesSages = [
+                'hegel', 'honnet', 'huntington', 'aron', 'porter', 'nash', 'von-neumann' // 时代智者ID (共7位)
+            ];
+
+            let completedTimesSages = 0;
+            allTimesSages.forEach(sage => {
+                if (visitedSagesList.includes(`times-${sage}`)) {
+                    completedTimesSages++;
+                }
+            });
+
+            const totalSagesInTimesMountain = allTimesSages.length; // 7位智者
+            document.getElementById('mountain-progress').textContent = `${completedTimesSages}/${totalSagesInTimesMountain}`;
+            document.getElementById('total-progress').textContent = `${visitedSagesList.length}/420`;
+
+            // 更新智者状态显示 (包括时代总论，因为它仍然是一个可访问的智者)
+            const allDisplaySages = [
+                'times-overview', // 时代总论 - 始终显示
+                'hegel', 'honnet', 'huntington', 'aron', 'porter', 'nash', 'von-neumann' 
+            ];
+
+            allDisplaySages.forEach(sage => {
+                const sageElement = document.querySelector(`[data-sage="${sage.replace('times-', '')}"]`);
+                if (sageElement && visitedSagesList.includes(`times-${sage}`)) {
+                    sageElement.classList.add('visited');
+                }
+            });
+
+            if (completedTimesSages === totalSagesInTimesMountain) {
+                if (!getTimesMountainCompleted()) {
+                    setTimesMountainCompleted(true);
+                    alert('恭喜！你已完成时代之山的探索！');
+                }
+            }
+        }
+
+        // 页面加载时检查完成状态
+        document.addEventListener('DOMContentLoaded', checkMountainComplete);
+
+        // 音乐播放逻辑 (与世界之山相同)
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let isPlaying = false;
+
+        function toggleBgMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            } else {
+                bgMusic.play();
+                musicBtn.textContent = '🎵';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        bgMusic.play().catch(e => console.log('音乐自动播放失败:', e));
+    </script>
+</body>
+</html> 

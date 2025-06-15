@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与佛陀对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe4b5 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(139, 69, 19, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 寺庙场景 */
+        .temple-room {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
+                linear-gradient(to bottom, #ffeaa7 0%, #fab1a0 20%, #e17055 40%, #d63031 100%);
+            overflow: hidden;
+        }
+        
+        /* 佛塔背景 */
+        .pagoda {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            right: 5%;
+            height: 70%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    #d4af37 0px,
+                    #d4af37 25px,
+                    #daa520 25px,
+                    #daa520 50px,
+                    #cd853f 50px,
+                    #cd853f 75px,
+                    #d4af37 75px,
+                    #d4af37 100px
+                );
+            border-radius: 15px;
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.2);
+        }
+        
+        /* 佛光装饰 */
+        .buddha-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(
+                    circle at center,
+                    rgba(255, 215, 0, 0.1) 0%,
+                    rgba(255, 215, 0, 0.05) 30%,
+                    transparent 70%
+                ),
+                repeating-conic-gradient(
+                    from 0deg at center,
+                    transparent 0deg,
+                    rgba(255, 215, 0, 0.05) 10deg,
+                    transparent 20deg
+                );
+            animation: buddhaLightRotate 20s linear infinite;
+        }
+        
+        @keyframes buddhaLightRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 佛陀形象 */
+        .buddha-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,248,220,0.9) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: buddhaFloat 5s ease-in-out infinite;
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.4),
+                0 15px 35px rgba(139, 69, 19, 0.2);
+            border: 3px solid rgba(212, 175, 55, 0.6);
+        }
+        
+        @keyframes buddhaFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1); 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), 0 15px 35px rgba(139, 69, 19, 0.2);
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.05); 
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 20px 45px rgba(139, 69, 19, 0.3);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+        
+        .sage-name-title {
+            font-size: 28px;
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #daa520;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #654321;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #cd853f;
+            margin: 15px 0;
+            padding: 15px 25px;
+            border-left: 4px solid #daa520;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .wisdom-point {
+            background: rgba(218, 165, 32, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid rgba(218, 165, 32, 0.3);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #daa520, #cd853f);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.5);
+        }
+        
+        /* 古典装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: decorationGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes decorationGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+            50% { text-shadow: 2px 2px 8px rgba(212, 175, 55, 0.5); }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
+    
+    <div class="temple-room">
+        <div class="pagoda">
+            <div class="buddha-light"></div>
+        </div>
+        
+        <div class="decoration">☸️ 菩提圣殿 ☸️</div>
+        
+        <div class="buddha-portrait">
+            🧘‍♂️
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">佛陀的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到这片宁静的圣地，善缘之人。我是释迦牟尼佛，一个觉悟了生命真谛的修行者。</p>
+                
+                <div class="quote">
+                    "诸恶莫作，众善奉行，自净其意，是诸佛教。"
+                </div>
+                
+                <p>众生皆苦，这是我悟道后的第一个真理。生老病死，爱别离，怨憎会，求不得，五蕴炽盛——这些都是人生不可避免的痛苦。但是，痛苦并非终点，解脱是可能的。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🕉️ 佛陀的核心教法：</strong><br>
+                    • <strong>四圣谛</strong>：苦、集、灭、道四个真理<br>
+                    • <strong>八正道</strong>：通往解脱的八条正确道路<br>
+                    • <strong>十二因缘</strong>：生死轮回的因果法则<br>
+                    • <strong>三法印</strong>：无常、无我、涅槃寂静
+                </div>
+                
+                <div class="quote">
+                    "心是一切法的先导，心是一切法的主宰。若以清净心言语造作，快乐必随其后，如影随形。"
+                </div>
+                
+                <p>记住，一切痛苦的根源都在于执着和贪欲。当你能够放下执着，以慈悲心对待一切众生，以智慧观照内心，你就走上了解脱之道。修行不在于外在的仪式，而在于内心的觉醒。</p>
+                
+                <p>愿你能在八正道上精进修行，最终证得无上菩提，获得内心的真正平静与解脱。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../sun-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'sun-buddha';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与佛陀的对话，获得了佛教智慧与慈悲！');
+            
+            // 返回太阳山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

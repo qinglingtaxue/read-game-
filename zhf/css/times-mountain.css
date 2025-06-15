@@ -1,0 +1,784 @@
+/* times-mountain.css - 时代山样式文件 */
+
+/* 清明上河图风格背景渐变 - 大地色系和柔和绿色调 */
+body {
+    background: linear-gradient(to bottom, 
+        #FAF8EB 0%,      /* 极浅米黄，天空顶部，更偏向纸张的颜色 */
+        #F5E8C7 25%,     /* 浅米黄，更温暖 */
+        #E7D397 50%,     /* 中米黄，更显古朴 */
+        #C7A77D 75%,     /* 浅土褐，过渡到地面 */
+        #A8865C 100%     /* 深土褐，地面底部 */
+    );
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* 移除背景光晕效果 (不符合风格) */
+body::before {
+    display: none;
+}
+
+/* 移除星空效果 (不符合风格) */
+body::after {
+    display: none;
+}
+
+/* 进度显示 */
+.progress-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.9); /* 白色半透明背景 */
+    padding: 10px 15px; /* 上下内边距10px，左右内边距15px */
+    border-radius: 10px; /* 圆角半径10px */
+    font-size: 14px; /* 字体大小 */
+    z-index: 500;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 柔和的阴影 */
+}
+
+.progress-display span {
+    display: block; /* 使得山进度和总进度文字各占一行 */
+    margin-bottom: 3px;
+    color: #8B4513; /* 文字颜色 */
+}
+
+.mountain-progress {
+    margin-right: 0; /* 确保不覆盖父级样式 */
+    font-weight: bold; /* 确保不覆盖父级样式 */
+    color: #8B4513; /* 确保文字颜色正确 */
+}
+
+.total-progress {
+    color: #8B4513; /* 确保文字颜色正确 */
+    font-weight: normal; /* 确保不覆盖父级样式 */
+}
+
+/* 九大行星太阳系背景 - 移除 */
+
+/* 太阳中心 - 移除 */
+
+/* 行星轨道基础样式 - 移除 */
+
+/* 各行星轨道大小 - 移除 */
+
+/* 行星基础样式 - 移除 */
+
+/* 各行星样式 - 移除 */
+
+/* 行星轨道动画 - 移除 */
+
+/* 移除月亮 */
+.moon {
+    display: none;
+}
+
+/* =================== 星座效果 =================== */
+
+.star-cluster {
+    display: none;
+}
+
+/* =================== 山脉背景 =================== */
+
+.mountain-scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 山脉层次 - 更贴近水墨画的色彩 */
+.distant-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 55vh; /* 调整高度以适应新背景 */
+    background: linear-gradient(to top, #7A654D 0%, #857058 50%, #907B63 100%); /* 远山深土褐，与背景更协调 */
+    opacity: 0.8; /* 调整透明度以示距离 */
+    clip-path: polygon(0% 100%, 15% 60%, 25% 80%, 40% 40%, 55% 70%, 70% 30%, 85% 65%, 100% 45%, 100% 100%); 
+    z-index: 1;
+}
+
+.middle-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45vh; /* 调整高度 */
+    background: linear-gradient(to top, #655440 0%, #705F4B 50%, #7B6A56 100%); /* 中山中土褐 */
+    opacity: 0.95; /* 提高透明度 */
+    clip-path: polygon(0% 100%, 10% 50%, 30% 20%, 45% 60%, 60% 10%, 75% 45%, 90% 25%, 100% 70%, 100% 100%);
+    z-index: 2;
+}
+
+.front-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35vh; /* 调整高度 */
+    background: linear-gradient(to top, #504030 0%, #5B4B3B 40%, #665646 80%, #716151 100%); /* 近山最深土褐 */
+    opacity: 1; /* 完全不透明 */
+    clip-path: polygon(0% 100%, 20% 30%, 35% 70%, 50% 20%, 65% 60%, 80% 15%, 95% 50%, 100% 100%);
+    z-index: 3;
+}
+
+/* 移除山脉光晕效果 (不符合风格) */
+.distant-mountains::after,
+.middle-mountains::after,
+.front-mountains::after {
+    display: none;
+}
+
+/* 调整山脉动画以适应新风格，或考虑移除 */
+@keyframes mountainFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); } /* 减小浮动幅度，使其更稳重 */
+}
+
+.distant-mountains {
+    animation: mountainFloat 12s ease-in-out infinite; /* 调整动画速度 */
+}
+
+.middle-mountains {
+    animation: mountainFloat 10s ease-in-out infinite;
+    animation-delay: -2s; /* 调整动画延迟 */
+}
+
+.front-mountains {
+    animation: mountainFloat 8s ease-in-out infinite;
+    animation-delay: -1s; /* 调整动画延迟 */
+}
+
+/* =================== 时代之河 =================== */
+
+.times-rivers {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.times-river {
+    position: absolute;
+    border-radius: 50%;
+    animation: riverFlow 4s ease-in-out infinite;
+}
+
+@keyframes riverFlow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* 直接暴力河 - 左下角 */
+.river-direct-violence {
+    bottom: 120px;
+    left: 15%;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 69, 0, 0.8); /* 橙红色 */
+    box-shadow: 
+        0 -18px 0 6px rgba(255, 69, 0, 0.7),
+        4px -32px 0 5px rgba(255, 69, 0, 0.6),
+        -3px -46px 0 5px rgba(255, 69, 0, 0.6),
+        5px -60px 0 4px rgba(255, 69, 0, 0.5);
+}
+
+/* 间接暴力河 - 左下角 */
+.river-indirect-violence {
+    bottom: 110px;
+    left: 35%;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 165, 0, 0.8); /* 橙色 */
+    box-shadow: 
+        0 -20px 0 6px rgba(255, 165, 0, 0.7),
+        -4px -36px 0 5px rgba(255, 165, 0, 0.6),
+        3px -52px 0 5px rgba(255, 165, 0, 0.6),
+        -3px -68px 0 4px rgba(255, 165, 0, 0.5);
+}
+
+/* 互联时代河 - 右下角 */
+.river-interconnected-era {
+    bottom: 115px;
+    right: 35%;
+    width: 12px;
+    height: 12px;
+    background: rgba(30, 144, 255, 0.8); /* 道奇蓝 */
+    box-shadow: 
+        0 -16px 0 6px rgba(30, 144, 255, 0.7),
+        3px -28px 0 5px rgba(30, 144, 255, 0.6),
+        -4px -40px 0 5px rgba(30, 144, 255, 0.6),
+        4px -52px 0 4px rgba(30, 144, 255, 0.5);
+}
+
+/* 对抗异化河 - 右下角 */
+.river-anti-alienation {
+    bottom: 125px;
+    right: 15%;
+    width: 12px;
+    height: 12px;
+    background: rgba(138, 43, 226, 0.8); /* 蓝紫色 */
+    box-shadow: 
+        0 -22px 0 6px rgba(138, 43, 226, 0.7),
+        -3px -38px 0 5px rgba(138, 43, 226, 0.6),
+        4px -54px 0 5px rgba(138, 43, 226, 0.6),
+        -4px -70px 0 4px rgba(138, 43, 226, 0.5);
+}
+
+/* 河流标签 */
+.river-direct-violence::before {
+    content: "⚔️ 直接暴力河";
+    position: absolute;
+    top: -70px;
+    left: -25px;
+    font-size: 12px;
+    color: #FF4500;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+    border: 1px solid rgba(255, 69, 0, 0.4);
+}
+
+.river-indirect-violence::before {
+    content: "⛓️ 间接暴力河";
+    position: absolute;
+    top: -75px;
+    left: -25px;
+    font-size: 12px;
+    color: #FFA500;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+    border: 1px solid rgba(255, 165, 0, 0.4);
+}
+
+.river-interconnected-era::before {
+    content: "🌐 互联时代河";
+    position: absolute;
+    top: -60px;
+    left: -25px;
+    font-size: 12px;
+    color: #1E90FF;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+    border: 1px solid rgba(30, 144, 255, 0.4);
+}
+
+.river-anti-alienation::before {
+    content: "✊ 对抗异化河";
+    position: absolute;
+    top: -80px;
+    left: -30px;
+    font-size: 12px;
+    color: #8A2BE2;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+}
+
+/* =================== 重新布局：导游左上，智者右上 =================== */
+
+/* 导游区域 - 左上角 (沿用太阳山样式) */
+.guide-section {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    display: flex;
+    align-items: flex-end;
+    gap: 26px;
+    max-width: 450px;
+    z-index: 300; /* Adjusted z-index to be consistent */
+}
+
+.guide-character {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.guide-avatar {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    animation: guideFloat 3s ease-in-out infinite;
+    background: none; /* Remove previous background */
+    border: none; /* Remove previous border */
+    backdrop-filter: none; /* Remove previous blur */
+    color: inherit; /* Inherit color */
+}
+
+@keyframes guideFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.guide-name {
+    font-size: 14px;
+    color: #8B4513; /* Matching sun-mountain color */
+    background: rgba(255,255,255,0.9);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: none; /* Remove previous text-shadow */
+}
+
+.speech-bubble {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 350px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    animation: bubbleAppear 2s ease-out;
+    flex: 1;
+    backdrop-filter: none; /* Remove previous blur */
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -10px; /* Adjusted to align with guide character */
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(255, 255, 255, 0.95);
+    transform: rotate(-45deg); /* Rotate to point towards guide */
+}
+
+.bubble-content h3 {
+    color: #8B4513; /* Matching sun-mountain color */
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.bubble-content p {
+    color: #654321; /* Matching sun-mountain color */
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* =================== 右上角智者区域 =================== */
+
+.right-side-sages {
+    position: absolute;
+    top: 100px;
+    right: 280px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 200px;
+    z-index: 300;
+}
+
+.right-side-sages .sage-figure {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.right-side-sages .sage-figure:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.right-side-sages .sage-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    animation: floatSage 4s ease-in-out infinite;
+}
+
+@keyframes floatSage {
+    0%, 100% { 
+        transform: translateY(0px) scale(1); 
+    }
+    50% { 
+        transform: translateY(-6px) scale(1.02); 
+    }
+}
+
+.right-side-sages .sage-name {
+    font-size: 12px;
+    color: #1A202C;
+    background: rgba(255,255,255,0.95);
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+/* 总论智者特殊样式 */
+.sage-overview {
+    display: none; /* 时代总论默认显示，这里不需要隐藏 */
+    grid-column: 1 / -1;
+    margin-bottom: 10px;
+}
+
+.sage-overview .sage-avatar {
+    font-size: 2.8rem;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.sage-overview .sage-name {
+    background: rgba(255, 215, 0, 0.9);
+    color: #8B4513;
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+/* 右侧智者光晕效果 */
+.right-side-sages .sage-figure::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: sageGlow 3s ease-in-out infinite;
+}
+
+@keyframes sageGlow {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* =================== 探索提示 =================== */
+
+.exploration-hint {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(calc(-50% + 10px));
+    background: rgba(106, 90, 205, 0.9);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 300;
+    animation: pulseHint 2s ease-in-out infinite alternate;
+    white-space: nowrap;
+}
+
+@keyframes pulseHint {
+    0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+/* =================== 访问状态 =================== */
+
+.figure-item.visited,
+.right-side-sages .sage-figure.visited {
+    opacity: 0.7;
+}
+
+.figure-item.visited::after,
+.right-side-sages .sage-figure.visited::after {
+    content: "✓";
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: #48BB78;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 20;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    border: 2px solid white;
+}
+
+/* =================== 音乐控制按钮 =================== */
+
+.music-toggle {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* =================== 响应式设计 =================== */
+
+@media (max-width: 768px) {
+    /* solar-system 相关的 media query 移除 */
+    
+    .guide-section {
+        top: 160px;
+        left: 20px;
+        max-width: 300px;
+    }
+    
+    .speech-bubble {
+        max-width: 250px;
+        padding: 15px;
+    }
+    
+    .right-side-sages {
+        top: 100px;
+        right: 200px; 
+        width: 160px;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .right-side-sages .sage-avatar {
+        font-size: 2rem;
+    }
+    
+    .right-side-sages .sage-name {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .figure-item {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 480px) {
+    /* solar-system 相关的 media query 移除 */
+    
+    .guide-section {
+        top: 140px;
+        left: 10px;
+        max-width: 250px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .speech-bubble {
+        max-width: 220px;
+        padding: 12px;
+    }
+    
+    .bubble-content h3 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .bubble-content p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    .right-side-sages {
+        top: 100px;
+        right: 200px;
+        width: 140px;
+        gap: 8px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .right-side-sages .sage-avatar {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+    }
+    
+    .right-side-sages .sage-name {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .sage-overview .sage-avatar {
+        font-size: 2.2rem;
+        padding: 8px;
+    }
+    
+    .sage-overview .sage-name {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .figure-item {
+        transform: scale(0.8);
+    }
+    
+    .figure-item:hover {
+        transform: scale(0.9) translateY(-5px);
+    }
+    
+    .figure-avatar {
+        font-size: 2.5rem;
+    }
+    
+    .figure-name {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+    
+    .exploration-hint {
+        font-size: 12px;
+        padding: 10px 20px;
+        bottom: 20px;
+    }
+    
+    .river-direct-violence::before,
+    .river-indirect-violence::before,
+    .river-interconnected-era::before,
+    .river-anti-alienation::before {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+}
+
+/* =================== 特殊动画效果增强 =================== */
+
+/* 时代河流的涟漪效果 */
+.times-river::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: ripple 4s ease-out infinite;
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+    }
+}
+
+/* 河流交汇处的粒子效果 */
+.times-rivers::after {
+    content: '';
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: radial-gradient(ellipse, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: particleEffect 6s ease-in-out infinite;
+}
+
+@keyframes particleEffect {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translateX(-50%) scale(1);
+    }
+    50% { 
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1.3);
+    }
+}
+
+/* 智者出现动画 */
+.sage-figure {
+    animation: sageAppear 1s ease-out forwards;
+}
+
+@keyframes sageAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 为不同的智者添加延迟 */
+.sage-overview { animation-delay: 0.1s; } /* 时代总论 */
+.sage-hegel { animation-delay: 0.2s; }
+.sage-honnet { animation-delay: 0.3s; }
+.sage-huntington { animation-delay: 0.4s; }
+.sage-aron { animation-delay: 0.5s; }
+.sage-porter { animation-delay: 0.6s; }
+.sage-nash { animation-delay: 0.7s; }
+.sage-von-neumann { animation-delay: 0.8s; }
+
+/* 行星发光效果增强 - 移除 */
+
+/* 返回按钮 */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(139, 69, 19, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(139, 69, 19, 1);
+    transform: translateY(-2px);
+} 

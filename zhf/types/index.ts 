@@ -1,0 +1,126 @@
+// types/index.ts
+
+export interface Scholar {
+  id: string;
+  name: string;
+  era: string;
+  field: string;
+  description: string;
+  quote?: string;
+  books?: string[];
+  achievements?: string[];
+  dialogues?: Dialogue[];
+  avatar?: string;
+}
+
+export interface Dialogue {
+  id: string;
+  trigger: 'first_meet' | 'random' | 'quest' | 'achievement';
+  content: string;
+  options?: DialogueOption[];
+  reward?: {
+    wisdom: number;
+    item?: string;
+    unlock?: string;
+  };
+}
+
+export interface DialogueOption {
+  text: string;
+  response: string;
+  consequence?: 'positive' | 'negative' | 'neutral';
+  nextDialogue?: string;
+}
+
+export interface Peak {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  scholars: Scholar[];
+  difficulty: 'easy' | 'medium' | 'hard';
+  unlockRequirement?: {
+    wisdom: number;
+    prerequisite?: string[];
+  };
+  story?: Story;
+}
+
+export interface Story {
+  id: string;
+  title: string;
+  introduction: string;
+  chapters: Chapter[];
+  choices: Choice[];
+}
+
+export interface Chapter {
+  id: string;
+  title: string;
+  content: string;
+  characters: string[]; // Scholar IDs
+  multimedia?: {
+    images?: string[];
+    audio?: string[];
+  };
+}
+
+export interface Choice {
+  id: string;
+  text: string;
+  description: string;
+  consequence: {
+    wisdom: number;
+    relationships?: { [scholarId: string]: number };
+    unlocks?: string[];
+  };
+}
+
+export interface Mountain {
+  id: string;
+  name: string;
+  type: 'source' | 'method' | 'heaven' | 'earth' | 'human';
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  discovered: boolean;
+  peaks: Peak[];
+  theme: string;
+  backgroundStory: string;
+  entryRequirement?: {
+    wisdom: number;
+    prerequisiteMountains?: string[];
+  };
+  specialFeatures?: {
+    hasRivers?: boolean;
+    hasSecrets?: boolean;
+    hasQuests?: boolean;
+  };
+}
+
+export interface GameState {
+  currentLocation: {
+    mountain?: string;
+    peak?: string;
+    character?: string;
+  };
+  discoveredAreas: string[];
+  wisdom: number;
+  relationships: { [scholarId: string]: number };
+  inventory: string[];
+  achievements: string[];
+  currentStory?: {
+    mountainId: string;
+    chapterId: string;
+    choices: string[];
+  };
+}
+
+export interface MountainComponentProps {
+  mountain: Mountain;
+  gameState: GameState;
+  onStateChange: (newState: Partial<GameState>) => void;
+  onExitMountain: () => void;
+  onEnterPeak: (peakId: string) => void;
+}

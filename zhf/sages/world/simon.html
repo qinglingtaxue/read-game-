@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与赫伯特·西蒙对话 - 决策科学实验室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 70%, #e94560 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(233, 69, 96, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(233, 69, 96, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 决策科学实验室场景 */
+        .decision-lab {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(233, 69, 96, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #1a1a2e 0%, #16213e 30%, #0f3460 70%, #e94560 100%);
+            overflow: hidden;
+        }
+        
+        /* 数据流装饰 */
+        .data-streams {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 30px,
+                    rgba(255, 255, 255, 0.05) 30px,
+                    rgba(255, 255, 255, 0.05) 32px,
+                    transparent 32px,
+                    transparent 62px
+                );
+            animation: dataFlow 15s linear infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100px); }
+        }
+        
+        /* 决策树 */
+        .decision-tree {
+            position: absolute;
+            top: 25%;
+            left: 15%;
+            width: 200px;
+            height: 250px;
+            background: 
+                linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%),
+                linear-gradient(-45deg, transparent 40%, rgba(233, 69, 96, 0.3) 50%, transparent 60%);
+            clip-path: polygon(50% 0%, 0% 100%, 25% 100%, 50% 25%, 75% 100%, 100% 100%);
+            animation: treeGrow 6s ease-in-out infinite;
+        }
+        
+        @keyframes treeGrow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+        
+        /* AI大脑符号 */
+        .ai-brain {
+            position: absolute;
+            top: 30%;
+            right: 25%;
+            font-size: 5rem;
+            color: rgba(233, 69, 96, 0.8);
+            animation: brainPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes brainPulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: scale(1.15);
+                filter: brightness(1.3);
+            }
+        }
+        
+        /* 有限理性指示器 */
+        .rationality-meter {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            width: 150px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .rationality-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+            border-radius: 10px;
+            animation: rationalityWave 8s ease-in-out infinite;
+        }
+        
+        @keyframes rationalityWave {
+            0%, 100% { width: 60%; }
+            50% { width: 85%; }
+        }
+        
+        /* 满意化vs最优化 */
+        .satisficing-optimal {
+            position: absolute;
+            top: 50%;
+            right: 15%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .choice-indicator {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            animation: choiceFlicker 5s ease-in-out infinite;
+        }
+        
+        .satisficing {
+            background: rgba(72, 219, 251, 0.3);
+            color: #48dbfb;
+        }
+        
+        .optimal {
+            background: rgba(254, 202, 87, 0.3);
+            color: #feca57;
+        }
+        
+        @keyframes choiceFlicker {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 5s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-10px);
+                filter: hue-rotate(15deg);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 75%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e94560;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #e94560;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #ff6b6b;
+            background: rgba(233, 69, 96, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(72, 219, 251, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(72, 219, 251, 0.4);
+        }
+        
+        /* 决策理论展示 */
+        .decision-theory {
+            background: rgba(26, 26, 46, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(26, 26, 46, 0.3);
+        }
+        
+        .theory-item {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: rgba(233, 69, 96, 0.2);
+            border-radius: 5px;
+            border-left: 3px solid #e94560;
+            font-weight: bold;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #e94560, #ff6b6b);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #48dbfb;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="decision-lab">
+        <div class="data-streams"></div>
+        <div class="decision-tree"></div>
+        <div class="ai-brain">🧠</div>
+        <div class="rationality-meter">
+            <div class="rationality-fill"></div>
+        </div>
+        <div class="satisficing-optimal">
+            <div class="choice-indicator satisficing">满意化</div>
+            <div class="choice-indicator optimal">最优化</div>
+        </div>
+        
+        <div class="decoration">🤖 决策科学实验室 🤖</div>
+        
+        <div class="sage-portrait">
+            👨‍💼
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">西蒙的有限理性智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到这个探索人类决策机制的实验室，年轻的决策者。我是赫伯特·西蒙，一个致力于理解人类认知和决策过程的跨学科学者。</p>
+                
+                <div class="quote">
+                    "现实世界中的人类并不是追求最优化的经济人，而是在有限理性下寻求满意化的社会人。"
+                </div>
+                
+                <p>在我多年的研究中，我发现传统经济学对人类决策的假设是不现实的。人们并不会穷尽所有可能性来寻找最优解，而是会在找到第一个"足够好"的方案时就停止搜索。</p>
+                
+                <div class="decision-theory">
+                    <strong>🎯 有限理性的核心概念：</strong>
+                    <div class="theory-item">认知局限 - 人类信息处理能力有限</div>
+                    <div class="theory-item">满意化 - 寻找"足够好"而非"最优"的解决方案</div>
+                    <div class="theory-item">启发式 - 使用简化的决策规则</div>
+                    <div class="theory-item">程序化决策 - 将复杂问题分解为简单步骤</div>
+                </div>
+                
+                <div class="quote">
+                    "管理就是决策。"——所有的管理活动本质上都是在做选择。
+                </div>
+                
+                <p>我还开创了人工智能的研究，与艾伦·纽厄尔一起开发了第一批能够解决问题的计算机程序。我们发现，人类和机器的思维过程有着惊人的相似性——都是通过搜索和匹配来解决问题。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🔍 问题解决的通用模式：</strong><br>
+                    • <strong>问题表征</strong>：清楚地定义问题是什么<br>
+                    • <strong>搜索策略</strong>：在问题空间中寻找解决路径<br>
+                    • <strong>启发式方法</strong>：使用经验法则缩小搜索范围<br>
+                    • <strong>手段-目的分析</strong>：将目标分解为子目标
+                </div>
+                
+                <div class="quote">
+                    "人类最重要的学习，是学习如何学习。"——元认知能力是智慧的核心。
+                </div>
+                
+                <p>在组织管理中，我提出了"管理人"的概念。真正的管理者不是全知全能的决策机器，而是在复杂环境中运用有限理性做出满意决策的普通人。</p>
+                
+                <p>我的跨学科背景让我意识到，人类行为不能仅仅从经济学角度理解，还需要心理学、认知科学、计算机科学等多重视角的融合。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💡 西蒙的实践智慧：</strong><br>
+                    承认自己的认知局限，不要追求不可能的完美决策。学会使用启发式方法，在"足够好"的基础上行动。重视学习和适应能力，这比单次最优决策更重要。
+                </div>
+                
+                <div class="quote">
+                    "在一个复杂世界中，寻求满意的解决方案往往比寻求最优解更加理智。"
+                </div>
+                
+                <p>记住，无论是在学术研究、商业决策还是日常生活中，完美的信息和无限的时间都是奢侈品。学会在不确定性中做出合理的判断，这就是智慧的体现。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🎲 决策的艺术：</strong><br>
+                    不要被"最优化"的幻觉所困扰。在现实世界中，"足够好"的快速决策往往比"完美"的延迟决策更有价值。关键是要学会何时停止搜索，何时开始行动。
+                </div>
+                
+                <p>离开这里时，请记住：智慧不在于知道所有答案，而在于知道如何在有限的时间和信息下做出合理的选择。这就是有限理性的真正含义。</p>
+            </div>
+        </div>
+        
+        <!-- 完成按钮 -->
+        <button class="complete-btn" onclick="completeDialogue()">完成对话</button>
+
+    </div>
+    
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+
+        // 完成对话
+        function completeDialogue() {
+            let visitedSages = [];
+            try {
+                visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            } catch (error) {
+                console.error('读取localStorage失败，使用内存存储', error);
+            }
+            
+            const currentSageId = 'simon'; // 当前智者的ID
+            if (!visitedSages.includes(`world-${currentSageId}`)) {
+                visitedSages.push(`world-${currentSageId}`);
+                try {
+                    localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+                } catch (error) {
+                    console.error('写入localStorage失败，使用内存存储', error);
+                }
+            }
+            alert('对话完成！你已获得西蒙的智慧。');
+            window.location.href = '../../world-mountain.html'; // 返回世界之山页面
+        }
+    </script>
+</body>
+</html>

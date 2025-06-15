@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与孔子对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd4 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(139, 69, 19, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 书房场景 */
+        .study-room {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 70% 30%, rgba(255,215,0,0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #CD853F 0%, #DEB887 20%, #F5DEB3 40%, #FFF8DC 100%);
+            overflow: hidden;
+        }
+        
+        /* 书架背景 */
+        .bookshelf {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            right: 5%;
+            height: 70%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    #8B4513 0px,
+                    #8B4513 40px,
+                    #A0522D 40px,
+                    #A0522D 80px
+                );
+            border-radius: 10px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
+        }
+        
+        /* 书籍装饰 */
+        .books {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 20px,
+                    rgba(139, 69, 19, 0.3) 20px,
+                    rgba(139, 69, 19, 0.3) 25px
+                );
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 3px solid #CD853F;
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            border: 2px solid #CD853F;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #8B4513;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #CD853F;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #DC143C;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #CD853F;
+            background: rgba(205, 133, 63, 0.1);
+            font-weight: bold;
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #32CD32, #228B22);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(50, 205, 50, 0.4);
+        }
+        
+        /* 古典装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #CD853F;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
+    
+    <div class="study-room">
+        <div class="bookshelf">
+            <div class="books"></div>
+        </div>
+        
+        <div class="decoration">📚 儒学圣殿 📚</div>
+        
+        <div class="sage-portrait">
+            👨‍🏫
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">孔子的教诲</h2>
+            <div class="dialogue-content">
+                <p>学而时习之，不亦说乎？有朋自远方来，不亦乐乎？欢迎你来到我的学堂，年轻的求学者。</p>
+                
+                <div class="quote">
+                    "学而不思则罔，思而不学则殆。"
+                </div>
+                
+                <p>我是孔子，人们称我为万世师表。在这个礼崩乐坏的时代，我致力于恢复周朝的礼制，培养君子品格，传播仁义之道。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🎓 孔子的核心思想：</strong><br>
+                    • <strong>仁</strong>：爱人如己，推己及人<br>
+                    • <strong>礼</strong>：社会秩序的基础<br>
+                    • <strong>义</strong>：道德行为的准则<br>
+                    • <strong>智</strong>：学习与思考的重要性<br>
+                    • <strong>信</strong>：诚实守信的品格
+                </div>
+                
+                <div class="quote">
+                    "己所不欲，勿施于人。"
+                </div>
+                
+                <p>这句话体现了仁的精神。一个真正的君子，应该将心比心，体恤他人。在与人交往中，要设身处地为他人着想。</p>
+                
+                <div class="quote">
+                    "三人行，必有我师焉。择其善者而从之，其不善者而改之。"
+                </div>
+                
+                <p>学习是终身的事业。无论走到哪里，都要保持谦逊的心态，向身边的每个人学习。见贤思齐，见不贤而内自省。</p>
+                
+                <p>记住，君子务本，本立而道生。做人要有根本，这个根本就是仁德。愿你能够修身齐家，将来为社会贡献自己的力量。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../sun-mountain.html';
+        }
+        
+        function completeDialogue() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'sun-confucius';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            alert('🎉 恭喜！您已经完成了与孔子的对话，获得了儒家智慧！');
+            goBack();
+        }
+        
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与苏格拉底对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', '宋体', serif;
+            background: linear-gradient(135deg, #e6f3ff 0%, #b3d9ff 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(139, 69, 19, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 古希腊风格书房 */
+        .study-room {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(135, 206, 235, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 20%, #F0F8FF 40%, #FFFFFF 100%);
+            overflow: hidden;
+        }
+        
+        /* 希腊柱子装饰 */
+        .columns {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            height: 80%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 80px,
+                    rgba(169, 169, 169, 0.3) 80px,
+                    rgba(169, 169, 169, 0.3) 100px
+                );
+        }
+        
+        /* 书架背景 */
+        .bookshelf {
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            right: 10%;
+            height: 60%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(139, 69, 19, 0.6) 0px,
+                    rgba(139, 69, 19, 0.6) 35px,
+                    rgba(160, 82, 45, 0.6) 35px,
+                    rgba(160, 82, 45, 0.6) 70px
+                );
+            border-radius: 10px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+            border: 2px solid rgba(169, 169, 169, 0.5);
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 8%;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(230,230,250,0.9) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 3px solid #4682B4;
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 28%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            border: 2px solid #4682B4;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #4682B4;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #87CEEB;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #4169E1;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #4682B4;
+            background: rgba(135, 206, 235, 0.1);
+            font-weight: bold;
+        }
+        
+        .wisdom-point {
+            background: rgba(135, 206, 235, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(135, 206, 235, 0.5);
+        }
+        
+        .question {
+            color: #8B0000;
+            font-weight: bold;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #4682B4, #87CEEB);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(70, 130, 180, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(70, 130, 180, 0.4);
+        }
+        
+        /* 古典装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #4682B4;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
+    
+    <div class="study-room">
+        <div class="columns"></div>
+        <div class="bookshelf"></div>
+        
+        <div class="decoration">🏛️ 雅典学院 🏛️</div>
+        
+        <div class="sage-portrait">
+            🧔‍♂️
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">苏格拉底的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎，年轻的朋友！我是苏格拉底，雅典的哲学家。让我们不要急于给出答案，而是先学会提出正确的问题。</p>
+                
+                <div class="quote">
+                    "我知道我一无所知。"
+                </div>
+                
+                <p>这并不是谦虚，而是智慧的开始。当我们承认自己的无知时，才能真正开始学习和思考。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🤔 苏格拉底的核心方法：</strong><br>
+                    • <strong>苏格拉底问答法</strong>：通过不断提问来寻求真理<br>
+                    • <strong>认识你自己</strong>：自我反省和内在探索<br>
+                    • <strong>德行即知识</strong>：道德品格来自理性认识<br>
+                    • <strong>未经审视的生活不值得过</strong>：思辨人生的意义
+                </div>
+                
+                <div class="question">
+                    让我问你：什么是正义？什么是美德？什么是勇敢？
+                </div>
+                
+                <p>不要急于回答。真正的智慧不在于背诵标准答案，而在于深入思考这些概念的本质。</p>
+                
+                <div class="quote">
+                    "未经审视的生活不值得过。"
+                </div>
+                
+                <p>我们每天都在生活，但有多少人真正思考过：我为什么而活？什么样的生活才是有意义的？</p>
+                
+                <div class="question">
+                    如果一个人拥有财富、地位、权力，但从未思考过生命的意义，他的生活有价值吗？
+                </div>
+                
+                <p>通过不断的质疑和对话，我们能够剥去表象，接近真理。记住，智慧的第一步就是承认自己的无知，然后永不停止地追问和思考。</p>
+                
+                <p>愿你在人生的道路上，始终保持一颗好奇和质疑的心！</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../sun-mountain.html';
+        }
+        
+        function completeDialogue() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'sun-socrates';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            alert('🎉 恭喜！您已经完成了与苏格拉底的对话，学会了智慧的质疑精神！');
+            goBack();
+        }
+        
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>

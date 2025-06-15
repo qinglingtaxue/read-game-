@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史之山探索之旅</title>
+    <link rel="stylesheet" href="css/history-mountain.css">
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回全景图</button>
+
+    <!-- 进度显示 -->
+    <div class="progress-display">
+        <span class="mountain-progress">历史山进度：<span id="mountain-progress">0/7</span></span>
+        <span class="total-progress">总进度：<span id="total-progress">0/420</span></span>
+    </div>
+    
+    <div class="mountain-scene">
+        <!-- 云朵 -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        
+        <!-- 山脉层次 -->
+        <div class="distant-mountains"></div>
+        <div class="middle-mountains"></div>
+        <div class="front-mountains"></div>
+
+        <!-- 历史河流 - 继承太阳山样式 -->
+        <div class="history-rivers">
+            <div class="history-river river-chinese-general" data-range="chinese-general" onclick="exploreRange('chinese-general')" title="中国通史"></div>
+            <div class="history-river river-world-general" data-range="world-general" onclick="exploreRange('world-general')" title="世界通史"></div>
+            <div class="history-river river-chinese-dynastic-special" data-range="chinese-dynastic-special" onclick="exploreRange('chinese-dynastic-special')" title="中国断代史"></div>
+            <div class="history-river river-western-dynastic-special" data-range="western-dynastic-special" onclick="exploreRange('western-dynastic-special')" title="西方断代史"></div>
+        </div>
+        
+        <!-- 导游人物和对话气泡 -->
+        <div class="guide-section">
+            <div class="guide-character">
+                <div class="guide-avatar">📜</div>
+                <div class="guide-name">历史向导</div>
+            </div>
+            <div class="speech-bubble">
+                <div class="bubble-content">
+                    <h3>🏛️ 欢迎来到历史之山</h3>
+                    <p>在这座庄重的山峰上，四条历史之河静静流淌。中国通史河脉络中华文明，世界通史河连结全球进程，中国断代史与专题河深究华夏细节，西方断代史与专题河剖析西方变迁。七位历史巨匠在此等候。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧智者区域 -->
+        <div class="right-side-sages">
+            <div class="sage-figure sage-simaqian" data-sage="simaqian" onclick="exploreSage('simaqian')">
+                <div class="sage-avatar">✍️</div>
+                <div class="sage-name">司马迁</div>
+            </div>
+            
+            <div class="sage-figure sage-thucydides" data-sage="thucydides" onclick="exploreSage('thucydides')">
+                <div class="sage-avatar">🏛️</div>
+                <div class="sage-name">修昔底德</div>
+            </div>
+            
+            <div class="sage-figure sage-simaguang" data-sage="simaguang" onclick="exploreSage('simaguang')">
+                <div class="sage-avatar">📝</div>
+                <div class="sage-name">司马光</div>
+            </div>
+            
+            <div class="sage-figure sage-wangchuanshan" data-sage="wangchuanshan" onclick="exploreSage('wangchuanshan')">
+                <div class="sage-avatar">⛰️</div>
+                <div class="sage-name">王船山</div>
+            </div>
+            
+            <div class="sage-figure sage-liangqichao" data-sage="liangqichao" onclick="exploreSage('liangqichao')">
+                <div class="sage-avatar">💡</div>
+                <div class="sage-name">梁启超</div>
+            </div>
+            
+            <div class="sage-figure sage-yangengwang" data-sage="yangengwang" onclick="exploreSage('yangengwang')">
+                <div class="sage-avatar">🧐</div>
+                <div class="sage-name">严耕望</div>
+            </div>
+            
+            <div class="sage-figure sage-braudel" data-sage="braudel" onclick="exploreSage('braudel')">
+                <div class="sage-avatar">🌐</div>
+                <div class="sage-name">布罗代尔</div>
+            </div>
+        </div>
+
+        <!-- 探索提示 -->
+        <div class="exploration-hint">
+            💧 点击河流探索历史脉络 | 🧐 点击智者深入对话
+        </div>
+    </div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="music/history-mountain-bg.mp3" type="audio/mpeg">
+        <source src="music/history-mountain-bg.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- 音乐控制按钮 -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleBgMusic()">🎵</button>
+
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // 探索山脉 (历史河流)
+        function exploreRange(rangeId) {
+            window.location.href = `ranges/history/${rangeId}-range.html`;
+        }
+
+        // 探索智者
+        function exploreSage(sageId) {
+            window.location.href = `sages/history/${sageId}.html`;
+        }
+
+        // 安全的存储访问函数
+        function getVisitedSages() {
+            try {
+                return JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            } catch (error) {
+                console.log('使用内存存储模式');
+                return [];
+            }
+        }
+
+        function setVisitedSages(sages) {
+            try {
+                localStorage.setItem('visitedSages', JSON.stringify(sages));
+            } catch (error) {
+                console.log('存储失败');
+            }
+        }
+
+        // 检查山峰完成状态
+        function checkMountainComplete() {
+            const visitedSagesList = getVisitedSages();
+            const mainHistorySages = ['simaqian', 'thucydides', 'simaguang', 'wangchuanshan', 'liangqichao', 'yangengwang', 'braudel'];
+
+            let completedMainSages = 0;
+            mainHistorySages.forEach(sage => {
+                if (visitedSagesList.includes(`history-${sage}`)) { 
+                    completedMainSages++;
+                }
+            });
+
+            document.getElementById('mountain-progress').textContent = `${completedMainSages}/${mainHistorySages.length}`;
+            document.getElementById('total-progress').textContent = `${visitedSagesList.length}/420`;
+            
+            // 更新智者状态显示
+            mainHistorySages.forEach(sage => {
+                const sageElement = document.querySelector(`[data-sage="${sage}"]`);
+                if (sageElement && visitedSagesList.includes(`history-${sage}`)) { 
+                    sageElement.classList.add('visited');
+                }
+            });
+            
+            // 如果完成了历史山的核心智者，显示提示
+            if (completedMainSages === mainHistorySages.length) {
+                if (!localStorage.getItem('historyMountainCompleted')) {
+                    localStorage.setItem('historyMountainCompleted', 'true');
+                    showCompletionModal();
+                }
+            }
+        }
+
+        // 显示完成提示
+        function showCompletionModal() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 2000;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: #F5DEB3; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; position: relative; border: 2px solid #8B6914;">
+                    <span onclick="this.parentElement.parentElement.remove()" 
+                    style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: #654321; font-weight: bold;">&times;</span>
+                    
+                    <h3 style="color: #654321; margin-bottom: 20px;">🎉 恭喜完成历史山探索！</h3>
+                    <p style="margin-bottom: 20px; color: #5D4E37;">你已拜访了历史山的所有智者，获得了历史的智慧。</p>
+                    
+                    <button onclick="goBack()" style="background: #8B6914; color: #F5DEB3; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer;">返回全景</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // 背景音乐控制
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        if (bgMusic) {
+            bgMusic.volume = 0.3;
+        }
+
+        function toggleBgMusic() {
+            if (!bgMusic) return;
+            
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(error => {
+                    console.log('播放失败，请检查音频文件');
+                });
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            }
+        }
+
+        // 用户首次交互时尝试播放
+        let hasInteracted = false;
+        document.addEventListener('click', function() {
+            if (!hasInteracted && bgMusic) {
+                hasInteracted = true;
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(() => {
+                    // 静默处理
+                });
+            }
+        });
+
+        // 页面加载时检查状态
+        window.addEventListener('load', checkMountainComplete);
+
+        // 页面加载时检查河流是否正确显示
+        window.addEventListener('load', function() {
+            console.log('页面加载完成，检查历史河流...');
+            
+            const rivers = document.querySelectorAll('.history-river');
+            console.log('找到河流数量:', rivers.length);
+            
+            rivers.forEach((river, index) => {
+                console.log(`河流 ${index + 1}:`, {
+                    element: river,
+                    className: river.className,
+                    innerHTML: river.innerHTML,
+                    position: window.getComputedStyle(river).position,
+                    bottom: window.getComputedStyle(river).bottom,
+                    left: window.getComputedStyle(river).left,
+                    right: window.getComputedStyle(river).right,
+                    zIndex: window.getComputedStyle(river).zIndex,
+                    display: window.getComputedStyle(river).display,
+                    visibility: window.getComputedStyle(river).visibility
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与萨特对话 - 存在主义咖啡馆</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #2C1810 0%, #3D2317 30%, #4E2E1F 70%, #5F3926 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(95, 57, 38, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(95, 57, 38, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 巴黎咖啡馆场景 */
+        .paris-cafe {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(205, 133, 63, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #2C1810 0%, #3D2317 30%, #4E2E1F 70%, #5F3926 100%);
+            overflow: hidden;
+        }
+        
+        /* 咖啡馆装饰 */
+        .cafe-tables {
+            position: absolute;
+            bottom: 20%;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: 
+                repeating-radial-gradient(
+                    circle at 25% 50%,
+                    transparent 0px,
+                    transparent 30px,
+                    rgba(139, 69, 19, 0.3) 30px,
+                    rgba(139, 69, 19, 0.3) 40px,
+                    transparent 40px,
+                    transparent 80px
+                );
+        }
+        
+        /* 香烟烟雾效果 */
+        .cigarette-smoke {
+            position: absolute;
+            top: 40%;
+            left: 15%;
+            width: 100px;
+            height: 200px;
+            background: 
+                radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: smokeRise 8s ease-in-out infinite;
+        }
+        
+        @keyframes smokeRise {
+            0% { 
+                opacity: 0.8; 
+                transform: translateY(0px) scaleX(1);
+            }
+            50% { 
+                opacity: 0.4; 
+                transform: translateY(-30px) scaleX(1.5);
+            }
+            100% { 
+                opacity: 0.1; 
+                transform: translateY(-60px) scaleX(2);
+            }
+        }
+        
+        /* 自由符号 */
+        .freedom-symbol {
+            position: absolute;
+            top: 25%;
+            right: 25%;
+            font-size: 5rem;
+            color: rgba(255, 215, 0, 0.7);
+            animation: freedomPulse 5s ease-in-out infinite;
+        }
+        
+        @keyframes freedomPulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scale(1.1) rotate(5deg);
+                opacity: 1;
+            }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 4s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(-1deg);
+                filter: sepia(20%);
+            }
+            50% { 
+                transform: translateY(-8px) rotate(1deg);
+                filter: sepia(0%);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 75%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #2C1810;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #5F3926;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #8B4513;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #CD853F;
+            background: rgba(205, 133, 63, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+        
+        /* 存在主义概念展示 */
+        .existential-concepts {
+            background: rgba(139, 69, 19, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(139, 69, 19, 0.3);
+        }
+        
+        .concept-item {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: rgba(95, 57, 38, 0.2);
+            border-radius: 5px;
+            border-left: 3px solid #CD853F;
+            font-weight: bold;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #8B4513, #CD853F);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #FFD700;
+        }
+        
+        /* 咖啡杯装饰 */
+        .coffee-cup {
+            position: absolute;
+            top: 35%;
+            left: 10%;
+            font-size: 3rem;
+            animation: steamRise 3s ease-in-out infinite;
+        }
+        
+        @keyframes steamRise {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="paris-cafe">
+        <div class="cafe-tables"></div>
+        <div class="cigarette-smoke"></div>
+        <div class="freedom-symbol">🗽</div>
+        <div class="coffee-cup">☕</div>
+        
+        <div class="decoration">🏛️ 存在主义咖啡馆 🏛️</div>
+        
+        <div class="sage-portrait">
+            🚬
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">萨特的存在主义思考</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到这个弥漫着思辨气息的巴黎咖啡馆，年轻的存在者。我是让-保罗·萨特，一个在烟雾和咖啡香中思考人类处境的存在主义哲学家。</p>
+                
+                <div class="quote">
+                    "存在先于本质。"——人首先存在，然后通过自己的选择和行动来定义自己的本质。
+                </div>
+                
+                <p>在这个荒诞的世界里，没有上帝为我们预设好人生的意义。我们被抛入这个世界，面对着绝对的自由——这既是我们的诅咒，也是我们的福音。</p>
+                
+                <div class="existential-concepts">
+                    <strong>⚡ 存在主义的核心概念：</strong>
+                    <div class="concept-item">自由选择 - 我们注定要自由</div>
+                    <div class="concept-item">责任承担 - 为自己的选择负全责</div>
+                    <div class="concept-item">焦虑体验 - 面对无限可能性的眩晕</div>
+                    <div class="concept-item">他人地狱 - "他人即地狱"的人际困境</div>
+                </div>
+                
+                <div class="quote">
+                    "人注定是自由的，因为一旦他被抛入这个世界，他就要为自己做的每一件事负责。"
+                </div>
+                
+                <p>很多人害怕这种绝对的自由，他们宁愿相信命运、上帝或社会为他们安排好一切。但这是一种"坏信念"(bad faith)——对自己自由的逃避和否认。</p>
+                
+                <div class="wisdom-point">
+                    <strong>👁️ 他人的目光：</strong><br>
+                    "他人即地狱"不是说他人本身邪恶，而是说在他人的目光下，我们容易失去自我，变成他人眼中的客体。真正的自由是保持主体性，不被他人的目光所定义。
+                </div>
+                
+                <div class="quote">
+                    "人是什么，人就应当承担起什么。人除了自我塑造之外，什么都不是。"
+                </div>
+                
+                <p>在咖啡馆里，我观察着来来往往的人们——服务员、顾客、恋人、独饮者。每个人都在无意识地扮演着某种角色，但很少有人意识到这种角色是可以选择和改变的。</p>
+                
+                <p>真正的存在主义者不是悲观主义者，而是勇敢的现实主义者。我们承认生活的荒诞，但正是在这种荒诞中，我们找到了创造意义的自由。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💫 萨特的人生哲学：</strong><br>
+                    拥抱你的自由，即使它让你焦虑。为你的选择承担责任，即使它们是错误的。在他人的目光中保持自我，在荒诞中创造意义。记住：你就是你选择成为的人。
+                </div>
+                
+                <p>离开这里时，请记住：你不是被动的受害者，而是主动的创造者。每一个瞬间，你都在重新发明自己。这就是人类存在的伟大与悲壮。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'world-sartre';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与萨特的对话，获得了存在主义的自由智慧！');
+            
+            // 返回世界之山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

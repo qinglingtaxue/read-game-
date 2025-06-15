@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与爱因斯坦对话 - 相对论实验室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 30%, #009ffd 70%, #00d2ff 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 210, 255, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(0, 210, 255, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 宇宙实验室场景 */
+        .cosmic-lab {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.05) 0%, transparent 60%),
+                linear-gradient(to bottom, #000428 0%, #004e92 30%, #009ffd 70%, #00d2ff 100%);
+            overflow: hidden;
+        }
+        
+        /* 星空装饰 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 20s linear infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* 相对论公式 */
+        .relativity-formula {
+            position: absolute;
+            top: 25%;
+            left: 15%;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Times New Roman', serif;
+            animation: formulaGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes formulaGlow {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+                transform: scale(1.05);
+            }
+        }
+        
+        /* 时空弯曲效果 */
+        .spacetime-warp {
+            position: absolute;
+            top: 30%;
+            right: 20%;
+            width: 200px;
+            height: 200px;
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: warpEffect 8s ease-in-out infinite;
+        }
+        
+        .spacetime-warp::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: warpEffect 6s ease-in-out infinite reverse;
+        }
+        
+        .spacetime-warp::after {
+            content: '🌌';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            animation: galaxyRotate 10s linear infinite;
+        }
+        
+        @keyframes warpEffect {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                border-color: rgba(255, 215, 0, 0.6);
+            }
+            50% { 
+                transform: scale(1.2) rotate(180deg);
+                border-color: rgba(255, 255, 255, 0.8);
+            }
+        }
+        
+        @keyframes galaxyRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* 光波效果 */
+        .light-wave {
+            position: absolute;
+            top: 40%;
+            left: 5%;
+            width: 300px;
+            height: 50px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.3) 25%, 
+                rgba(255, 215, 0, 0.5) 50%, 
+                rgba(255, 255, 255, 0.3) 75%, 
+                transparent 100%);
+            border-radius: 25px;
+            animation: lightSpeed 3s ease-in-out infinite;
+        }
+        
+        @keyframes lightSpeed {
+            0% { transform: translateX(-100px) scaleX(0.5); }
+            100% { transform: translateX(400px) scaleX(2); }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 5s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: translateY(-12px);
+                filter: brightness(1.2);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 75%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #000428;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #009ffd;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #004e92;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #00d2ff;
+            background: rgba(0, 210, 255, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+        
+        /* 科学原理展示 */
+        .physics-principle {
+            background: rgba(0, 78, 146, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(0, 78, 146, 0.3);
+        }
+        
+        .principle-item {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: rgba(0, 159, 253, 0.2);
+            border-radius: 5px;
+            border-left: 3px solid #00d2ff;
+            font-weight: bold;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #009ffd, #00d2ff);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 159, 253, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 159, 253, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="cosmic-lab">
+        <div class="stars"></div>
+        <div class="relativity-formula">E=mc²</div>
+        <div class="spacetime-warp"></div>
+        <div class="light-wave"></div>
+        
+        <div class="decoration">🌟 相对论实验室 🌟</div>
+        
+        <div class="sage-portrait">
+            👨‍🔬
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">爱因斯坦的宇宙智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到这个浩瀚的宇宙实验室，年轻的探索者。我是阿尔伯特·爱因斯坦，一个痴迷于理解宇宙奥秘的理论物理学家。</p>
+                
+                <div class="quote">
+                    "想象力比知识更重要，因为知识是有限的，而想象力概括着世界的一切，推动着进步，并且是知识进化的源泉。"
+                </div>
+                
+                <p>在我的研究中，我发现宇宙远比我们想象的更加奇妙和统一。时间和空间不是绝对的，质量和能量可以相互转换，引力实际上是时空的弯曲。</p>
+                
+                <div class="physics-principle">
+                    <strong>⚡ 相对论的核心洞察：</strong>
+                    <div class="principle-item">光速恒定 - 光速在任何参考系中都不变</div>
+                    <div class="principle-item">时空统一 - 时间和空间是一个整体</div>
+                    <div class="principle-item">质能等价 - E=mc²揭示了物质与能量的本质</div>
+                    <div class="principle-item">引力几何 - 引力是时空弯曲的表现</div>
+                </div>
+                
+                <div class="quote">
+                    "上帝是微妙的，但他不是恶意的。"——宇宙有着深刻的数学美和逻辑性。
+                </div>
+                
+                <p>最让我着迷的不仅仅是这些物理定律，而是宇宙的可理解性本身。为什么数学能够如此完美地描述自然？为什么宇宙是理性的而不是混沌的？</p>
+                
+                <div class="wisdom-point">
+                    <strong>🎯 科学研究的精神：</strong><br>
+                    • <strong>好奇心</strong>：对世界保持孩童般的好奇<br>
+                    • <strong>想象力</strong>：敢于超越常识的束缚<br>
+                    • <strong>简洁性</strong>：寻找事物背后的统一原理<br>
+                    • <strong>谦逊</strong>：面对宇宙奥秘的敬畏之心
+                </div>
+                
+                <div class="quote">
+                    "我最想知道的是上帝创造这个世界的时候在想什么，其他的都是细节。"
+                </div>
+                
+                <p>虽然我在科学上取得了一些成就，但我深知人类认识的局限性。我们就像在海边玩耍的孩子，偶尔捡到几个美丽的贝壳，而真理的海洋依然神秘莫测。</p>
+                
+                <p>在人生中，我学会了独立思考的重要性。不要盲从权威，要勇于质疑，敢于提出新的想法。但同时也要保持开放的心态，准备修正自己的观点。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🌌 爱因斯坦的人生哲学：</strong><br>
+                    保持好奇心和想象力，追求简洁和美的真理，在复杂中寻找统一，在变化中发现恒定。记住：真正的智慧来自于对无知的认识。
+                </div>
+                
+                <p>离开这里时，请记住：宇宙是一本用数学语言写成的伟大书籍。学会阅读这本书，你就能理解造物主的思想。但更重要的是，永远保持那份对未知的敬畏和探索的热情。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'world-einstein';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与爱因斯坦的对话，获得了相对论的宇宙智慧！');
+            
+            // 返回世界之山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

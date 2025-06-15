@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与胡塞尔对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            min-height: 100vh;
+            position: relative;
+            color: white;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(65, 105, 225, 1);
+            transform: translateY(-2px);
+        }
+        
+        .sage-scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 40% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #191970 0%, #000428 50%, #004e92 100%);
+            overflow: hidden;
+        }
+        
+        /* 现象学之眼 */
+        .phenomenological-eye {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 80px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: blink 4s ease-in-out infinite;
+        }
+        
+        .eye-pupil {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 215, 0, 0.5);
+            border-radius: 50%;
+        }
+        
+        @keyframes blink {
+            0%, 90%, 100% { opacity: 0.4; }
+            95% { opacity: 0.1; }
+        }
+        
+        .moon {
+            position: absolute;
+            top: 5%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #e6e6e6 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.8); }
+        }
+        
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(65, 105, 225, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            color: #333;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #4169E1;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #4169E1;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #FFD700;
+            text-align: center;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回月亮山</button>
+    
+    <div class="sage-scene">
+        <div class="phenomenological-eye">
+            <div class="eye-pupil"></div>
+        </div>
+        
+        <div class="moon"></div>
+        
+        <div class="decoration">👁️ 现象学观察室 🔍</div>
+        
+        <div class="sage-portrait">
+            👁️
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">胡塞尔的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到现象学的观察室，意识的探索者。我是埃德蒙德·胡塞尔，现象学运动的创始人。</p>
+                
+                <div class="quote">
+                    "回到事情本身！"
+                </div>
+                
+                <p>我致力于建立一门关于意识的严格科学。现象学不关心事物是否真实存在，而关心事物如何在意识中显现。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💡 胡塞尔的现象学方法：</strong><br>
+                    • <strong>现象学还原</strong>：悬置对外在世界存在的判断<br>
+                    • <strong>意向性</strong>：意识总是指向某个对象的意识<br>
+                    • <strong>本质直观</strong>：把握事物的本质结构<br>
+                    • <strong>生活世界</strong>：科学理论化之前的原初经验世界
+                </div>
+                
+                <p>我提出了"加括号"的方法——不是怀疑世界的存在，而是暂时不考虑这个问题，专注于研究意识中的现象。</p>
+                
+                <div class="quote">
+                    "意识总是关于某物的意识，这就是意识的意向性结构。"
+                </div>
+                
+                <p>现象学的目标是成为一切科学的基础，因为所有的知识最终都要回到意识的经验中来得到证实。</p>
+                
+                <p>愿你在胡塞尔的智慧指引下，学会用现象学的眼光观察世界的本质！</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../moon-mountain.html';
+        }
+        
+        function completeDialogue() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'moon-husserl';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            alert('🎉 恭喜！您已经完成了与胡塞尔的对话，获得了现象学之父的智慧！');
+            goBack();
+        }
+        
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+</body>
+</html>

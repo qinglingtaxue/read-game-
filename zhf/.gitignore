@@ -1,0 +1,87 @@
+# 编译结果和可执行文件
+*.exe
+*.app
+*.dmg
+*.deb
+*.rpm
+*.msi
+*.jar
+*.war
+*.class
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+
+# 压缩文件
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 日志文件
+*.log
+logs/
+
+# 临时文件
+*~
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# 编译输出目录
+build/
+dist/
+out/
+target/
+bin/
+obj/
+
+# 依赖包目录
+node_modules/
+venv/
+env/
+__pycache__/
+.venv/
+
+# IDE配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+desktop.ini
+
+# 大媒体文件
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.mp3
+*.wav
+*.flac
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.pdf
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 配置文件（可能包含密码）
+.env
+config.ini
+secrets.json
+
+# 压缩文件
+*.zip
+knowledge-map.zip

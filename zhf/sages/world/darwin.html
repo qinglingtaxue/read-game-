@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与达尔文对话 - 进化之源</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #2d5a3d 0%, #4a7c59 50%, #6b8e5a 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(34, 139, 34, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(34, 139, 34, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 自然实验室场景 */
+        .nature-lab {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(144, 238, 144, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(173, 255, 47, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #2F4F4F 0%, #3E5E3E 30%, #4A7C59 70%, #6B8E5A 100%);
+            overflow: hidden;
+        }
+        
+        /* 植物装饰 */
+        .plants {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: 
+                radial-gradient(ellipse at 20% 100%, rgba(34, 139, 34, 0.8) 0%, transparent 60%),
+                radial-gradient(ellipse at 60% 100%, rgba(107, 142, 35, 0.6) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 100%, rgba(85, 107, 47, 0.7) 0%, transparent 55%);
+        }
+        
+        /* 进化树装饰 */
+        .evolution-tree {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 200px;
+            height: 300px;
+            background: linear-gradient(to top, #8B4513 0%, #A0522D 50%, #228B22 100%);
+            clip-path: polygon(45% 0%, 55% 0%, 60% 50%, 70% 50%, 65% 100%, 35% 100%, 30% 50%, 40% 50%);
+            opacity: 0.3;
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 65%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #2F4F4F;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #6B8E5A;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #228B22;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #6B8E5A;
+            background: rgba(107, 142, 90, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(144, 238, 144, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(144, 238, 144, 0.5);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #32CD32, #228B22);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(50, 205, 50, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #6B8E5A;
+        }
+        
+        /* 物种演化动画 */
+        .species-animation {
+            position: absolute;
+            top: 25%;
+            left: 5%;
+            font-size: 3rem;
+            animation: evolve 8s infinite;
+        }
+        
+        @keyframes evolve {
+            0% { content: "🐠"; opacity: 1; }
+            25% { content: "🐸"; opacity: 1; }
+            50% { content: "🦎"; opacity: 1; }
+            75% { content: "🐒"; opacity: 1; }
+            100% { content: "👨‍🔬"; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="nature-lab">
+        <div class="plants"></div>
+        <div class="evolution-tree"></div>
+        <div class="species-animation">🧬</div>
+        
+        <div class="decoration">🔬 自然选择实验室 🔬</div>
+        
+        <div class="sage-portrait">
+            🧔‍♂️
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">达尔文的进化智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到我的自然实验室，年轻的探索者。我是查尔斯·达尔文，一个致力于理解生命奥秘的自然学家。</p>
+                
+                <div class="quote">
+                    "物竞天择，适者生存。不是最强壮的物种能够生存，也不是最聪明的，而是最能适应变化的。"
+                </div>
+                
+                <p>在我漫长的研究生涯中，我发现了一个震撼世界的真理：所有生命都有着共同的祖先，通过无数代的变异和自然选择，演化出了今天丰富多彩的生物世界。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🧬 进化论的核心原理：</strong><br>
+                    • <strong>变异</strong>：生物个体间存在差异<br>
+                    • <strong>遗传</strong>：性状可以传递给后代<br>
+                    • <strong>选择</strong>：环境筛选出适应者<br>
+                    • <strong>时间</strong>：漫长岁月积累微小变化
+                </div>
+                
+                <div class="quote">
+                    "我们人类也不例外，我们是自然选择这棵伟大生命之树上的一个分支。"
+                </div>
+                
+                <p>许多人害怕进化论，认为它贬低了人类的地位。但我要说，理解我们的真正起源，反而让我们更加敬畏生命的奇迹。我们与所有生物都是亲戚，都在这个星球上共同演化。</p>
+                
+                <p>记住，适应不是一蹴而就的，而是一个持续的过程。在人生中也是如此——不断学习、适应、进化，才能在变化的世界中茁壮成长。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🌱 人生进化的启示：</strong><br>
+                    保持好奇心，拥抱变化，从失败中学习，与环境和谐共存。真正的智慧不在于抗拒变化，而在于学会适应和成长。
+                </div>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'world-darwin';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与达尔文的对话，获得了进化论的智慧！');
+            
+            // 返回世界之山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

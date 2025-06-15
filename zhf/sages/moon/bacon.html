@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与培根对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            min-height: 100vh;
+            position: relative;
+            color: white;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(65, 105, 225, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 月光实验室场景 */
+        .laboratory-room {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(135, 206, 235, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #000428 0%, #004e92 50%, #1e3c72 100%);
+            overflow: hidden;
+        }
+        
+        /* 月亮 */
+        .moon {
+            position: absolute;
+            top: 5%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #e6e6e6 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.8); }
+        }
+        
+        /* 星星 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        .star1 { width: 3px; height: 3px; top: 15%; left: 20%; animation-delay: 0s; }
+        .star2 { width: 2px; height: 2px; top: 25%; left: 70%; animation-delay: 0.5s; }
+        .star3 { width: 4px; height: 4px; top: 35%; left: 30%; animation-delay: 1s; }
+        .star4 { width: 2px; height: 2px; top: 45%; right: 30%; animation-delay: 1.5s; }
+        .star5 { width: 3px; height: 3px; top: 55%; right: 15%; animation-delay: 0.8s; }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        /* 实验室背景 */
+        .laboratory-bg {
+            position: absolute;
+            top: 20%;
+            left: 5%;
+            right: 5%;
+            height: 60%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(65, 105, 225, 0.1) 0px,
+                    rgba(65, 105, 225, 0.1) 40px,
+                    rgba(135, 206, 235, 0.1) 40px,
+                    rgba(135, 206, 235, 0.1) 80px
+                );
+            border-radius: 10px;
+            box-shadow: inset 0 0 50px rgba(135, 206, 235, 0.2);
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(135, 206, 235, 0.3) 0%, rgba(65, 105, 225, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(135, 206, 235, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            color: #333;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #4169E1;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #87CEEB;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #4169E1;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #87CEEB;
+            background: rgba(135, 206, 235, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        .works-section {
+            background: rgba(65, 105, 225, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #4169E1, #1E90FF);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #87CEEB;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回月亮山</button>
+    
+    <div class="laboratory-room">
+        <!-- 星空 -->
+        <div class="stars">
+            <div class="star star1"></div>
+            <div class="star star2"></div>
+            <div class="star star3"></div>
+            <div class="star star4"></div>
+            <div class="star star5"></div>
+        </div>
+        
+        <!-- 月亮 -->
+        <div class="moon"></div>
+        
+        <div class="laboratory-bg"></div>
+        
+        <div class="decoration">🔬 实验科学殿堂 📚</div>
+        
+        <div class="sage-portrait">
+            📚
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">培根的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到我的实验室，年轻的求知者。我是弗朗西斯·培根，人们称我为实验科学之父。</p>
+                
+                <div class="quote">
+                    "知识就是力量！"
+                </div>
+                
+                <p>在这个充满迷信和偏见的时代，我致力于为人类指出一条通往真知的道路。真正的知识不来自于书斋中的空想，而来自于对自然的观察和实验。</p>
+                
+                <div class="works-section">
+                    <strong>📖 我的主要著作：</strong><br>
+                    • <strong>《新工具》</strong>：提出科学归纳法<br>
+                    • <strong>《学术的进展》</strong>：批判传统学问<br>
+                    • <strong>《新大西岛》</strong>：描绘科学乌托邦
+                </div>
+                
+                <div class="wisdom-point">
+                    <strong>💡 培根的四种偶像：</strong><br>
+                    • <strong>种族偶像</strong>：人性本身的局限和偏见<br>
+                    • <strong>洞穴偶像</strong>：个人经验和教育造成的偏见<br>
+                    • <strong>市场偶像</strong>：语言交流中产生的误解<br>
+                    • <strong>剧场偶像</strong>：传统学说和权威造成的盲从
+                </div>
+                
+                <div class="quote">
+                    "我们要像蜜蜂一样，既采集又整理，从感官和理性的素材中酿造出知识的蜂蜜。"
+                </div>
+                
+                <p>记住，真正的科学方法应该是归纳的——从具体的观察中得出一般性的结论。我们要抛弃那些阻碍我们认识真理的偶像，用事实和实验来验证我们的假设。</p>
+                
+                <p>愿你在追求知识的道路上，始终保持理性的光芒，让科学的方法指引你走向真理！</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../moon-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'moon-bacon';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与培根的对话，获得了实验科学的智慧！');
+            
+            // 返回月亮山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

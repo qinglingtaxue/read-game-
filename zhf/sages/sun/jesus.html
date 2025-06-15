@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与耶稣对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #e8f4fd 0%, #fff5e6 50%, #ffebcd 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(45, 52, 54, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(45, 52, 54, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 教堂场景 */
+        .church-room {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 20%, rgba(214, 48, 49, 0.2) 0%, transparent 60%),
+                linear-gradient(to bottom, #74b9ff 0%, #0984e3 30%, #fdcb6e 70%, #fd79a8 100%);
+            overflow: hidden;
+        }
+        
+        /* 教堂窗户背景 */
+        .stained-glass {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            right: 5%;
+            height: 70%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(214, 48, 49, 0.3) 0px,
+                    rgba(214, 48, 49, 0.3) 30px,
+                    rgba(116, 185, 255, 0.3) 30px,
+                    rgba(116, 185, 255, 0.3) 60px,
+                    rgba(253, 203, 110, 0.3) 60px,
+                    rgba(253, 203, 110, 0.3) 90px,
+                    rgba(253, 121, 168, 0.3) 90px,
+                    rgba(253, 121, 168, 0.3) 120px
+                );
+            border-radius: 15px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+        }
+        
+        /* 圣光装饰 */
+        .holy-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(
+                    ellipse at 50% 20%,
+                    rgba(255, 255, 255, 0.3) 0%,
+                    rgba(255, 255, 255, 0.1) 40%,
+                    transparent 70%
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    rgba(255, 255, 255, 0.05) 20px,
+                    transparent 40px
+                );
+            animation: holyLightShine 8s ease-in-out infinite;
+        }
+        
+        @keyframes holyLightShine {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* 耶稣形象 */
+        .christ-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(248,248,255,0.95) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: christFloat 6s ease-in-out infinite;
+            box-shadow: 
+                0 0 40px rgba(255, 255, 255, 0.6),
+                0 0 80px rgba(214, 48, 49, 0.2),
+                0 15px 35px rgba(45, 52, 54, 0.2);
+            border: 3px solid rgba(214, 48, 49, 0.3);
+        }
+        
+        @keyframes christFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1); 
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(214, 48, 49, 0.2), 0 15px 35px rgba(45, 52, 54, 0.2);
+            }
+            50% { 
+                transform: translateY(-18px) scale(1.03); 
+                box-shadow: 0 0 60px rgba(255, 255, 255, 0.8), 0 0 120px rgba(214, 48, 49, 0.3), 0 20px 45px rgba(45, 52, 54, 0.3);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(45, 52, 54, 0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            border: 2px solid rgba(214, 48, 49, 0.3);
+        }
+        
+        .sage-name-title {
+            font-size: 28px;
+            color: #2d3436;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #d63031;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2d3436;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #d63031;
+            margin: 15px 0;
+            padding: 15px 25px;
+            border-left: 4px solid #fd79a8;
+            background: rgba(214, 48, 49, 0.08);
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .wisdom-point {
+            background: rgba(214, 48, 49, 0.12);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid rgba(214, 48, 49, 0.25);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #d63031, #74b9ff);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5);
+        }
+        
+        /* 古典装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #d63031;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: decorationGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes decorationGlow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+            50% { text-shadow: 2px 2px 12px rgba(214, 48, 49, 0.6); }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
+    
+    <div class="church-room">
+        <div class="stained-glass">
+            <div class="holy-light"></div>
+        </div>
+        
+        <div class="decoration">✝️ 圣爱教堂 ✝️</div>
+        
+        <div class="christ-portrait">
+            🙏
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">耶稣基督的智慧</h2>
+            <div class="dialogue-content">
+                <p>平安归与你，我的孩子。我是耶稣基督，上帝的儿子，来到世间为要拯救失丧的灵魂。</p>
+                
+                <div class="quote">
+                    "我就是道路、真理、生命；若不藉着我，没有人能到父那里去。"
+                </div>
+                
+                <p>爱是一切的根本。上帝爱世人，甚至将他的独生子赐给他们，叫一切信他的，不至灭亡，反得永生。我来不是要定世人的罪，乃是要叫世人因我得救。</p>
+                
+                <div class="wisdom-point">
+                    <strong>✝️ 基督的核心教导：</strong><br>
+                    • <strong>爱的诫命</strong>：爱神爱人，这是最大的诫命<br>
+                    • <strong>饶恕之道</strong>：要饶恕七十个七次<br>
+                    • <strong>谦卑服事</strong>：谁要为大，就必作众人的仆人<br>
+                    • <strong>永生盼望</strong>：信我的人有永生
+                </div>
+                
+                <div class="quote">
+                    "你们要彼此相爱，像我爱你们一样。人为朋友舍命，没有比这个更大的爱了。"
+                </div>
+                
+                <p>不要为明天忧虑，因为明天自有明天的忧虑。一天的难处一天当就够了。天父知道你们的需要，他必供应。要先求他的国和他的义，这些东西都要加给你们了。</p>
+                
+                <p>记住，凡劳苦担重担的人，可以到我这里来，我就使你们得安息。我心里柔和谦卑，你们当负我的轭，学我的样式。愿平安与你同在。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../sun-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'sun-jesus';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与耶稣基督的对话，获得了神圣的爱与救恩！');
+            
+            // 返回太阳山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

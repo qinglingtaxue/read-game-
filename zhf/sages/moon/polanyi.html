@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与波兰尼对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            min-height: 100vh;
+            position: relative;
+            color: white;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(65, 105, 225, 1);
+            transform: translateY(-2px);
+        }
+        
+        .sage-scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 30% 60%, rgba(255, 69, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #8B0000 0%, #000428 50%, #004e92 100%);
+            overflow: hidden;
+        }
+        
+        /* 知识网络装饰 */
+        .knowledge-network {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+        }
+        
+        .knowledge-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 69, 0, 0.6);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .node1 { top: 20%; left: 20%; animation-delay: 0s; }
+        .node2 { top: 30%; right: 25%; animation-delay: 1s; }
+        .node3 { top: 50%; left: 15%; animation-delay: 2s; }
+        .node4 { top: 40%; right: 30%; animation-delay: 0.5s; }
+        .node5 { top: 60%; left: 40%; animation-delay: 1.5s; }
+        
+        .knowledge-connection {
+            position: absolute;
+            height: 1px;
+            background: rgba(255, 69, 0, 0.3);
+            transform-origin: left center;
+        }
+        
+        .connection1 {
+            top: 22%;
+            left: 20%;
+            width: 120px;
+            transform: rotate(25deg);
+        }
+        
+        .connection2 {
+            top: 32%;
+            left: 35%;
+            width: 100px;
+            transform: rotate(-15deg);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        
+        .moon {
+            position: absolute;
+            top: 5%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #e6e6e6 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.8); }
+        }
+        
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 69, 0, 0.3) 0%, rgba(65, 105, 225, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.3);
+            border: 2px solid rgba(255, 69, 0, 0.5);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            color: #333;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #FF4500;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #FF4500;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #FF4500;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #FF4500;
+            background: rgba(255, 69, 0, 0.1);
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 69, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 69, 0, 0.5);
+        }
+        
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #FF4500, #FF6347);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #FF4500;
+            text-align: center;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回月亮山</button>
+    
+    <div class="sage-scene">
+        <div class="knowledge-network">
+            <div class="knowledge-node node1"></div>
+            <div class="knowledge-node node2"></div>
+            <div class="knowledge-node node3"></div>
+            <div class="knowledge-node node4"></div>
+            <div class="knowledge-node node5"></div>
+            <div class="knowledge-connection connection1"></div>
+            <div class="knowledge-connection connection2"></div>
+        </div>
+        
+        <div class="moon"></div>
+        
+        <div class="decoration">🔬 隐性知识实验室 🧠</div>
+        
+        <div class="sage-portrait">
+            🔬
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">波兰尼的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到隐性知识的实验室，知识的探索者。我是迈克尔·波兰尼，隐性知识理论的提出者。</p>
+                
+                <div class="quote">
+                    "我们知道的比我们能说出来的要多。"
+                </div>
+                
+                <p>我发现了知识的一个重要特征：大部分知识是隐性的，无法用语言完全表达出来。就像骑自行车，我们知道怎么做，但很难说清楚。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💡 波兰尼的知识理论：</strong><br>
+                    • <strong>隐性知识</strong>：无法言传的个人知识<br>
+                    • <strong>个人知识</strong>：所有知识都带有个人色彩<br>
+                    • <strong>集中注意</strong>：从细节指向整体的认知过程<br>
+                    • <strong>科学发现</strong>：创新需要直觉和洞察力
+                </div>
+                
+                <p>科学发现不仅仅是逻辑推理的结果，更需要科学家的直觉、激情和个人承诺。伟大的科学家往往能感受到真理的美感。</p>
+                
+                <div class="quote">
+                    "科学激情是一种对隐藏的现实的渴望，这种现实在发现者心中唤起的敬畏感。"
+                </div>
+                
+                <p>想象一个熟练的工匠，他的手感知着材料的细微变化，但这种知识无法完全传授给学徒。这就是隐性知识的本质——它存在于我们的身体、直觉和经验中。</p>
+                
+                <p>隐性知识提醒我们：人不是计算机，知识传承需要师傅带徒弟的方式，需要在实践中体悟。</p>
+                
+                <p>愿你在波兰尼的智慧指引下，学会重视那些无法言喻但极其重要的知识！</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../moon-mountain.html';
+        }
+        
+        function completeDialogue() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'moon-polanyi';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            alert('🎉 恭喜！您已经完成了与波兰尼的对话，获得了隐性知识理论家的智慧！');
+            goBack();
+        }
+        
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+</body>
+</html>

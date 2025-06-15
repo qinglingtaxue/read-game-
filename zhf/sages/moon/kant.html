@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与康德对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            min-height: 100vh;
+            position: relative;
+            color: white;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(65, 105, 225, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 批判哲学法庭 */
+        .critical-court {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 40%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #2F4F4F 0%, #000428 50%, #004e92 100%);
+            overflow: hidden;
+        }
+        
+        /* 天平装饰 */
+        .balance-scales {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 100px;
+            opacity: 0.2;
+        }
+        
+        .scale-beam {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 2px;
+        }
+        
+        .scale-left, .scale-right {
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            border-radius: 0 0 15px 15px;
+            border-top: none;
+        }
+        
+        .scale-left { left: 10%; }
+        .scale-right { right: 10%; }
+        
+        /* 月亮 */
+        .moon {
+            position: absolute;
+            top: 5%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #e6e6e6 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            animation: moonGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 80px rgba(255, 255, 255, 0.8); }
+        }
+        
+        /* 星空中的道德律 */
+        .moral-stars {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            right: 20%;
+            height: 40%;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 40% 70%, white, transparent),
+                radial-gradient(1px 1px at 60% 20%, white, transparent),
+                radial-gradient(1px 1px at 80% 80%, white, transparent),
+                radial-gradient(2px 2px at 90% 40%, white, transparent);
+            background-size: 200px 200px;
+            animation: starField 30s linear infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes starField {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(65, 105, 225, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            color: #333;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #4169E1;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #4169E1;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        .critique-section {
+            background: rgba(47, 79, 79, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(47, 79, 79, 0.3);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #FFD700;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回月亮山</button>
+    
+    <div class="critical-court">
+        <!-- 天平 -->
+        <div class="balance-scales">
+            <div class="scale-beam"></div>
+            <div class="scale-left"></div>
+            <div class="scale-right"></div>
+        </div>
+        
+        <!-- 道德星空 -->
+        <div class="moral-stars"></div>
+        
+        <!-- 月亮 -->
+        <div class="moon"></div>
+        
+        <div class="decoration">⚖️ 批判哲学法庭 🌟</div>
+        
+        <div class="sage-portrait">
+            ⚖️
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">康德的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到批判哲学的法庭，求知的朋友。我是伊曼努尔·康德，致力于为人类理性划定界限。</p>
+                
+                <div class="quote">
+                    "有两样东西，我对它们的思考越是深沉和持久，它们在我心灵中唤起的惊奇和敬畏就越加新鲜和强烈：我头上的星空和我心中的道德律。"
+                </div>
+                
+                <p>我花了十多年时间思考这个问题：人类的理性究竟能认识什么？它的界限在哪里？我的批判哲学就是要回答这些根本问题。</p>
+                
+                <div class="critique-section">
+                    <strong>📚 康德的三大批判：</strong><br>
+                    • <strong>《纯粹理性批判》</strong>：理性认识能力的界限<br>
+                    • <strong>《实践理性批判》</strong>：道德哲学的基础<br>
+                    • <strong>《判断力批判》</strong>：美学和目的论的统一
+                </div>
+                
+                <div class="wisdom-point">
+                    <strong>💡 康德的革命性观念：</strong><br>
+                    • <strong>先验哲学</strong>：知识不仅来自经验，还有先天的认识形式<br>
+                    • <strong>现象与物自体</strong>：我们只能认识现象，无法认识物自体<br>
+                    • <strong>绝对命令</strong>：道德的普遍法则<br>
+                    • <strong>综合判断</strong>：既扩展知识又具有必然性的判断
+                </div>
+                
+                <div class="quote">
+                    "要敢于运用你自己的理智！这就是启蒙的口号。"
+                </div>
+                
+                <p>我提出的绝对命令是："要这样行动，使你行动的准则能够成为普遍的道德法则。" 这意味着道德不能因人而异，必须具有普遍性。</p>
+                
+                <p>哥白尼进行了天文学的革命，而我进行了哲学的哥白尼式革命——不是认识符合对象，而是对象符合我们的认识能力！</p>
+                
+                <p>愿你在理性的指引下，既认清认识的界限，又坚守内心的道德律！</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../moon-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'moon-kant';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与康德的对话，获得了批判哲学的智慧！');
+            
+            // 返回月亮山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

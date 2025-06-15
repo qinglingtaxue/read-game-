@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与柏拉图对话 - 智慧之峰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #e8f4fd 0%, #d1e7dd 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(44, 62, 80, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 学园场景 */
+        .academy-room {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(116, 185, 255, 0.2) 0%, transparent 50%),
+                linear-gradient(to bottom, #74b9ff 0%, #0984e3 20%, #667eea 40%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        /* 希腊柱子背景 */
+        .columns {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            right: 5%;
+            height: 70%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #f8f9fa 0px,
+                    #f8f9fa 60px,
+                    #e9ecef 60px,
+                    #e9ecef 80px,
+                    #f8f9fa 80px,
+                    #f8f9fa 140px
+                );
+            border-radius: 10px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+        }
+        
+        /* 理念世界装饰 */
+        .ideals {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 30px,
+                    rgba(116, 185, 255, 0.1) 30px,
+                    rgba(116, 185, 255, 0.1) 35px
+                );
+        }
+        
+        /* 哲学家形象 */
+        .philosopher-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(240,248,255,0.9) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: philosopherFloat 4s ease-in-out infinite;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            border: 3px solid rgba(116, 185, 255, 0.5);
+        }
+        
+        @keyframes philosopherFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            max-height: 60%;
+            overflow-y: auto;
+            border: 2px solid rgba(116, 185, 255, 0.3);
+        }
+        
+        .sage-name-title {
+            font-size: 28px;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #3498db;
+            margin: 15px 0;
+            padding: 15px 25px;
+            border-left: 4px solid #74b9ff;
+            background: rgba(116, 185, 255, 0.1);
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .wisdom-point {
+            background: rgba(52, 152, 219, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+        
+        /* 古典装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #3498db;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
+    
+    <div class="academy-room">
+        <div class="columns">
+            <div class="ideals"></div>
+        </div>
+        
+        <div class="decoration">🏛️ 柏拉图学园 🏛️</div>
+        
+        <div class="philosopher-portrait">
+            👨‍🏫
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">柏拉图的智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到我的学园，年轻的求知者。我是柏拉图，苏格拉底的学生，亚里士多德的老师。</p>
+                
+                <div class="quote">
+                    "未经审视的生活不值得过，而未经思辨的知识不值得学。"
+                </div>
+                
+                <p>在我看来，这个我们所见的世界只是真实世界的影子。真正完美的世界——理念世界，才是一切美好事物的源泉。正如洞穴比喻中所说，大多数人都被困在洞穴中看影子，只有哲学家才能走出洞穴，看到真正的阳光。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💡 柏拉图的核心思想：</strong><br>
+                    • <strong>理念论</strong>：现实世界是理念世界的影子<br>
+                    • <strong>洞穴比喻</strong>：从无知到智慧的觉醒过程<br>
+                    • <strong>三分灵魂说</strong>：理性、意志、欲望的和谐<br>
+                    • <strong>理想国</strong>：哲学王统治的完美社会
+                </div>
+                
+                <div class="quote">
+                    "教育不是灌输知识，而是点燃火焰。真正的学习是回忆，是灵魂对永恒真理的重新发现。"
+                </div>
+                
+                <p>记住，智慧不在于拥有多少知识，而在于认识到自己的无知。只有承认自己的无知，才能开始真正的学习之旅。正义、美、善这些理念虽然在现实中难以完美体现，但它们是我们追求的永恒目标。</p>
+                
+                <p>愿你能在追求真理的道路上，不断审视自己的生活，思辨知识的本质，最终成为一个有智慧的人。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../sun-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'sun-plato';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与柏拉图的对话，获得了古希腊哲学智慧！');
+            
+            // 返回太阳山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

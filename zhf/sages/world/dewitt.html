@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与德威特对话 - 世界观研究所</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #191970 0%, #483D8B 30%, #6A5ACD 70%, #9370DB 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(147, 112, 219, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(147, 112, 219, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 现代研究所场景 */
+        .research-institute {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #191970 0%, #483D8B 30%, #6A5ACD 70%, #9370DB 100%);
+            overflow: hidden;
+        }
+        
+        /* 科学设备装饰 */
+        .lab-equipment {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 30px,
+                    rgba(255, 255, 255, 0.05) 30px,
+                    rgba(255, 255, 255, 0.05) 35px,
+                    transparent 35px,
+                    transparent 65px
+                );
+        }
+        
+        /* 世界观转换动画 */
+        .worldview-shift {
+            position: absolute;
+            top: 30%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: paradigmShift 12s ease-in-out infinite;
+        }
+        
+        .worldview-shift::before {
+            content: '🌍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            animation: worldSpin 8s linear infinite;
+        }
+        
+        @keyframes paradigmShift {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                border-color: rgba(255, 255, 255, 0.6);
+            }
+            33% { 
+                transform: scale(1.2) rotate(120deg);
+                border-color: rgba(0, 255, 255, 0.8);
+            }
+            66% { 
+                transform: scale(0.8) rotate(240deg);
+                border-color: rgba(255, 215, 0, 0.8);
+            }
+        }
+        
+        @keyframes worldSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* 科学符号 */
+        .science-symbols {
+            position: absolute;
+            top: 25%;
+            right: 25%;
+            font-size: 4rem;
+            color: rgba(0, 255, 255, 0.7);
+            animation: symbolFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes symbolFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-15px) rotate(10deg);
+                opacity: 1;
+            }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 5s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-10px);
+                filter: hue-rotate(20deg);
+            }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 75%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #191970;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #6A5ACD;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #6A5ACD;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #9370DB;
+            background: rgba(147, 112, 219, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(0, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+        }
+        
+        /* 世界观对比展示 */
+        .worldview-comparison {
+            background: rgba(25, 25, 112, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(25, 25, 112, 0.3);
+        }
+        
+        .worldview-item {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: rgba(106, 90, 205, 0.2);
+            border-radius: 5px;
+            border-left: 3px solid #9370DB;
+        }
+        
+        .vs-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #FF6347;
+            margin: 10px 0;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #6A5ACD, #9370DB);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 90, 205, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #00FFFF;
+        }
+        
+        /* 量子粒子效果 */
+        .quantum-particles {
+            position: absolute;
+            top: 40%;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: quantumFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes quantumFloat {
+            0%, 100% { 
+                transform: scale(1) translate(0px, 0px);
+                opacity: 0.6;
+            }
+            25% { 
+                transform: scale(1.2) translate(10px, -10px);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(0.8) translate(-5px, 5px);
+                opacity: 0.8;
+            }
+            75% { 
+                transform: scale(1.1) translate(5px, -5px);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="research-institute">
+        <div class="lab-equipment"></div>
+        <div class="worldview-shift"></div>
+        <div class="science-symbols">🔬</div>
+        <div class="quantum-particles"></div>
+        
+        <div class="decoration">🌌 世界观研究所 🌌</div>
+        
+        <div class="sage-portrait">
+            👨‍🔬
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">德威特的世界观哲学</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到这个探索世界观变迁的研究所，年轻的思考者。我是理查德·德威特，一个专注于科学哲学和世界观研究的学者。</p>
+                
+                <div class="quote">
+                    "世界观就像眼镜一样——我们透过它们看世界，但很少意识到它们的存在。"
+                </div>
+                
+                <p>在我的研究中，我发现人类历史上发生过几次重大的世界观革命，每一次都彻底改变了我们对现实的理解。从亚里士多德世界观到牛顿世界观，再到现代量子力学世界观。</p>
+                
+                <div class="worldview-comparison">
+                    <strong>🔄 世界观的历史变迁：</strong>
+                    <div class="worldview-item"><strong>亚里士多德世界观</strong> - 地心说，目的论宇宙</div>
+                    <div class="vs-arrow">⬇️</div>
+                    <div class="worldview-item"><strong>牛顿世界观</strong> - 机械论宇宙，绝对时空</div>
+                    <div class="vs-arrow">⬇️</div>
+                    <div class="worldview-item"><strong>现代世界观</strong> - 相对论，量子力学，不确定性</div>
+                </div>
+                
+                <div class="quote">
+                    "每个世界观都包含一套核心信念，这些信念如此基础，以至于我们很少质疑它们。"
+                </div>
+                
+                <p>最有趣的是，每个时代的人都认为自己的世界观是显而易见的真理。但历史告诉我们，今天我们认为理所当然的很多观念，在未来可能会被彻底颠覆。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🧭 世界观的核心组成：</strong><br>
+                    • <strong>形而上学假设</strong>：关于现实本质的基本信念<br>
+                    • <strong>概念框架</strong>：我们用来理解世界的概念工具<br>
+                    • <strong>价值判断</strong>：什么是重要的、有意义的<br>
+                    • <strong>方法论</strong>：获取知识的方式和标准
+                </div>
+                
+                <div class="quote">
+                    "科学不仅仅是收集事实，更重要的是它提供了一种看待世界的方式。"
+                </div>
+                
+                <p>现代量子力学给我们带来了前所未有的挑战。我们发现，观察者和被观察对象是不可分离的，现实的本质比我们想象的更加神秘和复杂。</p>
+                
+                <p>这提醒我们要保持智识上的谦逊。我们目前的科学世界观虽然非常成功，但它也不是最终的真理。未来还会有新的发现挑战我们的基本假设。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🔍 德威特的认识论启示：</strong><br>
+                    认识到世界观的历史性和可变性，保持开放的心态，准备迎接新的概念革命。真正的智慧不在于坚持某个特定的世界观，而在于理解世界观本身的性质。
+                </div>
+                
+                <div class="quote">
+                    "如果历史告诉了我们什么，那就是：未来的世界观很可能会让我们今天的观念看起来古怪而过时。"
+                </div>
+                
+                <p>在日常生活中，我们也可以应用这种世界观意识。当我们与他人产生分歧时，往往不是因为事实不同，而是因为我们使用了不同的概念框架来理解同样的现象。</p>
+                
+                <p>教育的目标不应该只是传授知识，更重要的是培养学生的世界观意识——让他们意识到还有其他看待世界的方式，培养他们的批判性思维和概念敏感性。</p>
+                
+                <div class="wisdom-point">
+                    <strong>💡 实践智慧：</strong><br>
+                    在面对复杂问题时，尝试从不同的世界观角度来理解。承认我们的局限性，保持对新观念的开放态度。记住：今天的常识可能是明天的迷信。
+                </div>
+                
+                <p>离开这里时，请带着这样的思考：你的世界观塑造了你看待一切的方式。保持好奇心，质疑显而易见的东西，为概念的革命做好准备。这就是智识成长的精神。</p>
+            </div>
+        </div>
+        
+        <!-- 完成按钮 -->
+        <button class="complete-btn" onclick="completeDialogue()">完成对话</button>
+
+    </div>
+    
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+
+        // 完成对话
+        function completeDialogue() {
+            let visitedSages = [];
+            try {
+                visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            } catch (error) {
+                console.error('读取localStorage失败，使用内存存储', error);
+            }
+            
+            const currentSageId = 'dewitt'; // 当前智者的ID
+            if (!visitedSages.includes(`world-${currentSageId}`)) {
+                visitedSages.push(`world-${currentSageId}`);
+                try {
+                    localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+                } catch (error) {
+                    console.error('写入localStorage失败，使用内存存储', error);
+                }
+            }
+            alert('对话完成！你已获得德威特的智慧。');
+            window.location.href = '../../world-mountain.html'; // 返回世界之山页面
+        }
+    </script>
+</body>
+</html>

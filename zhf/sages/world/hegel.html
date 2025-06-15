@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>与黑格尔对话 - 绝对精神殿堂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 30%, #3a3a5e 70%, #4a4a7e 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(70, 70, 126, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(70, 70, 126, 1);
+            transform: translateY(-2px);
+        }
+        
+        /* 哲学殿堂场景 */
+        .philosophy-hall {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #1e1e2e 0%, #2a2a3e 30%, #3a3a5e 70%, #4a4a7e 100%);
+            overflow: hidden;
+        }
+        
+        /* 柱子装饰 */
+        .columns {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 80px,
+                    rgba(255, 255, 255, 0.1) 80px,
+                    rgba(255, 255, 255, 0.1) 100px,
+                    transparent 100px,
+                    transparent 180px
+                );
+        }
+        
+        /* 辩证螺旋 */
+        .dialectical-spiral {
+            position: absolute;
+            top: 25%;
+            left: 15%;
+            width: 150px;
+            height: 150px;
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: dialecticRotate 8s linear infinite;
+        }
+        
+        .dialectical-spiral::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(138, 43, 226, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: dialecticRotate 6s linear infinite reverse;
+        }
+        
+        .dialectical-spiral::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: dialecticRotate 4s linear infinite;
+        }
+        
+        @keyframes dialecticRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 智者形象 */
+        .sage-portrait {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: sageFloat 5s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-12px) scale(1.05); }
+        }
+        
+        /* 对话区域 */
+        .dialogue-container {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 25%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 70%;
+            overflow-y: auto;
+        }
+        
+        .sage-name-title {
+            font-size: 24px;
+            color: #2a2a3e;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4a4a7e;
+            padding-bottom: 10px;
+        }
+        
+        .dialogue-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2F4F4F;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #4a4a7e;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #6a6a9e;
+            background: rgba(74, 74, 126, 0.1);
+        }
+        
+        .wisdom-point {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+        
+        /* 三段论展示 */
+        .dialectic-display {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            text-align: center;
+        }
+        
+        .dialectic-step {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 5px 10px;
+            background: rgba(74, 74, 126, 0.2);
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        /* 完成按钮 */
+        .complete-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #4a4a7e, #6a6a9e);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 74, 126, 0.3);
+        }
+        
+        .complete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 74, 126, 0.4);
+        }
+        
+        /* 装饰 */
+        .decoration {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回世界之山</button>
+    
+    <div class="philosophy-hall">
+        <div class="columns"></div>
+        <div class="dialectical-spiral"></div>
+        
+        <div class="decoration">🏛️ 绝对精神殿堂 🏛️</div>
+        
+        <div class="sage-portrait">
+            🎓
+        </div>
+        
+        <div class="dialogue-container">
+            <h2 class="sage-name-title">黑格尔的辩证智慧</h2>
+            <div class="dialogue-content">
+                <p>欢迎来到我的哲学殿堂，年轻的思考者。我是格奥尔格·威廉·弗里德里希·黑格尔，一个致力于理解绝对精神运动规律的德国哲学家。</p>
+                
+                <div class="quote">
+                    "存在即合理。凡是现实的都是合理的，凡是合理的都是现实的。"
+                </div>
+                
+                <p>在我的哲学体系中，整个世界、历史和思维都遵循着一个共同的规律——辩证法。这是一个永恒的运动过程，通过矛盾的对立统一推动着事物的发展。</p>
+                
+                <div class="dialectic-display">
+                    <div class="dialectic-step">正题(Thesis)</div>
+                    <span>→</span>
+                    <div class="dialectic-step">反题(Antithesis)</div>
+                    <span>→</span>
+                    <div class="dialectic-step">合题(Synthesis)</div>
+                </div>
+                
+                <div class="wisdom-point">
+                    <strong>⚖️ 黑格尔辩证法的核心：</strong><br>
+                    • <strong>对立统一</strong>：矛盾是事物发展的动力<br>
+                    • <strong>否定之否定</strong>：通过否定达到更高层次的肯定<br>
+                    • <strong>量质互变</strong>：量的积累引起质的飞跃<br>
+                    • <strong>绝对精神</strong>：世界是精神自我实现的过程
+                </div>
+                
+                <div class="quote">
+                    "密涅瓦的猫头鹰总是在黄昏时分才起飞。"——智慧总是在事件发生之后才被理解。
+                </div>
+                
+                <p>我的哲学告诉我们，历史不是偶然的堆积，而是精神自我认识和自我实现的必然过程。每一个时代都有其必然性，每一种文化都是绝对精神发展的一个环节。</p>
+                
+                <p>在个人生活中，我们也要学会用辩证的眼光看问题。困难和挫折不是纯粹的负面，它们是成长的必要环节。通过克服矛盾，我们达到更高层次的自我实现。</p>
+                
+                <div class="wisdom-point">
+                    <strong>🎯 黑格尔哲学的人生启示：</strong><br>
+                    理性是现实的，现实是理性的。要用历史的眼光看问题，在对立中寻找统一，在否定中寻找肯定。每一次危机都是新发展的机遇。
+                </div>
+                
+                <p>记住，真理不是静止的教条，而是在运动中展开的过程。思维的任务就是要把握这个过程，理解事物的内在逻辑和必然性。只有这样，我们才能获得真正的自由——对必然性的认识。</p>
+            </div>
+        </div>
+        
+        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.location.href = '../../world-mountain.html';
+        }
+        
+        function completeDialogue() {
+            // 标记为已访问
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const sageKey = 'world-hegel';
+            
+            if (!visitedSages.includes(sageKey)) {
+                visitedSages.push(sageKey);
+                localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+            }
+            
+            // 显示完成提示
+            alert('🎉 恭喜！您已经完成了与黑格尔的对话，获得了辩证法的智慧！');
+            
+            // 返回世界之山
+            goBack();
+        }
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
+        });
+    </script>
+    
+    <style>
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+</body>
+</html>

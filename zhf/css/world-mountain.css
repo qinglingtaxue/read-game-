@@ -1,0 +1,1056 @@
+/* world-mountain.css - 世界山样式文件 - 重新布局版本 */
+
+/* 宇宙夜色背景渐变 */
+body {
+    background: linear-gradient(to bottom, 
+        #000000 0%,      /* 深空黑 */
+        #0a0a1a 15%,     /* 深夜空 */
+        #1a1a2e 35%,     /* 夜空蓝 */
+        #16213e 55%,     /* 深蓝 */
+        #0f3460 75%,     /* 海蓝 */
+        #2d4a7d 90%,     /* 蓝紫 */
+        #4a5568 100%     /* 暗灰蓝 */
+    );
+}
+
+/* =================== 九大行星太阳系背景 - 放大版本 =================== */
+.solar-system {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 450px;
+    z-index: 1;
+    opacity: 0.4;
+}
+
+/* 太阳中心 - 放大 */
+.sun-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #FFD700 0%, #FFA500 70%, #FF8C00 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    animation: sunPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes sunPulse {
+    0% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
+    100% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9); }
+}
+
+/* 行星轨道基础样式 */
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 各行星轨道大小 - 放大 */
+.orbit-mercury { width: 120px; height: 120px; }
+.orbit-venus { width: 150px; height: 150px; }
+.orbit-earth { width: 180px; height: 180px; }
+.orbit-mars { width: 210px; height: 210px; }
+.orbit-jupiter { width: 270px; height: 270px; }
+.orbit-saturn { width: 320px; height: 320px; }
+.orbit-uranus { width: 370px; height: 370px; }
+.orbit-neptune { width: 420px; height: 420px; }
+.orbit-pluto { width: 470px; height: 470px; }
+
+/* 行星基础样式 - 放大 */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 各行星样式 - 放大 */
+.mercury {
+    width: 8px;
+    height: 8px;
+    background: #8C7853;
+    animation: orbit-mercury 10s linear infinite;
+}
+
+.venus {
+    width: 10px;
+    height: 10px;
+    background: #FFC649;
+    animation: orbit-venus 15s linear infinite;
+}
+
+.earth {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #6B93D6 30%, #4682B4 60%, #2E8B57 100%);
+    animation: orbit-earth 20s linear infinite;
+    box-shadow: 0 0 10px rgba(107, 147, 214, 0.6);
+}
+
+.mars {
+    width: 10px;
+    height: 10px;
+    background: #CD5C5C;
+    animation: orbit-mars 25s linear infinite;
+}
+
+.jupiter {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #D8CA9D 0%, #FAD5A5 50%, #C88A5A 100%);
+    animation: orbit-jupiter 35s linear infinite;
+    box-shadow: 0 0 15px rgba(216, 202, 157, 0.4);
+}
+
+.saturn {
+    width: 18px;
+    height: 18px;
+    background: #FAD5A5;
+    animation: orbit-saturn 45s linear infinite;
+    position: relative;
+    box-shadow: 0 0 12px rgba(250, 213, 165, 0.5);
+}
+
+.saturn-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.uranus {
+    width: 14px;
+    height: 14px;
+    background: #4FD0E7;
+    animation: orbit-uranus 55s linear infinite;
+}
+
+.neptune {
+    width: 14px;
+    height: 14px;
+    background: #4B70DD;
+    animation: orbit-neptune 65s linear infinite;
+}
+
+.pluto {
+    width: 6px;
+    height: 6px;
+    background: #915C38;
+    animation: orbit-pluto 75s linear infinite;
+}
+
+/* 行星轨道动画 - 调整半径 */
+@keyframes orbit-mercury {
+    from { transform: translateX(-50%) rotate(0deg) translateX(60px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+@keyframes orbit-venus {
+    from { transform: translateX(-50%) rotate(0deg) translateX(75px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(75px) rotate(-360deg); }
+}
+
+@keyframes orbit-earth {
+    from { transform: translateX(-50%) rotate(0deg) translateX(90px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(90px) rotate(-360deg); }
+}
+
+@keyframes orbit-mars {
+    from { transform: translateX(-50%) rotate(0deg) translateX(105px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(105px) rotate(-360deg); }
+}
+
+@keyframes orbit-jupiter {
+    from { transform: translateX(-50%) rotate(0deg) translateX(135px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(135px) rotate(-360deg); }
+}
+
+@keyframes orbit-saturn {
+    from { transform: translateX(-50%) rotate(0deg) translateX(160px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(160px) rotate(-360deg); }
+}
+
+@keyframes orbit-uranus {
+    from { transform: translateX(-50%) rotate(0deg) translateX(185px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(185px) rotate(-360deg); }
+}
+
+@keyframes orbit-neptune {
+    from { transform: translateX(-50%) rotate(0deg) translateX(210px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(210px) rotate(-360deg); }
+}
+
+@keyframes orbit-pluto {
+    from { transform: translateX(-50%) rotate(0deg) translateX(235px) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg) translateX(235px) rotate(-360deg); }
+}
+
+/* 移除月亮 - 注释掉原有月亮样式 */
+.moon {
+    display: none;
+}
+
+/* =================== 星座效果 =================== */
+
+.star-cluster {
+    position: absolute;
+    z-index: 2;
+}
+
+.star-cluster1 {
+    top: 5%;
+    left: 10%;
+    width: 100px;
+    height: 80px;
+}
+
+.star-cluster2 {
+    top: 8%;
+    right: 12%;
+    width: 120px;
+    height: 100px;
+}
+
+.star-in-cluster {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    animation: starTwinkle 3s ease-in-out infinite alternate;
+}
+
+.star-cluster1 .star-in-cluster:nth-child(1) { top: 15px; left: 20px; animation-delay: 0s; }
+.star-cluster1 .star-in-cluster:nth-child(2) { top: 35px; left: 45px; animation-delay: 0.5s; }
+.star-cluster1 .star-in-cluster:nth-child(3) { top: 55px; left: 25px; animation-delay: 1s; }
+.star-cluster1 .star-in-cluster:nth-child(4) { top: 20px; left: 70px; animation-delay: 1.5s; }
+.star-cluster1 .star-in-cluster:nth-child(5) { top: 50px; left: 80px; animation-delay: 2s; }
+
+.star-cluster2 .star-in-cluster:nth-child(1) { top: 25px; left: 30px; animation-delay: 0.3s; }
+.star-cluster2 .star-in-cluster:nth-child(2) { top: 50px; left: 60px; animation-delay: 0.8s; }
+.star-cluster2 .star-in-cluster:nth-child(3) { top: 75px; left: 40px; animation-delay: 1.3s; }
+.star-cluster2 .star-in-cluster:nth-child(4) { top: 30px; left: 90px; animation-delay: 1.8s; }
+.star-cluster2 .star-in-cluster:nth-child(5) { top: 70px; left: 100px; animation-delay: 2.3s; }
+
+@keyframes starTwinkle {
+    0% { opacity: 0.4; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.5); }
+}
+
+/* =================== 夜色山脉 =================== */
+
+.distant-mountains {
+    background: linear-gradient(to top, #2F4F4F 0%, #4682B4 50%, #6495ED 100%);
+    clip-path: polygon(0% 100%, 12% 65%, 28% 85%, 45% 45%, 62% 75%, 78% 35%, 92% 70%, 100% 50%, 100% 100%);
+}
+
+.middle-mountains {
+    background: linear-gradient(to top, #483D8B 0%, #6A5ACD 50%, #7B68EE 100%);
+    clip-path: polygon(0% 100%, 8% 55%, 25% 25%, 42% 65%, 58% 15%, 75% 50%, 88% 30%, 100% 75%, 100% 100%);
+}
+
+.front-mountains {
+    background: linear-gradient(to top, #2F2F4F 0%, #4169E1 40%, #6495ED 80%, #87CEEB 100%);
+    clip-path: polygon(0% 100%, 18% 35%, 32% 75%, 48% 25%, 63% 65%, 78% 20%, 92% 55%, 100% 100%);
+}
+
+/* =================== 科学之河 =================== */
+
+.science-rivers {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.science-river {
+    position: absolute;
+    border-radius: 50%;
+    animation: riverFlow 4s ease-in-out infinite;
+}
+
+@keyframes riverFlow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* 进化之河 - 左下角 */
+.river-evolution {
+    bottom: 120px;
+    left: 15%;
+    width: 12px;
+    height: 12px;
+    background: rgba(34, 139, 34, 0.8);
+    box-shadow: 
+        0 -18px 0 6px rgba(34, 139, 34, 0.7),
+        4px -32px 0 5px rgba(34, 139, 34, 0.6),
+        -3px -46px 0 5px rgba(34, 139, 34, 0.6),
+        5px -60px 0 4px rgba(34, 139, 34, 0.5);
+}
+
+/* 天文之河 - 左下角 */
+.river-astronomy {
+    bottom: 110px;
+    left: 35%;
+    width: 12px;
+    height: 12px;
+    background: rgba(70, 130, 180, 0.8);
+    box-shadow: 
+        0 -20px 0 6px rgba(70, 130, 180, 0.7),
+        -4px -36px 0 5px rgba(70, 130, 180, 0.6),
+        3px -52px 0 5px rgba(70, 130, 180, 0.6),
+        -3px -68px 0 4px rgba(70, 130, 180, 0.5);
+}
+
+/* 物理之河 - 右下角 */
+.river-physics {
+    bottom: 115px;
+    right: 35%;
+    width: 12px;
+    height: 12px;
+    background: rgba(218, 165, 32, 0.8);
+    box-shadow: 
+        0 -16px 0 6px rgba(218, 165, 32, 0.7),
+        3px -28px 0 5px rgba(218, 165, 32, 0.6),
+        -4px -40px 0 5px rgba(218, 165, 32, 0.6),
+        4px -52px 0 4px rgba(218, 165, 32, 0.5);
+}
+
+/* 生物之河 - 右下角 */
+.river-biology {
+    bottom: 125px;
+    right: 15%;
+    width: 12px;
+    height: 12px;
+    background: rgba(138, 43, 226, 0.8);
+    box-shadow: 
+        0 -22px 0 6px rgba(138, 43, 226, 0.7),
+        -3px -38px 0 5px rgba(138, 43, 226, 0.6),
+        4px -54px 0 5px rgba(138, 43, 226, 0.6),
+        -4px -70px 0 4px rgba(138, 43, 226, 0.5);
+}
+
+/* 河流标签 */
+.river-evolution::before {
+    content: "🧬 进化河";
+    position: absolute;
+    top: -70px;
+    left: -25px;
+    font-size: 12px;
+    color: #228B22;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(34, 139, 34, 0.3);
+    border: 1px solid rgba(34, 139, 34, 0.4);
+}
+
+.river-astronomy::before {
+    content: "🌌 天文河";
+    position: absolute;
+    top: -75px;
+    left: -25px;
+    font-size: 12px;
+    color: #4682B4;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(70, 130, 180, 0.3);
+    border: 1px solid rgba(70, 130, 180, 0.4);
+}
+
+.river-physics::before {
+    content: "⚛️ 物理河";
+    position: absolute;
+    top: -60px;
+    left: -25px;
+    font-size: 12px;
+    color: #DAA520;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(218, 165, 32, 0.3);
+    border: 1px solid rgba(218, 165, 32, 0.4);
+}
+
+.river-biology::before {
+    content: "🧪 生物河";
+    position: absolute;
+    top: -80px;
+    left: -30px;
+    font-size: 12px;
+    color: #8A2BE2;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+}
+
+/* =================== 科学家们重新定位 =================== */
+
+.scientists-by-river {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+}
+
+.scientist-figure {
+    position: absolute;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.scientist-figure:hover {
+    transform: scale(1.15) translateY(-8px);
+}
+
+.scientist-avatar {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.4));
+    animation: floatGently 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatGently {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-5px); }
+}
+
+.scientist-name {
+    font-size: 14px;
+    color: #1A202C;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+/* 科学家重新定位 */
+/* 左下角 - 进化论和天文学 */
+.scientist-darwin {
+    bottom: 150px;
+    left: 12%;
+}
+
+.scientist-hawking {
+    bottom: 150px;
+    left: 32%;
+}
+
+/* 右下角 - 物理学和生物学 */
+.scientist-einstein {
+    bottom: 150px;
+    right: 32%;
+}
+
+.scientist-watson {
+    bottom: 160px;
+    right: 12%;
+}
+
+/* =================== 重新布局：导游左上，智者右上 =================== */
+
+/* 导游区域 - 左上角 */
+.guide-section {
+    position: absolute;
+    top: 150px;
+    left: 50px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 400px;
+    z-index: 300;
+}
+
+.guide-character {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.guide-avatar {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    animation: guideFloat 3s ease-in-out infinite;
+}
+
+@keyframes guideFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+.guide-name {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.speech-bubble {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 300px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(255, 255, 255, 0.95);
+}
+
+.bubble-content {
+    color: #333;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.bubble-content h3 {
+    color: #4A5568;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.bubble-content p {
+    color: #2D3748;
+    line-height: 1.6;
+}
+
+/* =================== 右上角智者区域 =================== */
+
+.right-side-sages {
+    position: absolute;
+    top: 100px;
+    right: 280px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 200px;
+    z-index: 300;
+}
+
+.right-side-sages .sage-figure {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.right-side-sages .sage-figure:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.right-side-sages .sage-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    animation: floatSage 4s ease-in-out infinite;
+}
+
+@keyframes floatSage {
+    0%, 100% { 
+        transform: translateY(0px) scale(1); 
+    }
+    50% { 
+        transform: translateY(-6px) scale(1.02); 
+    }
+}
+
+.right-side-sages .sage-name {
+    font-size: 12px;
+    color: #1A202C;
+    background: rgba(255,255,255,0.95);
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+/* 总论智者特殊样式 */
+.sage-overview {
+    display: none;
+    grid-column: 1 / -1;
+    margin-bottom: 10px;
+}
+
+.sage-overview .sage-avatar {
+    font-size: 2.8rem;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.sage-overview .sage-name {
+    background: rgba(255, 215, 0, 0.9);
+    color: #8B4513;
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+/* 右侧智者光晕效果 */
+.right-side-sages .sage-figure::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: sageGlow 3s ease-in-out infinite;
+}
+
+@keyframes sageGlow {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* =================== 探索提示 =================== */
+
+.exploration-hint {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(calc(-50% + 10px));
+    background: rgba(106, 90, 205, 0.9);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 300;
+    animation: pulseHint 2s ease-in-out infinite alternate;
+    white-space: nowrap;
+}
+
+@keyframes pulseHint {
+    0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+/* =================== 访问状态 =================== */
+
+.scientist-figure.visited,
+.right-side-sages .sage-figure.visited {
+    opacity: 0.7;
+}
+
+.scientist-figure.visited::after,
+.right-side-sages .sage-figure.visited::after {
+    content: "✓";
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: #48BB78;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 20;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    border: 2px solid white;
+}
+
+/* =================== 音乐控制按钮 =================== */
+
+.music-toggle {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* =================== 响应式设计 =================== */
+
+@media (max-width: 768px) {
+    .solar-system {
+        top: 20%;
+        width: 400px;
+        height: 300px;
+        opacity: 0.3;
+    }
+    
+    .orbit-mercury { width: 80px; height: 80px; }
+    .orbit-venus { width: 100px; height: 100px; }
+    .orbit-earth { width: 120px; height: 120px; }
+    .orbit-mars { width: 140px; height: 140px; }
+    .orbit-jupiter { width: 180px; height: 180px; }
+    .orbit-saturn { width: 220px; height: 220px; }
+    .orbit-uranus { width: 260px; height: 260px; }
+    .orbit-neptune { width: 300px; height: 300px; }
+    .orbit-pluto { width: 340px; height: 340px; }
+    
+    .guide-section {
+        top: 160px;
+        left: 20px;
+        max-width: 300px;
+    }
+    
+    .speech-bubble {
+        max-width: 250px;
+        padding: 15px;
+    }
+    
+    .right-side-sages {
+        top: 100px; /* 调整为更靠上 */
+        right: 200px; /* 调整为更靠右 */
+        width: 160px;
+        gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .right-side-sages .sage-avatar {
+        font-size: 2rem;
+    }
+    
+    .right-side-sages .sage-name {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .scientist-figure {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 480px) {
+    .solar-system {
+        width: 300px;
+        height: 220px;
+        top: 25%;
+    }
+    
+    .orbit-mercury { width: 60px; height: 60px; }
+    .orbit-venus { width: 75px; height: 75px; }
+    .orbit-earth { width: 90px; height: 90px; }
+    .orbit-mars { width: 105px; height: 105px; }
+    .orbit-jupiter { width: 135px; height: 135px; }
+    .orbit-saturn { width: 165px; height: 165px; }
+    .orbit-uranus { width: 195px; height: 195px; }
+    .orbit-neptune { width: 225px; height: 225px; }
+    .orbit-pluto { width: 255px; height: 255px; }
+    
+    .guide-section {
+        top: 140px;
+        left: 10px;
+        max-width: 250px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .speech-bubble {
+        max-width: 220px;
+        padding: 12px;
+    }
+    
+    .bubble-content h3 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .bubble-content p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    .right-side-sages {
+        top: 100px; /* 调整为更靠上 */
+        right: 200px; /* 调整为更靠右 */
+        width: 140px;
+        gap: 8px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .right-side-sages .sage-avatar {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+    }
+    
+    .right-side-sages .sage-name {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .sage-overview .sage-avatar {
+        font-size: 2.2rem;
+        padding: 8px;
+    }
+    
+    .sage-overview .sage-name {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    .scientist-figure {
+        transform: scale(0.8);
+    }
+    
+    .scientist-figure:hover {
+        transform: scale(0.9) translateY(-5px);
+    }
+    
+    .scientist-avatar {
+        font-size: 2.5rem;
+    }
+    
+    .scientist-name {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+    
+    .exploration-hint {
+        font-size: 12px;
+        padding: 10px 20px;
+        bottom: 20px;
+    }
+    
+    .river-evolution::before,
+    .river-astronomy::before,
+    .river-physics::before,
+    .river-biology::before {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+}
+
+/* =================== 特殊动画效果增强 =================== */
+
+/* 科学河流的涟漪效果 */
+.science-river::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: ripple 4s ease-out infinite;
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+    }
+}
+
+/* 河流交汇处的粒子效果 */
+.science-rivers::after {
+    content: '';
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: radial-gradient(ellipse, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: particleEffect 6s ease-in-out infinite;
+}
+
+@keyframes particleEffect {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translateX(-50%) scale(1);
+    }
+    50% { 
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1.3);
+    }
+}
+
+/* 智者出现动画 */
+.sage-figure {
+    animation: sageAppear 1s ease-out forwards;
+}
+
+@keyframes sageAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 为不同的智者添加延迟 */
+.sage-overview { animation-delay: 0.1s; }
+.sage-hegel { animation-delay: 0.2s; }
+.sage-heidegger { animation-delay: 0.3s; }
+.sage-sartre { animation-delay: 0.4s; }
+.sage-dewitt { animation-delay: 0.5s; }
+.sage-darwin { animation-delay: 0.6s; }
+.sage-einstein { animation-delay: 0.7s; }
+.sage-simon { animation-delay: 0.8s; }
+
+/* 科学家出现动画 */
+.scientist-figure {
+    animation: scientistAppear 1.2s ease-out forwards;
+}
+
+@keyframes scientistAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.7);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.scientist-darwin { animation-delay: 0.2s; }
+.scientist-hawking { animation-delay: 0.4s; }
+.scientist-einstein { animation-delay: 0.6s; }
+.scientist-watson { animation-delay: 0.8s; }
+
+/* 行星发光效果增强 */
+.earth::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle, 
+        rgba(107, 147, 214, 0.3) 0%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: earthGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes earthGlow {
+    0% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% { 
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+.jupiter::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, 
+        rgba(216, 202, 157, 0.2) 0%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: jupiterGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes jupiterGlow {
+    0% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% { 
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}

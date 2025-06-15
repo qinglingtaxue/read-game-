@@ -1,0 +1,807 @@
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Georgia', '宋体', serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* 更有历史感的背景色 - 从古老羊皮纸到深沉大地色 */
+    background: linear-gradient(to bottom, 
+        #8B7355 0%,     /* 古铜色天空 */
+        #A0826D 20%,    /* 暖褐色 */
+        #C9A876 50%,    /* 古老羊皮纸色 */
+        #B8956A 70%,    /* 深黄褐色 */
+        #8B6914 100%);  /* 深土黄色 */
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(101, 67, 33, 0.9);
+    color: #F5DEB3;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.back-btn:hover {
+    background: rgba(101, 67, 33, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* 进度显示 */
+.progress-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(245, 222, 179, 0.95);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    border: 1px solid rgba(139, 105, 20, 0.3);
+}
+
+.progress-display span {
+    display: block;
+    margin-bottom: 3px;
+    color: #654321;
+}
+
+/* 主要探索区域 */
+.mountain-scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 云朵 - 动态飘动效果 */
+.cloud {
+    position: absolute;
+    background: rgba(245, 222, 179, 0.8);
+    border-radius: 50px;
+    z-index: 5;
+}
+
+.cloud1 {
+    top: 80px;
+    right: 200px;
+    width: 80px;
+    height: 40px;
+    animation: cloudFloat1 20s ease-in-out infinite;
+}
+
+.cloud2 {
+    top: 120px;
+    right: 800px;
+    width: 120px;
+    height: 50px;
+    animation: cloudFloat2 25s ease-in-out infinite;
+}
+
+/* 云朵形状 */
+.cloud::before {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50px;
+    top: -25px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50px;
+    top: -25px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+}
+
+/* 云朵动画 */
+@keyframes cloudFloat1 {
+    0% { transform: translateX(0px) translateY(0px); opacity: 0.6; }
+    25% { transform: translateX(30px) translateY(-10px); opacity: 0.7; }
+    50% { transform: translateX(60px) translateY(5px); opacity: 0.8; }
+    75% { transform: translateX(40px) translateY(-5px); opacity: 0.7; }
+    100% { transform: translateX(0px) translateY(0px); opacity: 0.6; }
+}
+
+@keyframes cloudFloat2 {
+    0% { transform: translateX(0px) translateY(0px) scale(1); opacity: 0.5; }
+    30% { transform: translateX(-20px) translateY(8px) scale(1.05); opacity: 0.6; }
+    60% { transform: translateX(-40px) translateY(-8px) scale(0.95); opacity: 0.7; }
+    80% { transform: translateX(-25px) translateY(12px) scale(1.02); opacity: 0.6; }
+    100% { transform: translateX(0px) translateY(0px) scale(1); opacity: 0.5; }
+}
+
+/* 山脉层次 - 更有历史感的色调 */
+.distant-mountains {
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #B8956A 0%, #C9A876 50%, #D2B48C 100%);
+    clip-path: polygon(0% 100%, 15% 60%, 25% 80%, 40% 40%, 55% 70%, 70% 30%, 85% 65%, 100% 45%, 100% 100%);
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.middle-mountains {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #A0826D 0%, #B8956A 50%, #C9A876 100%);
+    clip-path: polygon(0% 100%, 10% 50%, 30% 20%, 45% 60%, 60% 10%, 75% 45%, 90% 25%, 100% 70%, 100% 100%);
+    opacity: 0.9;
+    z-index: 2;
+}
+
+.front-mountains {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to top, #8B7355 0%, #A0826D 40%, #B8956A 80%, #C9A876 100%);
+    clip-path: polygon(0% 100%, 20% 30%, 35% 70%, 50% 20%, 65% 60%, 80% 15%, 95% 50%, 100% 100%);
+    z-index: 3;
+}
+
+/* 历史河流 - 继承太阳山样式 */
+.history-rivers {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.history-river {
+    position: absolute;
+    background: rgba(30, 144, 255, 0.8);
+    border-radius: 50%;
+    animation: riverFlow 3s ease-in-out infinite;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.history-river:hover {
+    animation-play-state: paused;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(30, 144, 255, 0.8);
+}
+
+/* 中国通史河 */
+.river-chinese-general {
+    bottom: 80px;
+    left: 18%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -15px 0 5px rgba(30, 144, 255, 0.7),
+        3px -25px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -35px 0 4px rgba(30, 144, 255, 0.6),
+        4px -45px 0 3px rgba(30, 144, 255, 0.5),
+        -1px -55px 0 3px rgba(30, 144, 255, 0.5),
+        2px -65px 0 3px rgba(30, 144, 255, 0.4),
+        -3px -75px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+/* 世界通史河 */
+.river-world-general {
+    bottom: 90px;
+    left: 38%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -12px 0 5px rgba(30, 144, 255, 0.7),
+        -4px -22px 0 4px rgba(30, 144, 255, 0.6),
+        2px -32px 0 4px rgba(30, 144, 255, 0.6),
+        -3px -42px 0 3px rgba(30, 144, 255, 0.5),
+        3px -52px 0 3px rgba(30, 144, 255, 0.5),
+        -2px -62px 0 3px rgba(30, 144, 255, 0.4);
+}
+
+/* 中国断代史河 */
+.river-chinese-dynastic-special {
+    bottom: 85px;
+    left: 58%;
+    width: 9px;
+    height: 9px;
+    box-shadow: 
+        0 -18px 0 6px rgba(30, 144, 255, 0.8),
+        2px -30px 0 5px rgba(30, 144, 255, 0.7),
+        -3px -42px 0 5px rgba(30, 144, 255, 0.6),
+        3px -54px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -66px 0 4px rgba(30, 144, 255, 0.5),
+        4px -78px 0 3px rgba(30, 144, 255, 0.5),
+        -1px -90px 0 3px rgba(30, 144, 255, 0.4),
+        2px -102px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+/* 西方断代史河 */
+.river-western-dynastic-special {
+    bottom: 95px;
+    left: 78%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -14px 0 5px rgba(30, 144, 255, 0.7),
+        -3px -26px 0 4px rgba(30, 144, 255, 0.6),
+        4px -36px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -46px 0 3px rgba(30, 144, 255, 0.5),
+        3px -56px 0 3px rgba(30, 144, 255, 0.5),
+        -4px -66px 0 3px rgba(30, 144, 255, 0.4),
+        1px -76px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+/* 河流流动动画 */
+@keyframes riverFlow {
+    0% { 
+        opacity: 0.7;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.1);
+        filter: brightness(1.3);
+    }
+    100% { 
+        opacity: 0.7;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+/* 河流汇聚池 */
+.history-rivers::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: radial-gradient(ellipse, 
+        rgba(30, 144, 255, 0.6) 0%, 
+        rgba(30, 144, 255, 0.4) 50%, 
+        rgba(30, 144, 255, 0.2) 80%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: poolRipple 4s ease-in-out infinite;
+}
+
+@keyframes poolRipple {
+    0%, 100% { 
+        transform: translateX(-50%) scale(1);
+        opacity: 0.4;
+    }
+    50% { 
+        transform: translateX(-50%) scale(1.05);
+        opacity: 0.7;
+    }
+}
+
+/* 河流标签提示 */
+.river-chinese-general::before {
+    content: "中国通史";
+    position: absolute;
+    top: -80px;
+    left: -20px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(245, 222, 179, 0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+    animation: labelFadeIn 2s ease-out;
+    transition: all 0.3s ease;
+}
+
+.river-world-general::before {
+    content: "世界通史";
+    position: absolute;
+    top: -70px;
+    left: -18px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(245, 222, 179, 0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+    animation: labelFadeIn 2s ease-out;
+    transition: all 0.3s ease;
+}
+
+.river-chinese-dynastic-special::before {
+    content: "中国断代史";
+    position: absolute;
+    top: -110px;
+    left: -25px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(245, 222, 179, 0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+    animation: labelFadeIn 2s ease-out;
+    transition: all 0.3s ease;
+}
+
+.river-western-dynastic-special::before {
+    content: "西方断代史";
+    position: absolute;
+    top: -85px;
+    left: -30px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(245, 222, 179, 0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+    animation: labelFadeIn 2s ease-out;
+    transition: all 0.3s ease;
+}
+
+/* 鼠标悬停时标签变亮 */
+.history-river:hover::before {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(255,255,255,1);
+    color: #0066CC;
+}
+
+/* 河流标签淡入动画 */
+@keyframes labelFadeIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-10px) scale(0.8);
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0px) scale(1);
+    }
+}
+
+/* 导游人物和对话气泡 */
+.guide-section {
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    max-width: 400px;
+    z-index: 7;
+}
+
+.guide-character {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.guide-avatar {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    animation: guideFloat 3s ease-in-out infinite;
+}
+
+@keyframes guideFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.guide-name {
+    font-size: 14px;
+    color: #654321;
+    background: rgba(245, 222, 179, 0.95);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    border: 1px solid rgba(139, 105, 20, 0.3);
+}
+
+.speech-bubble {
+    position: relative;
+    background: rgba(245, 222, 179, 0.98);
+    padding: 18px;
+    border-radius: 20px;
+    max-width: 320px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    animation: bubbleAppear 2s ease-out;
+    flex: 1;
+    border: 1px solid rgba(139, 105, 20, 0.2);
+}
+
+@keyframes bubbleAppear {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(245, 222, 179, 0.98);
+    transform: rotate(-45deg);
+}
+
+.bubble-content h3 {
+    color: #654321;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.bubble-content p {
+    color: #5D4E37;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* 右侧智者区域 - 紧贴在气泡对话右侧 */
+.right-side-sages {
+    position: absolute;
+    top: 25%;
+    left: 800px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    width: 300px;
+    height: 500px;
+    z-index: 7;
+}
+
+/* 智者布局 - 上方3个，下方4个 */
+.sage-simaqian {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.sage-thucydides {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.sage-simaguang {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.sage-wangchuanshan {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.sage-liangqichao {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.sage-yangengwang {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.sage-braudel {
+    grid-column: 4;
+    grid-row: 2;
+}
+
+/* 智者基础样式 */
+.sage-figure {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+    animation: sageAppear 1s ease-out forwards;
+}
+
+.sage-figure:hover {
+    transform: scale(1.1) translateY(-3px);
+}
+
+/* 智者头像 */
+.sage-avatar {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    animation: floatSage 4s ease-in-out infinite;
+}
+
+/* 智者名字 */
+.sage-name {
+    font-size: 10px;
+    color: #8B4513;
+    background: rgba(255,255,255,0.95);
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.8);
+    max-width: 50px;
+}
+
+/* 智者光晕效果 */
+.sage-figure::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(222, 184, 135, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: sageGlow 3s ease-in-out infinite;
+}
+
+/* 动画效果 */
+@keyframes floatSage {
+    0%, 100% { 
+        transform: translateY(0px) scale(1); 
+    }
+    50% { 
+        transform: translateY(-4px) scale(1.02); 
+    }
+}
+
+@keyframes sageAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(15px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes sageGlow {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* 为不同的智者添加延迟 */
+.sage-simaqian { animation-delay: 0.1s; }
+.sage-thucydides { animation-delay: 0.2s; }
+.sage-simaguang { animation-delay: 0.3s; }
+.sage-wangchuanshan { animation-delay: 0.4s; }
+.sage-liangqichao { animation-delay: 0.5s; }
+.sage-yangengwang { animation-delay: 0.6s; }
+.sage-braudel { animation-delay: 0.7s; }
+
+/* 已访问智者的样式 */
+.sage-figure.visited {
+    opacity: 0.7;
+}
+
+.sage-figure.visited::after {
+    content: "✓";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 20;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    border: 2px solid white;
+}
+
+/* 探索提示 */
+.exploration-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(106, 90, 205, 0.9);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 300;
+    animation: hintPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes hintPulse {
+    0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+/* 音乐控制按钮 */
+.music-toggle {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(245, 222, 179, 0.9);
+    border: 1px solid rgba(139, 105, 20, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    color: #654321;
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(245, 222, 179, 1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .right-side-sages {
+        top: 20%;
+        left: 400px;
+        width: 200px;
+        height: 300px;
+        gap: 20px;
+    }
+    
+    .sage-avatar {
+        font-size: 2rem;
+    }
+    
+    .sage-name {
+        font-size: 9px;
+        padding: 2px 3px;
+        max-width: 45px;
+    }
+    
+    .history-river {
+        font-size: 1.5rem;
+        padding: 6px;
+    }
+    
+    .river-chinese-general {
+        bottom: 160px;
+        left: 15%;
+    }
+    
+    .river-world-general {
+        bottom: 140px;
+        left: 35%;
+    }
+    
+    .river-chinese-dynastic-special {
+        bottom: 150px;
+        right: 30%;
+    }
+    
+    .river-western-dynastic-special {
+        bottom: 130px;
+        right: 10%;
+    }
+}
+
+@media (max-width: 480px) {
+    .guide-section {
+        top: 15%;
+        left: 5%;
+        max-width: 300px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .speech-bubble {
+        max-width: 250px;
+        padding: 12px;
+    }
+    
+    .bubble-content h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .bubble-content p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    .right-side-sages {
+        top: 15%;
+        left: 320px;
+        width: 120px;
+        height: 160px;
+        gap: 6px;
+    }
+    
+    .sage-avatar {
+        font-size: 1.4rem;
+        margin-bottom: 4px;
+    }
+    
+    .sage-name {
+        font-size: 8px;
+        padding: 1px 2px;
+        max-width: 35px;
+    }
+    
+    .exploration-hint {
+        font-size: 12px;
+        padding: 10px 20px;
+        bottom: 20px;
+    }
+}

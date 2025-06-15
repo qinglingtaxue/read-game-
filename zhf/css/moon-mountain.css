@@ -1,0 +1,474 @@
+/* 月亮山特定样式 - 参考太阳山的设计风格 */
+
+/* 夜色背景渐变 */
+body {
+    background: linear-gradient(to bottom, 
+        #f59827 0%,     /* 夜空蓝 */
+        #daad34 25%,     /* 深蓝 */
+        #dfcb34 50%,     /* 海蓝 */
+        #ebce7f 75%,     /* 蓝紫 */
+        #edebb4 100%     /* 暗灰蓝 */
+    );
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+
+     z-index: 0;
+}
+
+/* 进度显示 */
+.progress-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.9); /* 白色背景 */
+    padding: 10px 15px; /* 调整填充 */
+    border-radius: 10px;
+    font-size: 14px; /* 设置字体大小 */
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 添加阴影 */
+}
+
+.progress-display span {
+    display: block;
+    margin-bottom: 3px; /* 调整底部外边距 */
+    color: #8B4513; /* 棕色文字 */
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(139, 69, 19, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(139, 69, 19, 1);
+    transform: translateY(-2px);
+}
+
+/* 创新者学派在山顶 */
+.innovation-peak {
+    position: absolute;
+    top: 50px; /*5调整 top 值，使其显示在进度显示框下方 */
+    right: 150px;
+    text-align: center;
+    z-index: 12;
+}
+
+
+.peak-name {
+    color: #f6f5f3;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@keyframes peakGlow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 月亮设计 */
+.moon {
+    position: absolute;
+    top: 80px;
+    right: 120px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, 
+        #FFFFFF 0%, 
+        #F0F8FF 30%, 
+        #E6E6FA 60%, 
+        #D3D3D3 90%, 
+        #A9A9A9 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 40px rgba(255, 255, 255, 0.6),
+        inset -15px -15px 0 rgba(169, 169, 169, 0.3);
+    animation: moonGlow 4s ease-in-out infinite alternate;
+    z-index: 10;
+}
+
+/* 月亮陨石坑 */
+.moon-crater {
+    position: absolute;
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.crater1 {
+    width: 18px;
+    height: 18px;
+    top: 25%;
+    left: 35%;
+}
+
+.crater2 {
+    width: 12px;
+    height: 12px;
+    top: 55%;
+    left: 20%;
+}
+
+.crater3 {
+    width: 10px;
+    height: 10px;
+    top: 40%;
+    right: 25%;
+}
+
+@keyframes moonGlow {
+    0% { 
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 
+                    inset -15px -15px 0 rgba(169, 169, 169, 0.3); 
+    }
+    100% { 
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.9), 
+                    inset -15px -15px 0 rgba(169, 169, 169, 0.4); 
+    }
+}
+
+/* 星空效果 */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: starTwinkle 3s ease-in-out infinite alternate;
+}
+
+.star1 { width: 3px; height: 3px; top: 12%; left: 15%; animation-delay: 0s; }
+.star2 { width: 2px; height: 2px; top: 20%; left: 60%; animation-delay: 0.8s; }
+.star3 { width: 4px; height: 4px; top: 30%; left: 25%; animation-delay: 1.2s; }
+.star4 { width: 2px; height: 2px; top: 35%; left: 85%; animation-delay: 1.8s; }
+.star5 { width: 3px; height: 3px; top: 15%; left: 90%; animation-delay: 2.5s; }
+
+@keyframes starTwinkle {
+    0% { opacity: 0.4; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.3); }
+}
+
+/* 夜色山脉 */
+/* 山脉层次 - 更亮的颜色 */
+distant-mountains {
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #D2B48C 0%, #DEB887 50%, #F5DEB3 100%);
+    clip-path: polygon(0% 100%, 15% 60%, 25% 80%, 40% 40%, 55% 70%, 70% 30%, 85% 65%, 100% 45%, 100% 100%);
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.middle-mountains {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #CD853F 0%, #D2B48C 50%, #DEB887 100%);
+    clip-path: polygon(0% 100%, 10% 50%, 30% 20%, 45% 60%, 60% 10%, 75% 45%, 90% 25%, 100% 70%, 100% 100%);
+    opacity: 0.9;
+    z-index: 2;
+}
+
+.front-mountains {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to top, #BC9A6A 0%, #CD853F 40%, #D2B48C 80%, #DEB887 100%);
+    clip-path: polygon(0% 100%, 20% 30%, 35% 70%, 50% 20%, 65% 60%, 80% 15%, 95% 50%, 100% 100%);
+    z-index: 3;
+}
+
+/* 月亮山的智者们 */
+.sages-on-moon {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    z-index: 6;
+    pointer-events: auto;
+}
+
+.sage-figure {
+    position: absolute;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    border: none;
+    background: none;
+    backdrop-filter: none;
+    display: block;
+}
+
+.sage-figure:hover {
+    transform: scale(1.1) translateY(-5px);
+    background: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.sage-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    animation: floatGently 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatGently {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-5px); }
+}
+
+.sage-name {
+    font-size: 11px;
+    color: #8B4513;
+    background: rgba(255,255,255,0.9);
+    padding: 5px 2px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    display: inline-block;
+}
+
+
+/* 导游人物和对话气泡 - 移到左上角 */
+.guide-section {
+    position: absolute;
+    top: 20%; /* 从 sun-mountain.css 继承 */
+    left: 5%; /* 从 sun-mountain.css 继承 */
+    display: flex;
+    align-items: flex-end; /* 从 sun-mountain.css 继承 */
+    gap: 26px; /* 从 sun-mountain.css 继承 */
+    max-width: 450px;
+    z-index: 7; /* 从 sun-mountain.css 继承 */
+}
+
+.guide-character {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.guide-avatar {
+    font-size: 3rem; /* 从 sun-mountain.css 继承 */
+    margin-bottom: 10px; /* 从 sun-mountain.css 继承 */
+    animation: guideFloat 3s ease-in-out infinite;
+    /* 移除月亮山特有的背景、边框、滤镜等，与太阳山保持一致 */
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-right: 0; /* 移除 flex 布局的 margin-right */
+    /* 调整定位确保在月亮山背景下也清晰可见 */
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+}
+
+@keyframes guideFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.guide-name {
+    font-size: 14px;
+    color: #8B4513; /* 从 sun-mountain.css 继承 */
+    background: rgba(255,255,255,0.9); /* 从 sun-mountain.css 继承 */
+    padding: 5px 10px; /* 从 sun-mountain.css 继承 */
+    border-radius: 15px; /* 从 sun-mountain.css 继承 */
+    font-weight: bold;
+    white-space: nowrap;
+    /* 移除月亮山特有的文本阴影 */
+    text-shadow: none;
+}
+
+.speech-bubble {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95); /* 从 sun-mountain.css 继承 */
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 350px; /* 从 sun-mountain.css 继承 */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* 从 sun-mountain.css 继承 */
+    animation: bubbleAppear 2s ease-out; /* 从 sun-mountain.css 继承 */
+    flex: 1; /* 从 sun-mountain.css 继承 */
+    /* 移除月亮山特有的滤镜 */
+    backdrop-filter: none;
+}
+
+@keyframes bubbleAppear {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* 确保使用 .speech-bubble::before 而不是 .bubble-tail */
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* 从 sun-mountain.css 继承 */
+    left: -10px; /* 从 sun-mountain.css 继承 */
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent; /* 从 sun-mountain.css 继承 */
+    border-right: 15px solid transparent; /* 从 sun-mountain.css 继承 */
+    border-top: 15px solid rgba(255, 255, 255, 0.95); /* 从 sun-mountain.css 继承 */
+    transform: rotate(-45deg); /* 从 sun-mountain.css 继承 */
+}
+
+/* 移除 .bubble-tail，因为它在 sun-mountain 中由 .speech-bubble::before 替代 */
+/*
+.bubble-tail {
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(255, 255, 255, 0.95);
+}
+*/
+
+.bubble-content h3 {
+    color: #8B4513; /* 从 sun-mountain.css 继承 */
+    margin-bottom: 15px; /* 从 sun-mountain.css 继承 */
+    font-size: 18px; /* 从 sun-mountain.css 继承 */
+}
+
+.bubble-content p {
+    color: #654321; /* 从 sun-mountain.css 继承 */
+    line-height: 1.6;
+    font-size: 14px; /* 从 sun-mountain.css 继承 */
+}
+
+/* 探索提示 */
+.exploration-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(106, 90, 205, 0.9);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 300;
+    animation: pulseHint 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseHint {
+    0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+/* 访问状态 */
+/* 已访问智者的样式 */
+.sage-figure.visited {
+    opacity: 0.7; /* 智者变暗 */
+}
+
+.sage-figure.visited::after {
+    content: "✓"; /* 添加打勾标记 */
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #4CAF50; /* 绿色背景 */
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 20;
+}
+
+/* 音乐控制按钮样式 */
+.music-toggle {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .moon {
+        top: 60px;
+        right: 20px;
+        width: 90px;
+        height: 90px;
+    }
+    
+    .sage-figure {
+        transform: scale(0.85);
+    }
+    
+    .sage-figure:hover {
+        transform: scale(0.95) translateY(-5px);
+    }
+    
+    .speech-bubble {
+        max-width: 280px;
+        padding: 15px;
+    }
+    
+    .guide-section {
+        top: 80px;
+        left: 15px;
+    }
+    
+    .river-empiricism::before,
+    .river-rationalism::before,
+    .river-phenomenology::before,
+    .river-analytic::before {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+}
+
+/* 智者位置 - 月亮山布局 (3-3-1) */
+.sage-bacon { bottom: 450px; left: 50%; }
+.sage-descartes { bottom: 450px; left: 60%; }
+.sage-hume { bottom: 450px; left: 70%; }
+
+.sage-kant { bottom: 320px; left: 46%; }
+.sage-husserl { bottom: 320px; left: 56%; }
+.sage-wittgenstein { bottom: 320px; left: 66%; }
+.sage-polanyi { bottom: 320px; left: 76%;  } /* 单独在底部居中 */
