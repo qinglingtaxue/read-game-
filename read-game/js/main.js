@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'society': 'society-mountain.html',
         'organization': 'organization-mountain.html',
         'family': 'family-mountain.html',
-        'nature': 'nature-mountain.html',
+        'nature': 'humanity-mountain.html',
         'body': 'body-mountain.html',
-        'faith': 'faith-mountain.html'
+        'faith': 'beliefs-mountain.html'
     };
     
     // 为所有山峰添加点击事件

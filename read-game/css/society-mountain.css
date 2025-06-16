@@ -1,0 +1,941 @@
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Georgia', '宋体', serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* 社会山都市霓虹主题：紫蓝渐变背景模拟夜晚都市天空 */
+    background: linear-gradient(to bottom, #2C1810 0%, #4A148C 30%, #6A1B9A 60%, #9C27B0 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 返回按钮 */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(139, 69, 19, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(139, 69, 19, 1);
+    transform: translateY(-2px);
+}
+
+/* 进度显示 */
+.progress-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.progress-display span {
+    display: block;
+    margin-bottom: 3px;
+    color: #8B4513;
+}
+
+/* 主要探索区域 */
+.mountain-scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 霓虹月亮 */
+.neon-moon {
+    position: absolute;
+    top: 80px;
+    right: 120px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #E1BEE7 0%, #CE93D8 70%, #AB47BC 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(225, 190, 231, 0.8), 0 0 60px rgba(156, 39, 176, 0.6);
+    animation: neonMoonGlow 3s ease-in-out infinite alternate;
+    z-index: 10;
+}
+
+@keyframes neonMoonGlow {
+    0% { 
+        box-shadow: 0 0 30px rgba(225, 190, 231, 0.8), 0 0 60px rgba(156, 39, 176, 0.6);
+        transform: scale(1);
+    }
+    100% { 
+        box-shadow: 0 0 50px rgba(225, 190, 231, 1), 0 0 100px rgba(156, 39, 176, 0.8);
+        transform: scale(1.05);
+    }
+}
+
+/* 都市装饰元素 */
+.city-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.city-item {
+    position: absolute;
+    font-size: 24px;
+    animation: cityFloat 8s ease-in-out infinite;
+}
+
+.building-item {
+    top: 120px;
+    left: 200px;
+    animation-delay: 0s;
+}
+
+.traffic-item {
+    top: 180px;
+    right: 250px;
+    animation-delay: 2s;
+}
+
+.tech-item {
+    top: 240px;
+    left: 60%;
+    animation-delay: 4s;
+}
+
+.network-item {
+    top: 160px;
+    left: 45%;
+    animation-delay: 6s;
+}
+
+@keyframes cityFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.8;
+        filter: drop-shadow(0 0 5px rgba(156, 39, 176, 0.5));
+    }
+    25% { 
+        transform: translateY(-15px) rotate(2deg); 
+        opacity: 1;
+        filter: drop-shadow(0 0 10px rgba(156, 39, 176, 0.8));
+    }
+    50% { 
+        transform: translateY(-10px) rotate(-1deg); 
+        opacity: 0.9;
+        filter: drop-shadow(0 0 8px rgba(156, 39, 176, 0.6));
+    }
+    75% { 
+        transform: translateY(-8px) rotate(1deg); 
+        opacity: 0.85;
+        filter: drop-shadow(0 0 6px rgba(156, 39, 176, 0.7));
+    }
+}
+
+/* 霓虹云朵 */
+.cloud {
+    position: absolute;
+    background: rgba(156, 39, 176, 0.3);
+    border-radius: 50px;
+    z-index: 5;
+    animation: cloudFloat 15s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.4);
+}
+
+.cloud1 {
+    top: 100px;
+    left: 200px;
+    width: 80px;
+    height: 40px;
+    animation: cloudFloat1 20s ease-in-out infinite;
+}
+
+.cloud2 {
+    top: 160px;
+    right: 300px;
+    width: 120px;
+    height: 50px;
+    animation: cloudFloat2 25s ease-in-out infinite;
+}
+
+/* 云朵形状 */
+.cloud::before {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50px;
+    top: -25px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    box-shadow: inherit;
+}
+
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50px;
+    top: -25px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: inherit;
+}
+
+/* 云朵动画 */
+@keyframes cloudFloat1 {
+    0% { 
+        transform: translateX(0px) translateY(0px); 
+        opacity: 0.6;
+        box-shadow: 0 0 15px rgba(156, 39, 176, 0.3);
+    }
+    25% { 
+        transform: translateX(30px) translateY(-10px); 
+        opacity: 0.8;
+        box-shadow: 0 0 25px rgba(156, 39, 176, 0.5);
+    }
+    50% { 
+        transform: translateX(60px) translateY(5px); 
+        opacity: 1;
+        box-shadow: 0 0 30px rgba(156, 39, 176, 0.6);
+    }
+    75% { 
+        transform: translateX(40px) translateY(-5px); 
+        opacity: 0.8;
+        box-shadow: 0 0 25px rgba(156, 39, 176, 0.5);
+    }
+    100% { 
+        transform: translateX(0px) translateY(0px); 
+        opacity: 0.6;
+        box-shadow: 0 0 15px rgba(156, 39, 176, 0.3);
+    }
+}
+
+@keyframes cloudFloat2 {
+    0% { 
+        transform: translateX(0px) translateY(0px) scale(1); 
+        opacity: 0.5;
+        box-shadow: 0 0 20px rgba(156, 39, 176, 0.4);
+    }
+    30% { 
+        transform: translateX(-20px) translateY(8px) scale(1.05); 
+        opacity: 0.7;
+        box-shadow: 0 0 35px rgba(156, 39, 176, 0.6);
+    }
+    60% { 
+        transform: translateX(-40px) translateY(-8px) scale(0.95); 
+        opacity: 0.9;
+        box-shadow: 0 0 40px rgba(156, 39, 176, 0.7);
+    }
+    80% { 
+        transform: translateX(-25px) translateY(12px) scale(1.02); 
+        opacity: 0.7;
+        box-shadow: 0 0 35px rgba(156, 39, 176, 0.6);
+    }
+    100% { 
+        transform: translateX(0px) translateY(0px) scale(1); 
+        opacity: 0.5;
+        box-shadow: 0 0 20px rgba(156, 39, 176, 0.4);
+    }
+}
+
+/* 山脉层次 - 都市霓虹色系 */
+.distant-mountains {
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #7B1FA2 0%, #8E24AA 50%, #9C27B0 100%);
+    clip-path: polygon(0% 100%, 15% 60%, 25% 80%, 40% 40%, 55% 70%, 70% 30%, 85% 65%, 100% 45%, 100% 100%);
+    opacity: 0.8;
+    z-index: 1;
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.3);
+}
+
+.middle-mountains {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #4A148C 0%, #6A1B9A 50%, #7B1FA2 100%);
+    clip-path: polygon(0% 100%, 10% 50%, 30% 20%, 45% 60%, 60% 10%, 75% 45%, 90% 25%, 100% 70%, 100% 100%);
+    opacity: 0.9;
+    z-index: 2;
+    box-shadow: 0 0 30px rgba(156, 39, 176, 0.4);
+}
+
+.front-mountains {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to top, #2C1810 0%, #4A148C 40%, #6A1B9A 80%, #7B1FA2 100%);
+    clip-path: polygon(0% 100%, 20% 30%, 35% 70%, 50% 20%, 65% 60%, 80% 15%, 95% 50%, 100% 100%);
+    z-index: 3;
+    box-shadow: 0 0 40px rgba(156, 39, 176, 0.5);
+}
+
+/* 河流容器 */
+.rivers {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* 河流 - 蓝色调 */
+.river {
+    position: absolute;
+    background: rgba(30, 144, 255, 0.8);
+    border-radius: 50%;
+    animation: riverFlow 3s ease-in-out infinite;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+}
+
+/* 权力之河 */
+.river-first {
+    bottom: 80px;
+    left: 18%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -15px 0 5px rgba(30, 144, 255, 0.7),
+        3px -25px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -35px 0 4px rgba(30, 144, 255, 0.6),
+        4px -45px 0 3px rgba(30, 144, 255, 0.5),
+        -1px -55px 0 3px rgba(30, 144, 255, 0.5),
+        2px -65px 0 3px rgba(30, 144, 255, 0.4),
+        -3px -75px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+/* 公正之河 */
+.river-second {
+    bottom: 90px;
+    left: 38%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -12px 0 5px rgba(30, 144, 255, 0.7),
+        -4px -22px 0 4px rgba(30, 144, 255, 0.6),
+        2px -32px 0 4px rgba(30, 144, 255, 0.6),
+        -3px -42px 0 3px rgba(30, 144, 255, 0.5),
+        3px -52px 0 3px rgba(30, 144, 255, 0.5),
+        -2px -62px 0 3px rgba(30, 144, 255, 0.4);
+}
+
+/* 秩序之河 */
+.river-third {
+    bottom: 85px;
+    left: 58%;
+    width: 9px;
+    height: 9px;
+    box-shadow: 
+        0 -18px 0 6px rgba(30, 144, 255, 0.8),
+        2px -30px 0 5px rgba(30, 144, 255, 0.7),
+        -3px -42px 0 5px rgba(30, 144, 255, 0.6),
+        3px -54px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -66px 0 4px rgba(30, 144, 255, 0.5),
+        4px -78px 0 3px rgba(30, 144, 255, 0.5),
+        -1px -90px 0 3px rgba(30, 144, 255, 0.4),
+        2px -102px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+/* 自由之河 */
+.river-fourth {
+    bottom: 95px;
+    left: 78%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -14px 0 5px rgba(30, 144, 255, 0.7),
+        -3px -26px 0 4px rgba(30, 144, 255, 0.6),
+        4px -36px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -46px 0 3px rgba(30, 144, 255, 0.5),
+        3px -56px 0 3px rgba(30, 144, 255, 0.5),
+        -4px -66px 0 3px rgba(30, 144, 255, 0.4),
+        1px -76px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+/* 河流流动动画 */
+@keyframes riverFlow {
+    0% { 
+        opacity: 0.7;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.1);
+        filter: brightness(1.3);
+    }
+    100% { 
+        opacity: 0.7;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+/* 河流汇聚池 */
+.rivers::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: radial-gradient(ellipse, 
+        rgba(30, 144, 255, 0.6) 0%, 
+        rgba(30, 144, 255, 0.4) 50%, 
+        rgba(30, 144, 255, 0.2) 80%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: poolRipple 4s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(30, 144, 255, 0.5);
+}
+
+/* 智者人物 */
+.sages-by-river {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    z-index: 6;
+}
+
+.sage-figure {
+    position: absolute;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.sage-figure:hover {
+    transform: scale(1.1) translateY(-5px);
+    filter: drop-shadow(0 0 15px rgba(156, 39, 176, 0.8));
+}
+
+.sage-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.sage-name {
+    font-size: 13px;
+    color: #9C27B0;
+    background: rgba(255,255,255,0.9);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+/* 智者位置 - 社会山相关的思想家 */
+.sage-rousseau {
+    bottom: 20px;
+    left: 15%;
+}
+
+.sage-machiavelli {
+    bottom: 30px;
+    left: 35%;
+}
+
+.sage-marx {
+    bottom: 25px;
+    left: 60%;
+}
+
+.sage-durkheim {
+    bottom: 30px;
+    left: 75%;
+}
+
+.sage-weber {
+    position: absolute !important;
+    top: -75% !important;
+    left: 65% !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+}
+
+.sage-simmel {
+    position: absolute !important;
+    top: -75% !important;
+    left: 55% !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+}
+
+.sage-smith {
+    position: absolute !important;
+    top: -75% !important;
+    left: 45% !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+}
+
+/* 对话框右侧智者的特殊样式 */
+.sage-weber, .sage-simmel, .sage-smith .sage-avatar {
+    font-size: 2.8rem;
+    animation: floatSage 4s ease-in-out infinite;
+}
+
+.sage-weber, .sage-simmel, .sage-smith .sage-name {
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(139, 69, 19, 0.3);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* 悬停效果 */
+.sage-weber, .sage-simmel, .sage-smith:hover {
+    transform: scale(1.15) translateY(-8px) !important;
+}
+
+/* 光晕效果 */
+.sage-weber, .sage-simmel, .sage-smith::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: sageGlow 3s ease-in-out infinite;
+}
+
+@keyframes sageGlow {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* 已访问状态 */
+.sage-figure.visited {
+    opacity: 0.7;
+}
+
+.sage-figure.visited::after {
+    content: "✓";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 20;
+}
+
+/* 导游部分 */
+.guide-section {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    display: flex;
+    align-items: flex-end;
+    gap: 26px;
+    max-width: 450px;
+    z-index: 7;
+}
+
+.guide-character {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.guide-avatar {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    animation: guideFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(156, 39, 176, 0.6));
+}
+
+@keyframes guideFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.guide-name {
+    font-size: 14px;
+    color: #9C27B0;
+    background: rgba(255,255,255,0.9);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.speech-bubble {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 350px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 30px rgba(156, 39, 176, 0.3);
+    animation: bubbleAppear 2s ease-out;
+    flex: 1;
+}
+
+@keyframes bubbleAppear {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.bubble-content h3 {
+    color: #7B1FA2;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.bubble-content p {
+    color: #4A148C;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.bubble-tail {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(255, 255, 255, 0.95);
+    transform: rotate(-45deg);
+}
+
+/* 探索提示 */
+.exploration-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(156, 39, 176, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    animation: hintPulse 2s ease-in-out infinite;
+    white-space: nowrap;
+    z-index: 8;
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.6);
+}
+
+@keyframes hintPulse {
+    0%, 100% { 
+        opacity: 0.8; 
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 20px rgba(156, 39, 176, 0.6);
+    }
+    50% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: 0 0 30px rgba(156, 39, 176, 0.8);
+    }
+}
+
+/* 河流标签 */
+.river-first::before {
+    content: "权力之河";
+    position: absolute;
+    top: -80px;
+    left: -20px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(255,255,255,0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+}
+
+.river-second::before {
+    content: "公正之河";
+    position: absolute;
+    top: -70px;
+    left: -18px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(255,255,255,0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+}
+
+.river-third::before {
+    content: "秩序之河";
+    position: absolute;
+    top: -110px;
+    left: -18px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(255,255,255,0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+}
+
+.river-fourth::before {
+    content: "自由之河";
+    position: absolute;
+    top: -85px;
+    left: -18px;
+    font-size: 11px;
+    color: #1E90FF;
+    background: rgba(255,255,255,0.95);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 1;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(30, 144, 255, 0.3);
+    z-index: 10;
+}
+
+/* 河流汇聚池动画 */
+@keyframes poolRipple {
+    0%, 100% { 
+        transform: translateX(-50%) scale(1);
+        opacity: 0.4;
+        box-shadow: 0 0 30px rgba(30, 144, 255, 0.5);
+    }
+    50% { 
+        transform: translateX(-50%) scale(1.05);
+        opacity: 0.7;
+        box-shadow: 0 0 50px rgba(30, 144, 255, 0.8);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .neon-moon {
+        top: 60px;
+        right: 20px;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .speech-bubble {
+        max-width: 300px;
+    }
+    
+    .city-item {
+        font-size: 20px;
+    }
+}
+
+/* 智者位置 - 完全复制太阳山的布局 */
+
+/* 下方河边的智者 - 对应太阳山的孔子、苏格拉底、佛陀、耶稣 */
+.sage-rousseau {
+    bottom: 20px;
+    left: 15%;
+}
+
+.sage-machiavelli {
+    bottom: 30px;
+    left: 35%;
+}
+
+.sage-marx {
+    bottom: 25px;
+    left: 60%;
+}
+
+.sage-durkheim {
+    bottom: 30px;
+    left: 75%;
+}
+
+/* 对话框右侧的智者 - 对应太阳山的柏拉图、庄子位置 */
+.sage-weber {
+    position: absolute !important;
+    top: -75% !important;
+    left: 65% !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+}
+
+.sage-simmel {
+    position: absolute !important;
+    top: -75% !important;
+    left: 55% !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+}
+
+.sage-smith {
+    position: absolute !important;
+    top: -75% !important;
+    left: 45% !important;
+    bottom: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+}
+
+/* 对话框右侧智者的特殊样式 */
+.sage-weber .sage-avatar, .sage-simmel .sage-avatar, .sage-smith .sage-avatar {
+    font-size: 2.8rem;
+    animation: floatSage 4s ease-in-out infinite;
+}
+
+.sage-weber .sage-name, .sage-simmel .sage-name, .sage-smith .sage-name {
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(156, 39, 176, 0.3);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* 悬停效果 */
+.sage-weber:hover, .sage-simmel:hover, .sage-smith:hover {
+    transform: scale(1.15) translateY(-8px) !important;
+    filter: drop-shadow(0 0 20px rgba(156, 39, 176, 1)) !important;
+}
+
+/* 光晕效果 */
+.sage-weber::after, .sage-simmel::after, .sage-smith::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(156, 39, 176, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: sageGlow 3s ease-in-out infinite;
+}
+
+/* 河流定位 - 复制太阳山的河流位置 */
+.river-first {
+    bottom: 80px;
+    left: 18%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -15px 0 5px rgba(30, 144, 255, 0.7),
+        3px -25px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -35px 0 4px rgba(30, 144, 255, 0.6),
+        4px -45px 0 3px rgba(30, 144, 255, 0.5),
+        -1px -55px 0 3px rgba(30, 144, 255, 0.5),
+        2px -65px 0 3px rgba(30, 144, 255, 0.4),
+        -3px -75px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+.river-second {
+    bottom: 90px;
+    left: 38%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -12px 0 5px rgba(30, 144, 255, 0.7),
+        -4px -22px 0 4px rgba(30, 144, 255, 0.6),
+        2px -32px 0 4px rgba(30, 144, 255, 0.6),
+        -3px -42px 0 3px rgba(30, 144, 255, 0.5),
+        3px -52px 0 3px rgba(30, 144, 255, 0.5),
+        -2px -62px 0 3px rgba(30, 144, 255, 0.4);
+}
+
+.river-third {
+    bottom: 85px;
+    left: 58%;
+    width: 9px;
+    height: 9px;
+    box-shadow: 
+        0 -18px 0 6px rgba(30, 144, 255, 0.8),
+        2px -30px 0 5px rgba(30, 144, 255, 0.7),
+        -3px -42px 0 5px rgba(30, 144, 255, 0.6),
+        3px -54px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -66px 0 4px rgba(30, 144, 255, 0.5),
+        4px -78px 0 3px rgba(30, 144, 255, 0.5),
+        -1px -90px 0 3px rgba(30, 144, 255, 0.4),
+        2px -102px 0 2px rgba(30, 144, 255, 0.4);
+}
+
+.river-fourth {
+    bottom: 95px;
+    left: 78%;
+    width: 8px;
+    height: 8px;
+    box-shadow: 
+        0 -14px 0 5px rgba(30, 144, 255, 0.7),
+        -3px -26px 0 4px rgba(30, 144, 255, 0.6),
+        4px -36px 0 4px rgba(30, 144, 255, 0.6),
+        -2px -46px 0 3px rgba(30, 144, 255, 0.5),
+        3px -56px 0 3px rgba(30, 144, 255, 0.5),
+        -4px -66px 0 3px rgba(30, 144, 255, 0.4),
+        1px -76px 0 2px rgba(30, 144, 255, 0.4);
+}

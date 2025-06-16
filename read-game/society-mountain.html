@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mountain="society">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社会山探索之旅</title>
+    <link rel="stylesheet" href="css/color-schemes.css">
+    <link rel="stylesheet" href="css/society-mountain.css">
+    <style>
+.music-toggle {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回选择</button>
+    
+    <!-- 进度显示 -->
+    <div class="progress-display">
+        <span class="mountain-progress">社会山进度：<span id="mountain-progress">0/7</span></span>
+        <span class="total-progress">总进度：<span id="total-progress">0/420</span></span>
+    </div>
+    
+    <div class="mountain-scene">
+        <!-- 主要装饰元素（根据各山峰主题） -->
+        <div class="main-decoration"></div>
+        
+        <!-- 装饰元素 -->
+        <div class="theme-decorations">
+            <!-- 各山峰特色装饰 -->
+        </div>
+        
+        <!-- 云朵 -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        
+        <!-- 山脉层次 -->
+        <div class="distant-mountains"></div>
+        <div class="middle-mountains"></div>
+        <div class="front-mountains"></div>
+
+        <!-- 四条社会之河 -->
+        <div class="rivers">
+            <div class="river river-first" title="权力之河"></div>
+            <div class="river river-second" title="公正之河"></div>
+            <div class="river river-third" title="秩序之河"></div>
+            <div class="river river-fourth" title="自由之河"></div>
+        </div>
+        
+        <!-- 河边的智者们 -->
+        <div class="sages-by-river">
+            <div class="sage-figure sage-rousseau" data-sage="rousseau" onclick="exploreRiver('rousseau')">
+                <div class="sage-avatar">📜</div>
+                <div class="sage-name">卢梭</div>
+            </div>
+            <div class="sage-figure sage-machiavelli" data-sage="machiavelli" onclick="exploreRiver('machiavelli')">
+                <div class="sage-avatar">👑</div>
+                <div class="sage-name">马基雅维利</div>
+            </div>
+            <div class="sage-figure sage-marx" data-sage="marx" onclick="exploreRiver('marx')">
+                <div class="sage-avatar">⚒️</div>
+                <div class="sage-name">马克思</div>
+            </div>
+            <div class="sage-figure sage-durkheim" data-sage="durkheim" onclick="exploreRiver('durkheim')">
+                <div class="sage-avatar">🔬</div>
+                <div class="sage-name">涂尔干</div>
+            </div>
+            
+            <div class="sage-figure sage-weber" data-sage="weber" onclick="exploreRiver('weber')">
+                <div class="sage-avatar">🏢</div>
+                <div class="sage-name">韦伯</div>
+            </div>
+            
+            <div class="sage-figure sage-simmel" data-sage="simmel" onclick="exploreRiver('simmel')">
+                <div class="sage-avatar">🌐</div>
+                <div class="sage-name">齐美尔</div>
+            </div>
+            
+            <div class="sage-figure sage-smith" data-sage="smith" onclick="exploreRiver('smith')">
+                <div class="sage-avatar">💰</div>
+                <div class="sage-name">亚当·斯密</div>
+            </div>
+        </div>
+        
+        <!-- 导游人物和对话气泡 -->
+        <div class="guide-section">
+            <div class="guide-character">
+                <div class="guide-avatar">🏢</div>
+                <div class="guide-name">社会向导</div>
+            </div>
+            <div class="speech-bubble">
+                <div class="bubble-content">
+                    <h3>🏛️ 在天外，有一座社会山</h3>
+                    <p>社会山里有四条河，叫权力之河、公正之河、秩序之河、自由之河，河水终日川流不息，孕育了
+人类的智慧。</p>
+          </div>
+                <div class="bubble-tail"></div>
+            </div>
+        </div>
+
+        <!-- 探索提示 -->
+        <div class="exploration-hint">
+            🏛️ 点击河边的智者开始对话
+        </div>
+    </div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="music/sun-mountain-bg.MP3" type="audio/mpeg">
+        <source src="music/sun-mountain-bg.MP3" type="audio/ogg">
+    </audio>
+
+    <!-- 音乐控制按钮 -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleBgMusic()">🎵</button>
+
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // 拜访智者
+        function exploreRiver(sageId) {
+            window.location.href = `sages/society/${sageId}.html`;
+        }
+
+        // 检查山峰完成状态
+        function checkMountainComplete() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const societySages = ['rousseau', 'machiavelli', 'marx', 'durkheim', 'weber', 'simmel', 'smith'];
+            const completedCount = societySages.filter(sage => visitedSages.includes(`society-${sage}`)).length;
+            
+            document.getElementById('mountain-progress').textContent = `${completedCount}/7`;
+            document.getElementById('total-progress').textContent = `${visitedSages.length}/420`;
+            
+            // 更新智者状态显示
+            societySages.forEach(sage => {
+                const sageElement = document.querySelector(`[data-sage="${sage}"]`);
+                if (visitedSages.includes(`society-${sage}`)) {
+                    sageElement.classList.add('visited');
+                }
+            });
+            
+            // 只有在刚好完成社会山时显示提示（避免重复显示）
+            if (completedCount === 7 && !localStorage.getItem('societyMountainCompleted')) {
+                localStorage.setItem('societyMountainCompleted', 'true');
+                showNextMountainOption();
+            }
+        }
+
+        // 显示前往下一座山的选项
+        function showNextMountainOption() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 2000;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; position: relative;">
+                    <span onclick="this.parentElement.parentElement.remove()" 
+                        style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: #999; font-weight: bold; user-select: none;">&times;</span>
+                    
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">🏛️ 恭喜完成社会山探索！</h3>
+                    <p style="margin-bottom: 20px;">你已拜访了社会山的所有7位智者，获得了珍贵的智慧。</p>
+                    
+                    <button onclick="goToNextMountain()" style="background: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer;">前往组织山</button>
+
+                    <button onclick="goBack()" style="background: var(--secondary-color); color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer;">返回全景</button>
+            </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // 前往下一座山
+        function goToNextMountain() {
+            window.location.href = 'organization-mountain.html';
+        }
+
+        // 背景音乐控制
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        if (bgMusic) {
+            bgMusic.volume = 0.3;
+        }
+
+        function toggleBgMusic() {
+            if (!bgMusic) return;
+            
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(error => {
+                    console.log('播放失败，请检查音频文件');
+                });
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            }
+        }
+
+        let hasInteracted = false;
+        document.addEventListener('click', function() {
+            if (!hasInteracted && bgMusic) {
+                hasInteracted = true;
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(() => {});
+            }
+        });
+
+        window.addEventListener('load', checkMountainComplete);
+    </script>
+</body>
+</html>

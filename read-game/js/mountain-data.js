@@ -216,3 +216,6 @@ const MOUNTAINS_DATA = {
         keyWords: ['文明', '智慧', '源头', '传承']
     },
 }
+
+// 导出数据
+module.exports = MOUNTAINS_DATA;

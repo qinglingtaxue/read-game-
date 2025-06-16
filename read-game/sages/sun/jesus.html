@@ -12,8 +12,8 @@
         }
         
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #e8f4fd 0%, #fff5e6 50%, #ffebcd 100%);
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #FF6347 0%, #CD5C5C 100%);
             min-height: 100vh;
             position: relative;
         }
@@ -24,7 +24,7 @@
             top: 20px;
             left: 20px;
             z-index: 1000;
-            background: rgba(45, 52, 54, 0.9);
+            background: rgba(139, 69, 19, 0.9);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -35,23 +35,23 @@
         }
         
         .back-btn:hover {
-            background: rgba(45, 52, 54, 1);
+            background: rgba(139, 69, 19, 1);
             transform: translateY(-2px);
         }
         
-        /* 教堂场景 */
-        .church-room {
+        /* 书房场景 */
+        .study-room {
             position: relative;
             width: 100%;
             height: 100vh;
             background: 
-                radial-gradient(circle at 50% 20%, rgba(214, 48, 49, 0.2) 0%, transparent 60%),
-                linear-gradient(to bottom, #74b9ff 0%, #0984e3 30%, #fdcb6e 70%, #fd79a8 100%);
+                radial-gradient(circle at 70% 30%, rgba(255,215,0,0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #FF6347 0%, #CD5C5C 100%);
             overflow: hidden;
         }
         
-        /* 教堂窗户背景 */
-        .stained-glass {
+        /* 书架背景 */
+        .bookshelf {
             position: absolute;
             top: 10%;
             left: 5%;
@@ -59,78 +59,53 @@
             height: 70%;
             background: 
                 repeating-linear-gradient(
-                    90deg,
-                    rgba(214, 48, 49, 0.3) 0px,
-                    rgba(214, 48, 49, 0.3) 30px,
-                    rgba(116, 185, 255, 0.3) 30px,
-                    rgba(116, 185, 255, 0.3) 60px,
-                    rgba(253, 203, 110, 0.3) 60px,
-                    rgba(253, 203, 110, 0.3) 90px,
-                    rgba(253, 121, 168, 0.3) 90px,
-                    rgba(253, 121, 168, 0.3) 120px
+                    0deg,
+                    rgba(139, 69, 19, 0.8) 0px,
+                    rgba(139, 69, 19, 0.8) 40px,
+                    rgba(160, 82, 45, 0.8) 40px,
+                    rgba(160, 82, 45, 0.8) 80px
                 );
-            border-radius: 15px;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
         }
         
-        /* 圣光装饰 */
-        .holy-light {
+        /* 书籍装饰 */
+        .books {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(
-                    ellipse at 50% 20%,
-                    rgba(255, 255, 255, 0.3) 0%,
-                    rgba(255, 255, 255, 0.1) 40%,
-                    transparent 70%
-                ),
                 repeating-linear-gradient(
-                    45deg,
+                    90deg,
                     transparent 0px,
-                    rgba(255, 255, 255, 0.05) 20px,
-                    transparent 40px
+                    transparent 20px,
+                    rgba(139, 69, 19, 0.3) 20px,
+                    rgba(139, 69, 19, 0.3) 25px
                 );
-            animation: holyLightShine 8s ease-in-out infinite;
         }
         
-        @keyframes holyLightShine {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-        
-        /* 耶稣形象 */
-        .christ-portrait {
+        /* 智者形象 */
+        .sage-portrait {
             position: absolute;
             bottom: 15%;
             right: 10%;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(248,248,255,0.95) 100%);
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 8rem;
-            animation: christFloat 6s ease-in-out infinite;
-            box-shadow: 
-                0 0 40px rgba(255, 255, 255, 0.6),
-                0 0 80px rgba(214, 48, 49, 0.2),
-                0 15px 35px rgba(45, 52, 54, 0.2);
-            border: 3px solid rgba(214, 48, 49, 0.3);
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
-        @keyframes christFloat {
-            0%, 100% { 
-                transform: translateY(0px) scale(1); 
-                box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(214, 48, 49, 0.2), 0 15px 35px rgba(45, 52, 54, 0.2);
-            }
-            50% { 
-                transform: translateY(-18px) scale(1.03); 
-                box-shadow: 0 0 60px rgba(255, 255, 255, 0.8), 0 0 120px rgba(214, 48, 49, 0.3), 0 20px 45px rgba(45, 52, 54, 0.3);
-            }
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         
         /* 对话区域 */
@@ -139,47 +114,44 @@
             bottom: 5%;
             left: 5%;
             right: 25%;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 40px rgba(45, 52, 54, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             max-height: 60%;
             overflow-y: auto;
-            border: 2px solid rgba(214, 48, 49, 0.3);
         }
         
         .sage-name-title {
-            font-size: 28px;
-            color: #2d3436;
+            font-size: 24px;
+            color: #8B4513;
             text-align: center;
             margin-bottom: 20px;
-            border-bottom: 3px solid #d63031;
+            border-bottom: 2px solid #CD853F;
             padding-bottom: 10px;
-            font-weight: bold;
         }
         
         .dialogue-content {
             font-size: 16px;
             line-height: 1.8;
-            color: #2d3436;
+            color: #2F4F4F;
         }
         
         .quote {
             font-style: italic;
-            color: #d63031;
+            color: #4682B4;
             margin: 15px 0;
-            padding: 15px 25px;
-            border-left: 4px solid #fd79a8;
-            background: rgba(214, 48, 49, 0.08);
-            border-radius: 0 10px 10px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #CD853F;
+            background: rgba(205, 133, 63, 0.1);
         }
         
         .wisdom-point {
-            background: rgba(214, 48, 49, 0.12);
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
             margin: 20px 0;
-            border: 2px solid rgba(214, 48, 49, 0.25);
+            border: 1px solid rgba(255, 215, 0, 0.5);
         }
         
         /* 完成按钮 */
@@ -187,7 +159,7 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(45deg, #d63031, #74b9ff);
+            background: linear-gradient(45deg, #32CD32, #228B22);
             color: white;
             padding: 12px 25px;
             border: none;
@@ -196,117 +168,128 @@
             font-size: 16px;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
+            box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
         }
         
         .complete-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5);
+            box-shadow: 0 6px 20px rgba(50, 205, 50, 0.4);
         }
         
         /* 古典装饰 */
         .decoration {
             position: absolute;
-            top: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            color: #d63031;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: decorationGlow 4s ease-in-out infinite;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
         }
-        
-        @keyframes decorationGlow {
-            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-            50% { text-shadow: 2px 2px 12px rgba(214, 48, 49, 0.6); }
+
+        .decoration-1 {
+            top: 5%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            animation-duration: 25s;
+        }
+
+        .decoration-2 {
+            bottom: 10%;
+            left: 15%;
+            width: 120px;
+            height: 120px;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .back-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+
+            .sage-portrait {
+                width: 120px;
+                height: 120px;
+                font-size: 5rem;
+                right: 5%;
+                bottom: initial;
+                top: 5%;
+            }
+
+            .dialogue-container {
+                left: 5%;
+                right: 5%;
+                width: 90%;
+                padding: 20px;
+                bottom: 5%;
+                max-height: 70%;
+            }
+
+            .sage-name-title {
+                font-size: 20px;
+            }
+
+            .dialogue-content {
+                font-size: 14px;
+            }
+
+            .complete-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
-    
-    <div class="church-room">
-        <div class="stained-glass">
-            <div class="holy-light"></div>
-        </div>
-        
-        <div class="decoration">✝️ 圣爱教堂 ✝️</div>
-        
-        <div class="christ-portrait">
-            🙏
-        </div>
-        
+    <div class="study-room">
+        <div class="bookshelf"></div>
+        <div class="books"></div>
+        <div class="sage-portrait">🙏</div>
         <div class="dialogue-container">
-            <h2 class="sage-name-title">耶稣基督的智慧</h2>
-            <div class="dialogue-content">
-                <p>平安归与你，我的孩子。我是耶稣基督，上帝的儿子，来到世间为要拯救失丧的灵魂。</p>
-                
-                <div class="quote">
-                    "我就是道路、真理、生命；若不藉着我，没有人能到父那里去。"
-                </div>
-                
-                <p>爱是一切的根本。上帝爱世人，甚至将他的独生子赐给他们，叫一切信他的，不至灭亡，反得永生。我来不是要定世人的罪，乃是要叫世人因我得救。</p>
-                
-                <div class="wisdom-point">
-                    <strong>✝️ 基督的核心教导：</strong><br>
-                    • <strong>爱的诫命</strong>：爱神爱人，这是最大的诫命<br>
-                    • <strong>饶恕之道</strong>：要饶恕七十个七次<br>
-                    • <strong>谦卑服事</strong>：谁要为大，就必作众人的仆人<br>
-                    • <strong>永生盼望</strong>：信我的人有永生
-                </div>
-                
-                <div class="quote">
-                    "你们要彼此相爱，像我爱你们一样。人为朋友舍命，没有比这个更大的爱了。"
-                </div>
-                
-                <p>不要为明天忧虑，因为明天自有明天的忧虑。一天的难处一天当就够了。天父知道你们的需要，他必供应。要先求他的国和他的义，这些东西都要加给你们了。</p>
-                
-                <p>记住，凡劳苦担重担的人，可以到我这里来，我就使你们得安息。我心里柔和谦卑，你们当负我的轭，学我的样式。愿平安与你同在。</p>
+            <h2 class="sage-name-title">与 耶稣 对话</h2>
+            <p class="dialogue-content">
+                耶稣 是 undefined 的 undefined，主要贡献是 undefined。
+            </p>
+            <blockquote class="quote">“undefined”</blockquote>
+            <p class="dialogue-content">
+                他的主要著作包括：《圣经》。
+            </p>
+            <div class="wisdom-point">
+                <h3>核心智慧点:</h3>
+                <ul>
+                    <li>基督教教义</li>
+                    <li>通过阅读他的著作，你可以更深入地理解这些思想。</li>
+                </ul>
             </div>
         </div>
-        
-        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+        <button class="complete-btn" onclick="markSageAsVisited('sun-jesus')">✔️ 拜访完成</button>
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
     </div>
-    
+
     <script>
+        // 返回山峰
         function goBack() {
-            window.location.href = '../../sun-mountain.html';
+            window.location.href = '/read-game/' + mountainHTMLFiles[mountain];
         }
-        
-        function completeDialogue() {
-            // 标记为已访问
-            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
-            const sageKey = 'sun-jesus';
-            
+
+        // 标记智者已拜访
+        function markSageAsVisited(sageKey) {
+            let visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
             if (!visitedSages.includes(sageKey)) {
                 visitedSages.push(sageKey);
                 localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+                alert('恭喜，您已成功拜访这位智者！');
             }
-            
-            // 显示完成提示
-            alert('🎉 恭喜！您已经完成了与耶稣基督的对话，获得了神圣的爱与救恩！');
-            
-            // 返回太阳山
-            goBack();
         }
-        
-        // 页面加载动画
-        window.addEventListener('load', function() {
-            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
-        });
     </script>
-    
-    <style>
-        @keyframes slideUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(50px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-    </style>
 </body>
 </html>

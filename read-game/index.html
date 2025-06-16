@@ -276,10 +276,144 @@
         <div class="loading" id="loading">
             <div class="loading-text">正在加载智慧山水...</div>
         </div>
+
+        <!-- 音乐控制按钮 -->
+        <button class="music-toggle" id="musicBtn" onclick="toggleBgMusic()" title="音乐开关">🎵</button>
     </div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music/xianxia4.MP3" type="audio/mpeg">
+        <source src="music/xianxia4.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
 
     <!-- 脚本文件 -->
     <script src="js/mountain-data.js"></script>
     <script src="js/main.js"></script>
+    <script>
+    // 降低山脉移动速度
+    function moveMountains(e) {
+        const mountains = document.querySelectorAll('.mountain');
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        mountains.forEach(mountain => {
+            const layer = mountain.getAttribute('data-layer');
+            let moveX = 0, moveY = 0;
+            switch(layer) {
+                case 'core':
+                    moveX = (mouseX - centerX) * 0.005;
+                    moveY = (mouseY - centerY) * 0.005;
+                    break;
+                case 'heaven':
+                    moveX = (mouseX - centerX) * 0.01;
+                    moveY = (mouseY - centerY) * 0.01;
+                    break;
+                case 'earth':
+                    moveX = (mouseX - centerX) * 0.015;
+                    moveY = (mouseY - centerY) * 0.015;
+                    break;
+                case 'human':
+                    moveX = (mouseX - centerX) * 0.02;
+                    moveY = (mouseY - centerY) * 0.02;
+                    break;
+            }
+            mountain.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    }
+
+    // 背景音乐控制
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+
+    if (bgMusic) {
+        bgMusic.volume = 0.3; // 设置音量为30%
+    }
+
+    function toggleBgMusic() {
+        if (!bgMusic) return;
+        
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                musicBtn.textContent = '🔊';
+                musicBtn.title = '点击暂停音乐';
+            }).catch(error => {
+                console.log('音乐播放失败：', error);
+                musicBtn.textContent = '🔇';
+                musicBtn.title = '音乐播放失败';
+            });
+        } else {
+            bgMusic.pause();
+            musicBtn.textContent = '🎵';
+            musicBtn.title = '点击播放音乐';
+        }
+    }
+
+    // 页面加载后自动播放音乐（需要用户交互）
+    let hasInteracted = false;
+    document.addEventListener('click', function() {
+        if (!hasInteracted && bgMusic) {
+            hasInteracted = true;
+            bgMusic.play().then(() => {
+                musicBtn.textContent = '🔊';
+                musicBtn.title = '点击暂停音乐';
+            }).catch(() => {
+                // 如果自动播放失败，保持静音状态
+            });
+        }
+    });
+
+    // 页面失去焦点时暂停音乐，获得焦点时恢复
+    document.addEventListener('visibilitychange', function() {
+        if (bgMusic && !bgMusic.paused) {
+            if (document.hidden) {
+                bgMusic.pause();
+            } else {
+                bgMusic.play().catch(() => {});
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('mousemove', moveMountains);
+    });
+    </script>
+
+    <style>
+    /* 音乐控制按钮样式 */
+    .music-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 1001;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+    }
+
+    .music-toggle:hover {
+        transform: scale(1.1);
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .music-toggle:active {
+        transform: scale(0.95);
+    }
+
+    /* 确保音乐按钮在所有元素之上 */
+    .music-toggle {
+        z-index: 9999;
+    }
+    </style>
 </body>
 </html>

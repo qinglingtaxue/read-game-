@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-mountain="body">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身体山探索之旅</title>
+    <link rel="stylesheet" href="css/color-schemes.css">
+    <link rel="stylesheet" href="css/body-mountain.css">
+    <style>
+.music-toggle {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+}
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">← 返回全景</button>
+    
+    <!-- 进度显示 -->
+    <div class="progress-display">
+        <span class="mountain-progress">身体山进度：<span id="mountain-progress">0/7</span></span>
+        <span class="total-progress">总进度：<span id="total-progress">0/420</span></span>
+    </div>
+    
+    <div class="mountain-scene">
+        <!-- 生命螺旋装饰 -->
+        <div class="life-spiral"></div>
+        
+        <!-- 身体装饰元素 -->
+        <div class="body-decorations">
+            <div class="body-item brain-icon">🧠</div>
+            <div class="body-item heart-icon">❤️</div>
+            <div class="body-item muscle-icon">💪</div>
+            <div class="body-item dna-icon">🧬</div>
+        </div>
+        
+        <!-- 云朵 -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        
+        <!-- 山脉层次 -->
+        <div class="distant-mountains"></div>
+        <div class="middle-mountains"></div>
+        <div class="front-mountains"></div>
+
+        <!-- 四条身体之河 -->
+        <div class="rivers">
+            <div class="river river-first" title="循环之河"></div>
+            <div class="river river-second" title="新陈代谢之河"></div>
+            <div class="river river-third" title="感知之河"></div>
+            <div class="river river-fourth" title="协调之河"></div>
+        </div>
+        
+        <!-- 河边的智者们 -->
+        <div class="sages-by-river">
+            <div class="sage-figure sage-knight" data-sage="knight" onclick="exploreRiver('knight')">
+                <div class="sage-avatar">🩸</div>
+                <div class="sage-name">奈特</div>
+            </div>
+            <div class="sage-figure sage-abraham" data-sage="abraham" onclick="exploreRiver('abraham')">
+                <div class="sage-avatar">🫀</div>
+                <div class="sage-name">亚伯拉罕</div>
+            </div>
+            <div class="sage-figure sage-williams" data-sage="williams" onclick="exploreRiver('williams')">
+                <div class="sage-avatar">🧪</div>
+                <div class="sage-name">威廉姆斯</div>
+            </div>
+            <div class="sage-figure sage-collins" data-sage="collins" onclick="exploreRiver('collins')">
+                <div class="sage-avatar">🧮</div>
+                <div class="sage-name">柯林斯</div>
+            </div>
+            <div class="sage-figure sage-venter" data-sage="venter" onclick="exploreRiver('venter')">
+                <div class="sage-avatar">🔬</div>
+                <div class="sage-name">文特尔</div>
+            </div>
+            <div class="sage-figure sage-plomin" data-sage="plomin" onclick="exploreRiver('plomin')">
+                <div class="sage-avatar">🧬</div>
+                <div class="sage-name">普罗明</div>
+            </div>
+            <div class="sage-figure sage-mukherjee" data-sage="mukherjee" onclick="exploreRiver('mukherjee')">
+                <div class="sage-avatar">⚕️</div>
+                <div class="sage-name">悉达多·穆克吉</div>
+            </div>
+        </div>
+        
+        <!-- 导游人物和对话气泡 -->
+        <div class="guide-section">
+            <div class="guide-character">
+                <div class="guide-avatar">🧬</div>
+                <div class="guide-name">生命向导</div>
+            </div>
+            <div class="speech-bubble">
+                <div class="bubble-content">
+                    <h3>🧬 在天外，有一座身体山</h3>
+                    <p>身体山里有四条河，叫循环之河、新陈代谢之河、感知之河、协调之河，河水终日川流不息，孕育了生命的奥秘。</p>
+                </div>
+                <div class="bubble-tail"></div>
+            </div>
+        </div>
+
+        <!-- 探索提示 -->
+        <div class="exploration-hint">
+            🧬 点击河边的智者开始对话
+        </div>
+    </div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="music/sun-mountain-bg.MP3" type="audio/mpeg">
+        <source src="music/sun-mountain-bg.MP3" type="audio/ogg">
+    </audio>
+
+    <!-- 音乐控制按钮 -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleBgMusic()">🎵</button>
+
+    <script>
+        // 返回全景图
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // 拜访智者
+        function exploreRiver(sageId) {
+            window.location.href = `sages/body/${sageId}.html`;
+        }
+
+        // 检查山峰完成状态
+        function checkMountainComplete() {
+            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
+            const bodySages = ['knight', 'abraham', 'williams', 'collins', 'venter', 'plomin', 'mukherjee'];
+            const completedCount = bodySages.filter(sage => visitedSages.includes(`body-${sage}`)).length;
+            
+            document.getElementById('mountain-progress').textContent = `${completedCount}/7`;
+            document.getElementById('total-progress').textContent = `${visitedSages.length}/420`;
+            
+            // 更新智者状态显示
+            bodySages.forEach(sage => {
+                const sageElement = document.querySelector(`[data-sage="${sage}"]`);
+                if (visitedSages.includes(`body-${sage}`)) {
+                    sageElement.classList.add('visited');
+                }
+            });
+            
+            // 只有在刚好完成身体山时显示提示（避免重复显示）
+            if (completedCount === 7 && !localStorage.getItem('bodyMountainCompleted')) {
+                localStorage.setItem('bodyMountainCompleted', 'true');
+                showNextMountainOption();
+            }
+        }
+
+        // 显示前往下一座山的选项
+        function showNextMountainOption() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 2000;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; position: relative;">
+                    <span onclick="this.parentElement.parentElement.remove()" 
+                    style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: #999; font-weight: bold; user-select: none;">&times;</span>
+                    
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">🧬 恭喜完成身体山探索！</h3>
+                    <p style="margin-bottom: 20px;">你已拜访了身体山的所有7位智者，获得了珍贵的生命智慧。</p>
+                    
+                    <button onclick="goToNextMountain()" style="background: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer;">前往下一座山</button>
+                    <button onclick="goBack()" style="background: var(--secondary-color); color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer;">返回全景</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // 前往下一座山
+        function goToNextMountain() {
+            // 这里需要根据实际的山峰顺序来设置
+            window.location.href = 'index.html';
+        }
+
+        // 背景音乐控制
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        if (bgMusic) {
+            bgMusic.volume = 0.3;
+        }
+
+        function toggleBgMusic() {
+            if (!bgMusic) return;
+            
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(() => {});
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            }
+        }
+
+        let hasInteracted = false;
+        document.addEventListener('click', function() {
+            if (!hasInteracted && bgMusic) {
+                hasInteracted = true;
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🔊';
+                }).catch(() => {});
+            }
+        });
+
+        window.addEventListener('load', checkMountainComplete);
+    </script>
+</body>
+</html>

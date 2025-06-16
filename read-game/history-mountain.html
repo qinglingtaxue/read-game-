@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/history-mountain.css">
 </head>
 <body>
-    <button class="back-btn" onclick="goBack()">← 返回全景图</button>
+    <button class="back-btn" onclick="goBack()">← 返回全景</button>
 
     <!-- 进度显示 -->
     <div class="progress-display">
@@ -93,8 +93,7 @@
 
     <!-- 背景音乐 -->
     <audio id="bgMusic" loop>
-        <source src="music/history-mountain-bg.mp3" type="audio/mpeg">
-        <source src="music/history-mountain-bg.ogg" type="audio/ogg">
+        <source src="music/sun-mountain-bg.MP3" type="audio/mpeg">
     </audio>
 
     <!-- 音乐控制按钮 -->
@@ -204,7 +203,7 @@
                 bgMusic.play().then(() => {
                     musicBtn.textContent = '🔊';
                 }).catch(error => {
-                    console.log('播放失败，请检查音频文件');
+                    console.error('播放失败，请检查音频文件', error); // 使用 console.error 打印错误对象
                 });
             } else {
                 bgMusic.pause();
@@ -219,8 +218,8 @@
                 hasInteracted = true;
                 bgMusic.play().then(() => {
                     musicBtn.textContent = '🔊';
-                }).catch(() => {
-                    // 静默处理
+                }).catch(error => {
+                    console.error('用户交互播放失败', error); // 使用 console.error 打印错误对象
                 });
             }
         });

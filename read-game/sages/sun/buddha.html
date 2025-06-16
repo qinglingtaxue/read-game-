@@ -12,8 +12,8 @@
         }
         
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #fff5e6 0%, #ffe4b5 100%);
+            font-family: '宋体', serif;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             min-height: 100vh;
             position: relative;
         }
@@ -39,19 +39,19 @@
             transform: translateY(-2px);
         }
         
-        /* 寺庙场景 */
-        .temple-room {
+        /* 书房场景 */
+        .study-room {
             position: relative;
             width: 100%;
             height: 100vh;
             background: 
-                radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
-                linear-gradient(to bottom, #ffeaa7 0%, #fab1a0 20%, #e17055 40%, #d63031 100%);
+                radial-gradient(circle at 70% 30%, rgba(255,215,0,0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             overflow: hidden;
         }
         
-        /* 佛塔背景 */
-        .pagoda {
+        /* 书架背景 */
+        .bookshelf {
             position: absolute;
             top: 10%;
             left: 5%;
@@ -60,76 +60,52 @@
             background: 
                 repeating-linear-gradient(
                     0deg,
-                    #d4af37 0px,
-                    #d4af37 25px,
-                    #daa520 25px,
-                    #daa520 50px,
-                    #cd853f 50px,
-                    #cd853f 75px,
-                    #d4af37 75px,
-                    #d4af37 100px
+                    rgba(139, 69, 19, 0.8) 0px,
+                    rgba(139, 69, 19, 0.8) 40px,
+                    rgba(160, 82, 45, 0.8) 40px,
+                    rgba(160, 82, 45, 0.8) 80px
                 );
-            border-radius: 15px;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
         }
         
-        /* 佛光装饰 */
-        .buddha-light {
+        /* 书籍装饰 */
+        .books {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(
-                    circle at center,
-                    rgba(255, 215, 0, 0.1) 0%,
-                    rgba(255, 215, 0, 0.05) 30%,
-                    transparent 70%
-                ),
-                repeating-conic-gradient(
-                    from 0deg at center,
-                    transparent 0deg,
-                    rgba(255, 215, 0, 0.05) 10deg,
-                    transparent 20deg
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 20px,
+                    rgba(139, 69, 19, 0.3) 20px,
+                    rgba(139, 69, 19, 0.3) 25px
                 );
-            animation: buddhaLightRotate 20s linear infinite;
         }
         
-        @keyframes buddhaLightRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        /* 佛陀形象 */
-        .buddha-portrait {
+        /* 智者形象 */
+        .sage-portrait {
             position: absolute;
             bottom: 15%;
             right: 10%;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,248,220,0.9) 100%);
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 8rem;
-            animation: buddhaFloat 5s ease-in-out infinite;
-            box-shadow: 
-                0 0 30px rgba(255, 215, 0, 0.4),
-                0 15px 35px rgba(139, 69, 19, 0.2);
-            border: 3px solid rgba(212, 175, 55, 0.6);
+            animation: sageFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
-        @keyframes buddhaFloat {
-            0%, 100% { 
-                transform: translateY(0px) scale(1); 
-                box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), 0 15px 35px rgba(139, 69, 19, 0.2);
-            }
-            50% { 
-                transform: translateY(-15px) scale(1.05); 
-                box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 20px 45px rgba(139, 69, 19, 0.3);
-            }
+        @keyframes sageFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         
         /* 对话区域 */
@@ -138,47 +114,44 @@
             bottom: 5%;
             left: 5%;
             right: 25%;
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             max-height: 60%;
             overflow-y: auto;
-            border: 2px solid rgba(212, 175, 55, 0.4);
         }
         
         .sage-name-title {
-            font-size: 28px;
-            color: #8b4513;
+            font-size: 24px;
+            color: #8B4513;
             text-align: center;
             margin-bottom: 20px;
-            border-bottom: 3px solid #daa520;
+            border-bottom: 2px solid #CD853F;
             padding-bottom: 10px;
-            font-weight: bold;
         }
         
         .dialogue-content {
             font-size: 16px;
             line-height: 1.8;
-            color: #654321;
+            color: #2F4F4F;
         }
         
         .quote {
             font-style: italic;
-            color: #cd853f;
+            color: #4682B4;
             margin: 15px 0;
-            padding: 15px 25px;
-            border-left: 4px solid #daa520;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 0 10px 10px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #CD853F;
+            background: rgba(205, 133, 63, 0.1);
         }
         
         .wisdom-point {
-            background: rgba(218, 165, 32, 0.15);
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
             margin: 20px 0;
-            border: 2px solid rgba(218, 165, 32, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.5);
         }
         
         /* 完成按钮 */
@@ -186,7 +159,7 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(45deg, #daa520, #cd853f);
+            background: linear-gradient(45deg, #32CD32, #228B22);
             color: white;
             padding: 12px 25px;
             border: none;
@@ -195,117 +168,128 @@
             font-size: 16px;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+            box-shadow: 0 4px 15px rgba(50, 205, 50, 0.3);
         }
         
         .complete-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.5);
+            box-shadow: 0 6px 20px rgba(50, 205, 50, 0.4);
         }
         
         /* 古典装饰 */
         .decoration {
             position: absolute;
-            top: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            color: #d4af37;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: decorationGlow 3s ease-in-out infinite;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
         }
-        
-        @keyframes decorationGlow {
-            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-            50% { text-shadow: 2px 2px 8px rgba(212, 175, 55, 0.5); }
+
+        .decoration-1 {
+            top: 5%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            animation-duration: 25s;
+        }
+
+        .decoration-2 {
+            bottom: 10%;
+            left: 15%;
+            width: 120px;
+            height: 120px;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .back-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+
+            .sage-portrait {
+                width: 120px;
+                height: 120px;
+                font-size: 5rem;
+                right: 5%;
+                bottom: initial;
+                top: 5%;
+            }
+
+            .dialogue-container {
+                left: 5%;
+                right: 5%;
+                width: 90%;
+                padding: 20px;
+                bottom: 5%;
+                max-height: 70%;
+            }
+
+            .sage-name-title {
+                font-size: 20px;
+            }
+
+            .dialogue-content {
+                font-size: 14px;
+            }
+
+            .complete-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <button class="back-btn" onclick="goBack()">← 返回太阳山</button>
-    
-    <div class="temple-room">
-        <div class="pagoda">
-            <div class="buddha-light"></div>
-        </div>
-        
-        <div class="decoration">☸️ 菩提圣殿 ☸️</div>
-        
-        <div class="buddha-portrait">
-            🧘‍♂️
-        </div>
-        
+    <div class="study-room">
+        <div class="bookshelf"></div>
+        <div class="books"></div>
+        <div class="sage-portrait">🧘</div>
         <div class="dialogue-container">
-            <h2 class="sage-name-title">佛陀的智慧</h2>
-            <div class="dialogue-content">
-                <p>欢迎来到这片宁静的圣地，善缘之人。我是释迦牟尼佛，一个觉悟了生命真谛的修行者。</p>
-                
-                <div class="quote">
-                    "诸恶莫作，众善奉行，自净其意，是诸佛教。"
-                </div>
-                
-                <p>众生皆苦，这是我悟道后的第一个真理。生老病死，爱别离，怨憎会，求不得，五蕴炽盛——这些都是人生不可避免的痛苦。但是，痛苦并非终点，解脱是可能的。</p>
-                
-                <div class="wisdom-point">
-                    <strong>🕉️ 佛陀的核心教法：</strong><br>
-                    • <strong>四圣谛</strong>：苦、集、灭、道四个真理<br>
-                    • <strong>八正道</strong>：通往解脱的八条正确道路<br>
-                    • <strong>十二因缘</strong>：生死轮回的因果法则<br>
-                    • <strong>三法印</strong>：无常、无我、涅槃寂静
-                </div>
-                
-                <div class="quote">
-                    "心是一切法的先导，心是一切法的主宰。若以清净心言语造作，快乐必随其后，如影随形。"
-                </div>
-                
-                <p>记住，一切痛苦的根源都在于执着和贪欲。当你能够放下执着，以慈悲心对待一切众生，以智慧观照内心，你就走上了解脱之道。修行不在于外在的仪式，而在于内心的觉醒。</p>
-                
-                <p>愿你能在八正道上精进修行，最终证得无上菩提，获得内心的真正平静与解脱。</p>
+            <h2 class="sage-name-title">与 佛陀 对话</h2>
+            <p class="dialogue-content">
+                佛陀 是 undefined 的 undefined，主要贡献是 undefined。
+            </p>
+            <blockquote class="quote">“undefined”</blockquote>
+            <p class="dialogue-content">
+                他的主要著作包括：《金刚经》、《心经》。
+            </p>
+            <div class="wisdom-point">
+                <h3>核心智慧点:</h3>
+                <ul>
+                    <li>佛教哲学</li>
+                    <li>通过阅读他的著作，你可以更深入地理解这些思想。</li>
+                </ul>
             </div>
         </div>
-        
-        <button class="complete-btn" onclick="completeDialogue()">✓ 完成对话</button>
+        <button class="complete-btn" onclick="markSageAsVisited('sun-buddha')">✔️ 拜访完成</button>
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
     </div>
-    
+
     <script>
+        // 返回山峰
         function goBack() {
-            window.location.href = '../../sun-mountain.html';
+            window.location.href = '/read-game/' + mountainHTMLFiles[mountain];
         }
-        
-        function completeDialogue() {
-            // 标记为已访问
-            const visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
-            const sageKey = 'sun-buddha';
-            
+
+        // 标记智者已拜访
+        function markSageAsVisited(sageKey) {
+            let visitedSages = JSON.parse(localStorage.getItem('visitedSages') || '[]');
             if (!visitedSages.includes(sageKey)) {
                 visitedSages.push(sageKey);
                 localStorage.setItem('visitedSages', JSON.stringify(visitedSages));
+                alert('恭喜，您已成功拜访这位智者！');
             }
-            
-            // 显示完成提示
-            alert('🎉 恭喜！您已经完成了与佛陀的对话，获得了佛教智慧与慈悲！');
-            
-            // 返回太阳山
-            goBack();
         }
-        
-        // 页面加载动画
-        window.addEventListener('load', function() {
-            document.querySelector('.dialogue-container').style.animation = 'slideUp 1s ease-out';
-        });
     </script>
-    
-    <style>
-        @keyframes slideUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(50px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-    </style>
 </body>
 </html>
